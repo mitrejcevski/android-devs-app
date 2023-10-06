@@ -1,0 +1,38 @@
+[versions]
+    min-sdk-version = "24"
+    target-sdk-version = "34"
+    gradle-plugin-version = "8.1.1"
+    kotlin-version = "1.8.10"
+    kotlin-compiler-extension-version = "1.4.3"
+    androidx-core-ktx-version = "1.12.0"
+    androidx-lifecycle-runtime = "2.6.2"
+    compose-bom-version = "2023.03.00"
+    compose-activity-version = "1.7.2"
+    compose-nav-version = "2.7.3"
+    coil-version = "2.4.0"
+
+[libraries]
+    androidx-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core-ktx-version" }
+    androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle-runtime" }
+
+    compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom-version" }
+    compose-activity = { module = "androidx.activity:activity-compose", version.ref = "compose-activity-version" }
+    compose-ui = { module = "androidx.compose.ui:ui" }
+    compose-graphics = { module = "androidx.compose.ui:ui-graphics" }
+    compose-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+    compose-material3 = { module = "androidx.compose.material3:material3" }
+    compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+    compose-ui-test-manifest = { module = "androidx.compose.ui:ui-tooling" }
+    compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "compose-nav-version" }
+
+    coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-version" }
+
+[bundles]
+    androidx = ["androidx-ktx", "androidx-lifecycle-runtime"]
+    compose = ["compose-activity", "compose-ui", "compose-graphics", "compose-preview", "compose-material3", "compose-navigation"]
+    compose-debug = ["compose-ui-tooling", "compose-ui-test-manifest"]
+
+[plugins]
+    android-application = { id = "com.android.application", version.ref = "gradle-plugin-version" }
+    android-library = { id = "com.android.library", version.ref = "gradle-plugin-version" }
+    kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin-version" }
