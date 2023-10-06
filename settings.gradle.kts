@@ -16,3 +16,6 @@ dependencyResolutionManagement {
 rootProject.name = "AndroidDevs"
 include(":app")
 include(":core:view")
+include(":feature:welcome")
+include(":feature:signup")
+include(":feature:login")

@@ -6,7 +6,7 @@
     kotlin-compiler-extension-version = "1.4.3"
     androidx-core-ktx-version = "1.12.0"
     androidx-lifecycle-runtime = "2.6.2"
-    compose-bom-version = "2023.03.00"
+    compose-bom-version = "2023.09.02"
     compose-activity-version = "1.7.2"
     compose-nav-version = "2.7.3"
     coil-version = "2.4.0"
