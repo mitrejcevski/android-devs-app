@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "AndroidDevs"
 include(":app")
+include(":core:view")

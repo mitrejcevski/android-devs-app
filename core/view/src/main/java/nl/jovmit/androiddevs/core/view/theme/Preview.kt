@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.ui.theme
+package nl.jovmit.androiddevs.core.view.theme
 
 import android.content.res.Configuration
 import androidx.compose.ui.tooling.preview.Preview

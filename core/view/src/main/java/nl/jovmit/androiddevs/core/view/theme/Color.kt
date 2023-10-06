@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.ui.theme
+package nl.jovmit.androiddevs.core.view.theme
 
 import androidx.compose.ui.graphics.Color
 
