@@ -1,6 +1,7 @@
 package nl.jovmit.androiddevs.feature.login
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -15,12 +16,14 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import nl.jovmit.androiddevs.core.view.composables.PrimaryButton
 import nl.jovmit.androiddevs.core.view.theme.AppTheme
 import nl.jovmit.androiddevs.core.view.theme.PreviewLightDark
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun LoginScreen(
+    onLoggedIn: () -> Unit,
     onNavigateUp: () -> Unit
 ) {
     Scaffold(
@@ -56,10 +59,18 @@ internal fun LoginScreen(
                 .padding(paddingValues),
             contentAlignment = Alignment.Center
         ) {
-            Text(
-                text = "Hi from Login!",
-                color = AppTheme.colorScheme.onBackground
-            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Hi from Login!",
+                    color = AppTheme.colorScheme.onBackground
+                )
+                PrimaryButton(
+                    label = "Perform Fake Login",
+                    onClick = onLoggedIn
+                )
+            }
         }
     }
 }
@@ -69,6 +80,7 @@ internal fun LoginScreen(
 private fun PreviewLoginScreen() {
     AppTheme {
         LoginScreen(
+            onLoggedIn = {},
             onNavigateUp = {}
         )
     }
