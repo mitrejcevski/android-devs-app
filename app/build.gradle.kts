@@ -59,6 +59,7 @@ dependencies {
     implementation(project(":feature:welcome"))
     implementation(project(":feature:signup"))
     implementation(project(":feature:login"))
+    implementation(project(":feature:timeline"))
 
     implementation(libs.bundles.androidx)
 
