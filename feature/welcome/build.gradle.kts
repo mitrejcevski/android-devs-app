@@ -44,4 +44,5 @@ android {
 
 dependencies {
     implementation(project(":core:view"))
+    implementation(project(":base:auth"))
 }
