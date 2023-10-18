@@ -11,7 +11,7 @@ fun NavGraphBuilder.loginScreen(
     onNavigateUp: () -> Unit
 ) {
     composable(LOGIN_ROUTE) {
-        LoginScreen(
+        LoginScreenContainer(
             onLoggedIn = onLoggedIn,
             onNavigateUp = onNavigateUp
         )

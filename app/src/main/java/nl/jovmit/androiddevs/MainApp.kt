@@ -7,6 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import nl.jovmit.androiddevs.feature.login.loginScreen
 import nl.jovmit.androiddevs.feature.login.navigateToLogin
+import nl.jovmit.androiddevs.feature.postdetails.navigateToPostDetails
+import nl.jovmit.androiddevs.feature.postdetails.postDetailsScreen
 import nl.jovmit.androiddevs.feature.signup.navigateToSignUp
 import nl.jovmit.androiddevs.feature.signup.signUpScreen
 import nl.jovmit.androiddevs.feature.timeline.navigateToTimeline
@@ -39,8 +41,12 @@ fun MainApp() {
 
         timelineScreen(
             onItemClicked = { itemId ->
-                println("Navigate To $itemId")
+                navController.navigateToPostDetails(itemId)
             }
+        )
+
+        postDetailsScreen(
+            onNavigateUp = { navController.navigateUp() }
         )
     }
 }

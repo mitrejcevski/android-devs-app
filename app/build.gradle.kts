@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.hilt.android)
 }
 
 android {
@@ -60,8 +62,12 @@ dependencies {
     implementation(project(":feature:signup"))
     implementation(project(":feature:login"))
     implementation(project(":feature:timeline"))
+    implementation(project(":feature:postdetails"))
 
     implementation(libs.bundles.androidx)
+    implementation(libs.bundles.hilt)
+
+    kapt(libs.hilt.compiler)
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
