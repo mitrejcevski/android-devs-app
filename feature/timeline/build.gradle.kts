@@ -44,4 +44,6 @@ android {
 
 dependencies {
     implementation(project(":core:view"))
+
+    testImplementation(libs.bundles.unit.testing)
 }
