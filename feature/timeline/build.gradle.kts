@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kapt)
 }
 
 android {
@@ -44,6 +46,12 @@ android {
 
 dependencies {
     implementation(project(":core:view"))
+    implementation(libs.bundles.hilt)
+    implementation(libs.bundles.paging)
 
     testImplementation(libs.bundles.unit.testing)
+
+    kapt(libs.hilt.compiler)
+
+    testRuntimeOnly(libs.junit.jupiter.engine)
 }

@@ -15,10 +15,11 @@
     json-serialization-version = "1.6.0"
     retrofit-serialization-converter-version = "1.0.0"
     okhttp-version = "4.11.0"
-    hilt-version = "2.47"
+    hilt-version = "2.48"
     hilt-navigation-version = "1.1.0"
     room-version = "2.6.0"
-    junit4-version = "4.13.2"
+    paging-version = "3.2.1"
+    test-junit-jupiter-version = "5.10.0"
     truth-version = "1.1.5"
 
 [libraries]
@@ -38,6 +39,7 @@
 
     coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-version" }
     paging = { module = "androidx.paging:paging-runtime-ktx", version = "3.2.1" }
+    paging-compose = { module = "androidx.paging:paging-compose", version = "3.2.1" }
 
     retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit-version" }
     reotrfit-serialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-serialization-converter-version" }
@@ -55,7 +57,9 @@
     androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", version = "3.5.1" }
     androidx-test-compose = { module = "androidx.compose.ui:ui-test-junit4", version = "1.5.4" }
 
-    junit4 = { module = "junit:junit", version.ref = "junit4-version" }
+    junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "test-junit-jupiter-version" }
+    jupiter = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "test-junit-jupiter-version" }
+    jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "test-junit-jupiter-version" }
     truth = { module = "com.google.truth:truth", version.ref = "truth-version" }
 
 [bundles]
@@ -64,8 +68,9 @@
     compose-debug = ["compose-ui-tooling", "compose-ui-test-manifest"]
     retrofit = ["retrofit", "reotrfit-serialization", "kotlinx-serialization", "okhttp"]
     hilt = ["hilt-android", "hilt-navigation"]
+    paging = ["paging", "paging-compose"]
     ui-tessting = ["androidx-test-ext", "androidx-test-compose", "androidx-test-espresso"]
-    unit-testing = ["junit4", "truth"]
+    unit-testing = ["jupiter", "jupiter-params", "truth"]
 
 [plugins]
     android-application = { id = "com.android.application", version.ref = "gradle-plugin-version" }
