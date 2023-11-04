@@ -84,7 +84,7 @@ private fun TimelineScreenContent(
                 .padding(paddingValues)
         ) {
             items(
-                count = if (state.showLimitedContent) 3 else posts.itemCount,
+                count = posts.itemCount,
                 key = posts.itemKey { it.id },
             ) { index ->
                 posts[index]?.let { postItem ->

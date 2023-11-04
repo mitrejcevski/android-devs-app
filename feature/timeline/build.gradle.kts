@@ -34,13 +34,20 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-    
+
     buildFeatures {
         compose = true
     }
 
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.kotlin.compiler.extension.version.get()
+    }
+
+    testOptions.unitTests {
+        isReturnDefaultValues = true
+        all { tests ->
+            tests.useJUnitPlatform()
+        }
     }
 }
 
@@ -50,6 +57,7 @@ dependencies {
     implementation(libs.bundles.paging)
 
     testImplementation(libs.bundles.unit.testing)
+    testImplementation(libs.paging.test)
 
     kapt(libs.hilt.compiler)
 
