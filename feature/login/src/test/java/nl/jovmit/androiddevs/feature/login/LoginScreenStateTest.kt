@@ -13,4 +13,14 @@ class LoginScreenStateTest {
             .isEqualTo(LoginScreenState())
     }
 
+    @Test
+    fun updateEmail() {
+        val updatedEmail = ":some email:"
+        val viewModel = LoginViewModel()
+
+        viewModel.updateEmail(updatedEmail)
+
+        assertThat(viewModel.screenState.value)
+            .isEqualTo(LoginScreenState(email = updatedEmail))
+    }
 }
