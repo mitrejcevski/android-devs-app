@@ -16,7 +16,7 @@ class LoginViewModel : ViewModel() {
     }
 
     fun updatePassword(newValue: String) {
-        TODO("Not yet implemented")
+        _screenState.update { it.copy(password = newValue) }
     }
 
     fun login() {
