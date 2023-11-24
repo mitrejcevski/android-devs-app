@@ -108,11 +108,6 @@ private fun LoginScreenContent(
     }
 }
 
-data class LoginScreenState(
-    val email: String = "",
-    val password: String = ""
-)
-
 @Composable
 @PreviewLightDark
 private fun PreviewLoginScreen() {

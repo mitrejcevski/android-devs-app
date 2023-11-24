@@ -6,7 +6,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class LoginViewModel : ViewModel() {
-    fun login() {
+
+    private val _screenState = MutableStateFlow(LoginScreenState())
+    val screenState: StateFlow<LoginScreenState> = _screenState.asStateFlow()
+
+    fun updateEmail(newValue: String) {
         TODO("Not yet implemented")
     }
 
@@ -14,10 +18,7 @@ class LoginViewModel : ViewModel() {
         TODO("Not yet implemented")
     }
 
-    fun updateEmail(newValue: String) {
+    fun login() {
         TODO("Not yet implemented")
     }
-
-    private val _screenState = MutableStateFlow(LoginScreenState())
-    val screenState: StateFlow<LoginScreenState> = _screenState.asStateFlow()
 }
