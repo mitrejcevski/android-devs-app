@@ -20,13 +20,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import nl.jovmit.androiddevs.core.view.theme.AppTheme
 import nl.jovmit.androiddevs.core.view.theme.PreviewLightDark
 
 @Composable
 internal fun LoginScreen(
-    loginViewModel: LoginViewModel = viewModel(),
+    loginViewModel: LoginViewModel = hiltViewModel(),
     onNavigateUp: () -> Unit,
 ) {
     val state by loginViewModel.screenState.collectAsState()
@@ -112,8 +113,12 @@ private fun LoginScreenContent(
 @PreviewLightDark
 private fun PreviewLoginScreen() {
     AppTheme {
-        LoginScreen(
-            onNavigateUp = {}
+        LoginScreenContent(
+            screenState = LoginScreenState(),
+            onNavigateUp = {},
+            onEmailUpdate = {},
+            onPasswordUpdate = {},
+            onLoginClicked = {}
         )
     }
 }

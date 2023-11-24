@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.parcelable)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kapt)
 }
 
 android {
@@ -56,6 +58,9 @@ android {
 dependencies {
     implementation(project(":core:view"))
     implementation(libs.bundles.androidx)
+    implementation(libs.bundles.hilt)
+
+    kapt(libs.hilt.compiler)
 
     testImplementation(libs.bundles.unit.testing)
 
