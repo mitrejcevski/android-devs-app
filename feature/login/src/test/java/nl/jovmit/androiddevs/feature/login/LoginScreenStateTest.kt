@@ -1,5 +1,6 @@
 package nl.jovmit.androiddevs.feature.login
 
+import androidx.lifecycle.SavedStateHandle
 import com.google.common.truth.Truth.*
 import org.junit.jupiter.api.Test
 
@@ -7,7 +8,7 @@ class LoginScreenStateTest {
 
     @Test
     fun defaultScreenState() {
-        val viewModel = LoginViewModel()
+        val viewModel = LoginViewModel(SavedStateHandle())
 
         assertThat(viewModel.screenState.value)
             .isEqualTo(LoginScreenState())
@@ -16,7 +17,7 @@ class LoginScreenStateTest {
     @Test
     fun updateEmail() {
         val updatedEmail = ":some email:"
-        val viewModel = LoginViewModel()
+        val viewModel = LoginViewModel(SavedStateHandle())
 
         viewModel.updateEmail(updatedEmail)
 
@@ -27,7 +28,7 @@ class LoginScreenStateTest {
     @Test
     fun updatePassword() {
         val newPassword = ":a password:"
-        val viewModel = LoginViewModel()
+        val viewModel = LoginViewModel(SavedStateHandle())
 
         viewModel.updatePassword(newPassword)
 
