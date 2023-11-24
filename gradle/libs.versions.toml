@@ -51,3 +51,4 @@
     android-application = { id = "com.android.application", version.ref = "gradle-plugin-version" }
     android-library = { id = "com.android.library", version.ref = "gradle-plugin-version" }
     kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin-version" }
+    parcelable = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin-version" }
