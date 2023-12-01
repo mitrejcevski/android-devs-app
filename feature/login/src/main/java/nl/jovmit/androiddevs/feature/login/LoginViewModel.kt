@@ -25,7 +25,9 @@ class LoginViewModel @Inject constructor(
     }
 
     fun login() {
-        TODO("Not yet implemented")
+        val value = savedStateHandle.get<LoginScreenState>(LOGIN_SCREEN_STATE)
+        val user = User(email = "alice@app.com")
+        savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(loggedInUser = user)
     }
 
     companion object {

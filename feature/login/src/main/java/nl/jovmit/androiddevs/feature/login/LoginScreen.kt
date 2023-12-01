@@ -21,7 +21,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import nl.jovmit.androiddevs.core.view.theme.AppTheme
 import nl.jovmit.androiddevs.core.view.theme.PreviewLightDark
 
