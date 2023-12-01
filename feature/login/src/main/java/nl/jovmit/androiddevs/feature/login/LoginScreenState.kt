@@ -7,5 +7,6 @@ import kotlinx.parcelize.Parcelize
 data class LoginScreenState(
     val email: String = "",
     val password: String = "",
-    val loggedInUser: User? = null
+    val loggedInUser: User? = null,
+    val wrongCredentials: Boolean = false
 ) : Parcelable

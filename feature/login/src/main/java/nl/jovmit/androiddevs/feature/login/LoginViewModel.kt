@@ -27,13 +27,16 @@ class LoginViewModel @Inject constructor(
     fun login() {
         val value = savedStateHandle.get<LoginScreenState>(LOGIN_SCREEN_STATE)
 
-        val user = if (screenState.value.email == "bob@app.com") {
-            User(email = "bob@app.com")
+        if (screenState.value.email == "valid@email.com") {
+            savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(wrongCredentials = true)
         } else {
-            User(email = "alice@app.com")
+            val user = if (screenState.value.email == "bob@app.com") {
+                User(email = "bob@app.com")
+            } else {
+                User(email = "alice@app.com")
+            }
+            savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(loggedInUser = user)
         }
-
-        savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(loggedInUser = user)
     }
 
     companion object {

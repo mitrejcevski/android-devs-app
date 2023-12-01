@@ -35,4 +35,33 @@ class LoginTest {
         assertThat(viewModel.screenState.value)
             .isEqualTo(viewModel.screenState.value.copy(loggedInUser = bob))
     }
+
+    @Test
+    fun noUserFound() {
+        val viewModel = LoginViewModel(savedStateHandle).apply {
+            updateEmail("valid@email.com")
+            updatePassword("validPassword")
+        }
+
+        viewModel.login()
+
+        assertThat(viewModel.screenState.value)
+            .isEqualTo(viewModel.screenState.value.copy(wrongCredentials = true))
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
