@@ -26,7 +26,13 @@ class LoginViewModel @Inject constructor(
 
     fun login() {
         val value = savedStateHandle.get<LoginScreenState>(LOGIN_SCREEN_STATE)
-        val user = User(email = "alice@app.com")
+
+        val user = if (screenState.value.email == "bob@app.com") {
+            User(email = "bob@app.com")
+        } else {
+            User(email = "alice@app.com")
+        }
+
         savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(loggedInUser = user)
     }
 
