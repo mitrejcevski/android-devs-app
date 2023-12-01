@@ -27,6 +27,8 @@ class LoginViewModel @Inject constructor(
     fun login() {
         val value = savedStateHandle.get<LoginScreenState>(LOGIN_SCREEN_STATE)
 
+        val knownEmails = listOf("bob@app.com", "alice@app.com")
+
         if (screenState.value.email == "valid@email.com") {
             savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(wrongCredentials = true)
         } else {
