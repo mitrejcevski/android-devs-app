@@ -11,6 +11,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nl.jovmit.androiddevs.core.view.composables.ImperfectCircleShape
 
 private val darkColorScheme = AppColorScheme(
     background = Color.Black,
@@ -62,7 +63,8 @@ private val typography = AppTypography(
 
 private val shape = AppShape(
     container = RoundedCornerShape(12.dp),
-    button = RoundedCornerShape(50)
+    button = RoundedCornerShape(50),
+    circular = ImperfectCircleShape()
 )
 
 private val size = AppSize(

@@ -1,5 +1,6 @@
 package nl.jovmit.androiddevs.core.view.theme
 
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Brush
@@ -35,7 +36,8 @@ data class AppTypography(
 @Stable
 data class AppShape(
     val container: Shape,
-    val button: Shape
+    val button: Shape,
+    val circular: Shape
 )
 
 @Stable
@@ -71,7 +73,8 @@ val LocalAppTypography = staticCompositionLocalOf {
 val LocalAppShape = staticCompositionLocalOf {
     AppShape(
         container = RectangleShape,
-        button = RectangleShape
+        button = RectangleShape,
+        circular = CircleShape
     )
 }
 

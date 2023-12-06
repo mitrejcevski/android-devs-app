@@ -1,7 +1,7 @@
 [versions]
     min-sdk-version = "24"
     target-sdk-version = "34"
-    gradle-plugin-version = "8.1.1"
+    gradle-plugin-version = "8.1.4"
     kotlin-version = "1.8.10"
     kotlin-compiler-extension-version = "1.4.3"
     androidx-core-ktx-version = "1.12.0"
