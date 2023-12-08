@@ -6,12 +6,15 @@ import org.junit.jupiter.api.Test
 
 class LoginTest {
 
+    private val alice = User(email = "alice@app.com")
+    private val bob = User(email = "bob@app.com")
+
+    private val usersCatalog = InMemoryUsersCatalog(listOf(bob, alice))
     private val savedStateHandle = SavedStateHandle()
 
     @Test
     fun userLoggedIn() {
-        val alice = User(email = "alice@app.com")
-        val viewModel = LoginViewModel(savedStateHandle).apply {
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog).apply {
             updateEmail(alice.email)
             updatePassword(":password:")
         }
@@ -24,8 +27,7 @@ class LoginTest {
 
     @Test
     fun anotherLoggedInUser() {
-        val bob = User(email = "bob@app.com")
-        val viewModel = LoginViewModel(savedStateHandle).apply {
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog).apply {
             updateEmail(bob.email)
             updatePassword("bobsPassword")
         }
@@ -38,7 +40,7 @@ class LoginTest {
 
     @Test
     fun noUserFound() {
-        val viewModel = LoginViewModel(savedStateHandle).apply {
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog).apply {
             updateEmail("valid@email.com")
             updatePassword("validPassword")
         }

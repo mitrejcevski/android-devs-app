@@ -10,7 +10,13 @@ class LoginScreenStateTest {
 
     @Test
     fun defaultScreenState() {
-        val viewModel = LoginViewModel(savedStateHandle)
+        val viewModel = LoginViewModel(savedStateHandle, InMemoryUsersCatalog(
+            listOf(
+                User(email = "bob@app.com"),
+                User(email = "alice@app.com")
+            )
+        )
+        )
 
         assertThat(viewModel.screenState.value)
             .isEqualTo(LoginScreenState())
@@ -19,7 +25,13 @@ class LoginScreenStateTest {
     @Test
     fun updateEmail() {
         val updatedEmail = ":some email:"
-        val viewModel = LoginViewModel(savedStateHandle)
+        val viewModel = LoginViewModel(savedStateHandle, InMemoryUsersCatalog(
+            listOf(
+                User(email = "bob@app.com"),
+                User(email = "alice@app.com")
+            )
+        )
+        )
 
         viewModel.updateEmail(updatedEmail)
 
@@ -30,7 +42,13 @@ class LoginScreenStateTest {
     @Test
     fun updatePassword() {
         val newPassword = ":a password:"
-        val viewModel = LoginViewModel(savedStateHandle)
+        val viewModel = LoginViewModel(savedStateHandle, InMemoryUsersCatalog(
+            listOf(
+                User(email = "bob@app.com"),
+                User(email = "alice@app.com")
+            )
+        )
+        )
 
         viewModel.updatePassword(newPassword)
 
