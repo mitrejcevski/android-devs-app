@@ -27,7 +27,8 @@ class LoginViewModel @Inject constructor(
 
     fun login() {
         val email = screenState.value.email
-        val found = usersCatalog.performLogin(email)
+        val password = screenState.value.password
+        val found = usersCatalog.performLogin(email, password)
         onLoginResults(found)
     }
 

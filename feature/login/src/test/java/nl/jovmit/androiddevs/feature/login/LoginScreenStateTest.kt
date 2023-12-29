@@ -11,9 +11,15 @@ class LoginScreenStateTest {
     @Test
     fun defaultScreenState() {
         val viewModel = LoginViewModel(savedStateHandle, InMemoryUsersCatalog(
-            listOf(
-                User(email = "bob@app.com"),
-                User(email = "alice@app.com")
+            mapOf<String, List<User>>(
+                ":password:" to listOf(
+                    User(email = "bob@app.com"),
+                    User(email = "alice@app.com")
+                ),
+                "bobsPassword" to listOf(
+                    User(email = "bob@app.com"),
+                    User(email = "alice@app.com")
+                )
             )
         )
         )
@@ -26,9 +32,15 @@ class LoginScreenStateTest {
     fun updateEmail() {
         val updatedEmail = ":some email:"
         val viewModel = LoginViewModel(savedStateHandle, InMemoryUsersCatalog(
-            listOf(
-                User(email = "bob@app.com"),
-                User(email = "alice@app.com")
+            mapOf<String, List<User>>(
+                ":password:" to listOf(
+                    User(email = "bob@app.com"),
+                    User(email = "alice@app.com")
+                ),
+                "bobsPassword" to listOf(
+                    User(email = "bob@app.com"),
+                    User(email = "alice@app.com")
+                )
             )
         )
         )
@@ -43,9 +55,15 @@ class LoginScreenStateTest {
     fun updatePassword() {
         val newPassword = ":a password:"
         val viewModel = LoginViewModel(savedStateHandle, InMemoryUsersCatalog(
-            listOf(
-                User(email = "bob@app.com"),
-                User(email = "alice@app.com")
+            mapOf<String, List<User>>(
+                ":password:" to listOf(
+                    User(email = "bob@app.com"),
+                    User(email = "alice@app.com")
+                ),
+                "bobsPassword" to listOf(
+                    User(email = "bob@app.com"),
+                    User(email = "alice@app.com")
+                )
             )
         )
         )

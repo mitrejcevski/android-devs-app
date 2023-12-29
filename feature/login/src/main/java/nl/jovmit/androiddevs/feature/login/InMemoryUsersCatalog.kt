@@ -1,10 +1,10 @@
 package nl.jovmit.androiddevs.feature.login
 
 class InMemoryUsersCatalog(
-    private val knownUsers: List<User>
+    private val usersForPassword: Map<String, List<User>>
 ) {
 
-    fun performLogin(email: String): User? {
-        return knownUsers.find { it.email == email }
+    fun performLogin(email: String, password: String): User? {
+        return usersForPassword[password]?.find { it.email == email }
     }
 }
