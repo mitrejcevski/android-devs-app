@@ -2,9 +2,9 @@ package nl.jovmit.androiddevs.feature.login
 
 class InMemoryUsersCatalog(
     private val usersForPassword: Map<String, List<User>>
-) {
+) : UsersCatalog {
 
-    fun performLogin(email: String, password: String): User? {
+    override fun performLogin(email: String, password: String): User? {
         return usersForPassword[password]?.find { it.email == email }
     }
 }

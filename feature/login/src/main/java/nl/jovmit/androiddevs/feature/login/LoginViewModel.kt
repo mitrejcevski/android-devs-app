@@ -9,7 +9,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val usersCatalog: InMemoryUsersCatalog
+    private val usersCatalog: UsersCatalog
 ) : ViewModel() {
 
     val screenState: StateFlow<LoginScreenState> =
