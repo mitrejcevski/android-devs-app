@@ -97,4 +97,17 @@ class LoginTest {
         assertThat(viewModel.screenState.value)
             .isEqualTo(viewModel.screenState.value.copy(wrongCredentials = true))
     }
+
+    @Test
+    fun attemptToLoginWithIncorrectEmail() {
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog).apply {
+            updateEmail(" ")
+            updatePassword(bobPassword)
+        }
+
+        viewModel.login()
+
+        assertThat(viewModel.screenState.value)
+            .isEqualTo(viewModel.screenState.value.copy(isWrongEmailFormat = true))
+    }
 }
