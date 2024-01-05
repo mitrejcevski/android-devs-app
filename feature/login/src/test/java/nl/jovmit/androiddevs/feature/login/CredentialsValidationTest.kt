@@ -24,4 +24,21 @@ class CredentialsValidationTest {
         assertThat(result).isEqualTo(expected)
     }
 
+    @ParameterizedTest
+    @CsvSource(
+        "'   ', false",
+        "' a  ', false",
+        "'ab  ', false",
+        "'short_1', false",
+        "'password', false",
+        "'pAssW0rd', true",
+        "'abc@De.f1', true",
+    )
+    fun passwordValidation(password: String, expected: Boolean) {
+        val passwordValidator = PasswordValidator()
+
+        val result = passwordValidator.validatePassword(password)
+
+        assertThat(result).isEqualTo(expected)
+    }
 }
