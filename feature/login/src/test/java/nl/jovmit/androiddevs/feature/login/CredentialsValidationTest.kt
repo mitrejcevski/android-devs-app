@@ -18,13 +18,19 @@ class CredentialsValidationTest {
         "'abc@de.fe', true",
     )
     fun incorrectEmail(email: String, expected: Boolean) {
-        val result = validateEmail(email)
+        val emailValidator = EmailValidator()
+
+        val result = emailValidator.validateEmail(email)
+
         assertThat(result).isEqualTo(expected)
     }
-    
-    private fun validateEmail(email: String): Boolean {
-        val regex = """[a-zA-Z0-9+._%\-]{1,64}@[a-zA-Z0-9][a-zA-Z0-9\-]{1,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{1,25})"""
-        val emailPattern = Pattern.compile(regex)
-        return emailPattern.matcher(email).matches()
+
+    class EmailValidator {
+
+        fun validateEmail(email: String): Boolean {
+            val regex = """[a-zA-Z0-9+._%\-]{1,64}@[a-zA-Z0-9][a-zA-Z0-9\-]{1,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{1,25})"""
+            val emailPattern = Pattern.compile(regex)
+            return emailPattern.matcher(email).matches()
+        }
     }
 }
