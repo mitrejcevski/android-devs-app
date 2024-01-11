@@ -14,7 +14,7 @@ class TimelinePaging(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ListItem> {
-        val page = params.key ?: 1
+        val page = params.key ?: 0
         val pageSize = params.loadSize
         return when (val timelineResponse = timelineRepository.loadTimeline(page, pageSize)) {
             is TimelineResponse.Success -> {
