@@ -51,7 +51,7 @@ class LoginScreenStateTest {
     }
 
     @Test
-    fun resetWrongPasswordState() {
+    fun resetWrongEmailState() {
         val initialEmailValue = "something"
         val viewModel = LoginViewModel(savedStateHandle, usersCatalog).apply {
             updateEmail(initialEmailValue)
@@ -63,4 +63,34 @@ class LoginScreenStateTest {
         assertThat(viewModel.screenState.value.isWrongEmailFormat)
             .isEqualTo(false)
     }
+
+    @Test
+    fun resetWrongPasswordState() {
+        val initialPasswordValue = "pass"
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog).apply {
+            updateEmail("bob@app.com")
+            updatePassword(initialPasswordValue)
+            login()
+        }
+
+        viewModel.updatePassword("$initialPasswordValue.")
+
+        assertThat(viewModel.screenState.value.isBadPasswordFormat)
+            .isEqualTo(false)
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
