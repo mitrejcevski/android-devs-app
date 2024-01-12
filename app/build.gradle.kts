@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kapt)
 }
 
 android {
@@ -71,6 +73,9 @@ dependencies {
     implementation(project(":feature:login"))
 
     implementation(libs.bundles.androidx)
+    implementation(libs.bundles.hilt)
+
+    kapt(libs.hilt.compiler)
 
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.bundles.ui.testing)
