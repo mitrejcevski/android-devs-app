@@ -7,22 +7,22 @@ import org.junit.jupiter.api.Test
 class LoginScreenStateTest {
 
     private val savedStateHandle = SavedStateHandle()
+    private val usersCatalog = InMemoryUsersCatalog(
+        mapOf(
+            ":password:" to listOf(
+                User(email = "bob@app.com"),
+                User(email = "alice@app.com")
+            ),
+            "bobsPassword" to listOf(
+                User(email = "bob@app.com"),
+                User(email = "alice@app.com")
+            )
+        )
+    )
 
     @Test
     fun defaultScreenState() {
-        val viewModel = LoginViewModel(savedStateHandle, InMemoryUsersCatalog(
-            mapOf<String, List<User>>(
-                ":password:" to listOf(
-                    User(email = "bob@app.com"),
-                    User(email = "alice@app.com")
-                ),
-                "bobsPassword" to listOf(
-                    User(email = "bob@app.com"),
-                    User(email = "alice@app.com")
-                )
-            )
-        )
-        )
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog)
 
         assertThat(viewModel.screenState.value)
             .isEqualTo(LoginScreenState())
@@ -31,19 +31,7 @@ class LoginScreenStateTest {
     @Test
     fun updateEmail() {
         val updatedEmail = ":some email:"
-        val viewModel = LoginViewModel(savedStateHandle, InMemoryUsersCatalog(
-            mapOf<String, List<User>>(
-                ":password:" to listOf(
-                    User(email = "bob@app.com"),
-                    User(email = "alice@app.com")
-                ),
-                "bobsPassword" to listOf(
-                    User(email = "bob@app.com"),
-                    User(email = "alice@app.com")
-                )
-            )
-        )
-        )
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog)
 
         viewModel.updateEmail(updatedEmail)
 
@@ -54,19 +42,7 @@ class LoginScreenStateTest {
     @Test
     fun updatePassword() {
         val newPassword = ":a password:"
-        val viewModel = LoginViewModel(savedStateHandle, InMemoryUsersCatalog(
-            mapOf<String, List<User>>(
-                ":password:" to listOf(
-                    User(email = "bob@app.com"),
-                    User(email = "alice@app.com")
-                ),
-                "bobsPassword" to listOf(
-                    User(email = "bob@app.com"),
-                    User(email = "alice@app.com")
-                )
-            )
-        )
-        )
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog)
 
         viewModel.updatePassword(newPassword)
 
