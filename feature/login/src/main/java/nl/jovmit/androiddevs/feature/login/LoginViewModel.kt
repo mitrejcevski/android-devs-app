@@ -35,6 +35,8 @@ class LoginViewModel @Inject constructor(
         val password = screenState.value.password
         if (!emailValidator.validateEmail(email)) {
             setIncorrectEmailFormatError()
+        } else if (!PasswordValidator().validatePassword(password)) {
+            setIncorrectPasswordFormat()
         } else {
             val found = usersCatalog.performLogin(email, password)
             onLoginResults(found)
@@ -53,6 +55,11 @@ class LoginViewModel @Inject constructor(
     private fun setIncorrectEmailFormatError() {
         val value = savedStateHandle.get<LoginScreenState>(LOGIN_SCREEN_STATE)
         savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(isWrongEmailFormat = true)
+    }
+
+    private fun setIncorrectPasswordFormat() {
+        val value = savedStateHandle.get<LoginScreenState>(LOGIN_SCREEN_STATE)
+        savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(isBadPasswordFormat = true)
     }
 
     companion object {

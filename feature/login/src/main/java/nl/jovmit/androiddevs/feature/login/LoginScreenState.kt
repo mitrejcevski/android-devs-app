@@ -9,5 +9,6 @@ data class LoginScreenState(
     val password: String = "",
     val loggedInUser: User? = null,
     val wrongCredentials: Boolean = false,
-    val isWrongEmailFormat: Boolean = false
+    val isWrongEmailFormat: Boolean = false,
+    val isBadPasswordFormat: Boolean = false
 ) : Parcelable

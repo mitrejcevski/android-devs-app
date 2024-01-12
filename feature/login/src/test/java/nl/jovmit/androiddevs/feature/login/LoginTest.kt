@@ -2,15 +2,16 @@ package nl.jovmit.androiddevs.feature.login
 
 import androidx.lifecycle.SavedStateHandle
 import com.google.common.truth.Truth.assertThat
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class LoginTest {
 
     private val alycia = User(email = "alycia@app.com")
     private val alice = User(email = "alice@app.com")
-    private val alicePassword = ":password:"
+    private val alicePassword = ":Passw0rd:"
     private val bob = User(email = "bob@app.com")
-    private val bobPassword = "bobsPassword"
+    private val bobPassword = "bobsPassword1"
     private val unknownEmail = "valid@email.com"
     private val usersForPassword = mapOf(
         alicePassword to listOf(alice, alycia),
@@ -89,7 +90,7 @@ class LoginTest {
     fun noUserFound() {
         val viewModel = LoginViewModel(savedStateHandle, usersCatalog).apply {
             updateEmail(unknownEmail)
-            updatePassword("validPassword")
+            updatePassword("validPassword1")
         }
 
         viewModel.login()
@@ -110,4 +111,32 @@ class LoginTest {
         assertThat(viewModel.screenState.value)
             .isEqualTo(viewModel.screenState.value.copy(isWrongEmailFormat = true))
     }
+
+    @Test
+    fun attemptToLoginWithIncorrectPassword() {
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog).apply {
+            updateEmail(bob.email)
+            updatePassword("wrong")
+        }
+
+        viewModel.login()
+
+        assertThat(viewModel.screenState.value)
+            .isEqualTo(viewModel.screenState.value.copy(isBadPasswordFormat = true))
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
