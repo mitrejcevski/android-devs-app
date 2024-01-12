@@ -12,6 +12,9 @@ class LoginViewModel @Inject constructor(
     private val usersCatalog: UsersCatalog
 ) : ViewModel() {
 
+    private val emailValidator = EmailValidator()
+    private val passwordValidator = PasswordValidator()
+
     val screenState: StateFlow<LoginScreenState> =
         savedStateHandle.getStateFlow(LOGIN_SCREEN_STATE, LoginScreenState())
 
@@ -31,14 +34,12 @@ class LoginViewModel @Inject constructor(
         )
     }
 
-    private val emailValidator = EmailValidator()
-
     fun login() {
         val email = screenState.value.email
         val password = screenState.value.password
         if (!emailValidator.validateEmail(email)) {
             setIncorrectEmailFormatError()
-        } else if (!PasswordValidator().validatePassword(password)) {
+        } else if (!passwordValidator.validatePassword(password)) {
             setIncorrectPasswordFormat()
         } else {
             val found = usersCatalog.performLogin(email, password)
