@@ -17,7 +17,10 @@ class LoginViewModel @Inject constructor(
 
     fun updateEmail(newValue: String) {
         val value = savedStateHandle.get<LoginScreenState>(LOGIN_SCREEN_STATE)
-        savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(email = newValue)
+        savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(
+            email = newValue,
+            isWrongEmailFormat = false
+        )
     }
 
     fun updatePassword(newValue: String) {
