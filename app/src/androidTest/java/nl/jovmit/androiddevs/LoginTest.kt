@@ -18,6 +18,17 @@ class LoginTest {
             badEmailErrorIsShown()
         }
     }
+
+    @Test
+    fun resetBadEmailFormatError() {
+        launchLoginScreen(loginTestRule) {
+            typeEmail("email")
+            submit()
+            typeEmail("email@")
+        } verify {
+            badEmailErrorIsGone()
+        }
+    }
 }
 
 

@@ -1,6 +1,7 @@
 package nl.jovmit.androiddevs
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
@@ -46,5 +47,11 @@ class LoginVerification(
         val badEmailErrorMessage = rule.activity.getString(R.string.error_bad_email_format)
         rule.onNodeWithText(badEmailErrorMessage)
             .assertIsDisplayed()
+    }
+
+    fun badEmailErrorIsGone() {
+        val badEmailErrorMessage = rule.activity.getString(R.string.error_bad_email_format)
+        rule.onNodeWithText(badEmailErrorMessage)
+            .assertDoesNotExist()
     }
 }
