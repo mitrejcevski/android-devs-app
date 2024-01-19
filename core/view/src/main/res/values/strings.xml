@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_title">Login</string>
+    <string name="error_bad_email_format">Bad email format</string>
+</resources>

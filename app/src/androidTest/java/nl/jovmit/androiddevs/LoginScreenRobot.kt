@@ -7,6 +7,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.test.ext.junit.rules.ActivityScenarioRule
+import nl.jovmit.androiddevs.core.view.R
 
 fun launchLoginScreen(
     rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>,
@@ -42,7 +43,8 @@ class LoginVerification(
 ) {
 
     fun badEmailErrorIsShown() {
-        rule.onNodeWithText("Bad email format")
+        val badEmailErrorMessage = rule.activity.getString(R.string.error_bad_email_format)
+        rule.onNodeWithText(badEmailErrorMessage)
             .assertIsDisplayed()
     }
 }

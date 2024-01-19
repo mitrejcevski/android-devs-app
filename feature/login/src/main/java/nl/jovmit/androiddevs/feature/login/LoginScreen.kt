@@ -21,9 +21,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import nl.jovmit.androiddevs.core.view.theme.AppTheme
 import nl.jovmit.androiddevs.core.view.theme.PreviewLightDark
+import nl.jovmit.androiddevs.core.view.R
 
 @Composable
 internal fun LoginScreen(
@@ -65,7 +67,7 @@ private fun LoginScreenContent(
                 },
                 title = {
                     Text(
-                        text = "Login",
+                        text = stringResource(id = R.string.login_title),
                         color = AppTheme.colorScheme.onBackground,
                         style = AppTheme.typography.titleNormal
                     )
@@ -92,7 +94,7 @@ private fun LoginScreenContent(
                 isError = screenState.isWrongEmailFormat,
                 supportingText = {
                     if (screenState.isWrongEmailFormat) {
-                        Text(text = "Bad email format")
+                        Text(text = stringResource(id = R.string.error_bad_email_format))
                     }
                 },
                 label = {
