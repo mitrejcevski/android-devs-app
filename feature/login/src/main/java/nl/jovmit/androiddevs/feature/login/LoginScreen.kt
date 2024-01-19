@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.hilt.navigation.compose.hiltViewModel
 import nl.jovmit.androiddevs.core.view.theme.AppTheme
 import nl.jovmit.androiddevs.core.view.theme.PreviewLightDark
@@ -83,9 +84,17 @@ private fun LoginScreenContent(
             verticalArrangement = Arrangement.spacedBy(AppTheme.size.medium)
         ) {
             TextField(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("email"),
                 value = screenState.email,
                 onValueChange = onEmailUpdate,
+                isError = screenState.isWrongEmailFormat,
+                supportingText = {
+                    if (screenState.isWrongEmailFormat) {
+                        Text(text = "Bad email format")
+                    }
+                },
                 label = {
                     Text(text = "Email")
                 }
@@ -99,7 +108,9 @@ private fun LoginScreenContent(
                 }
             )
             Button(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("loginButton"),
                 onClick = onLoginClicked
             ) {
                 Text(text = "Login")
