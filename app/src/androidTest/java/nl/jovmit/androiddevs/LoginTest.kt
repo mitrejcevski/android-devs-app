@@ -29,6 +29,17 @@ class LoginTest {
             badEmailErrorIsGone()
         }
     }
+
+    @Test
+    fun displayBadPasswordError() {
+        launchLoginScreen(loginTestRule) {
+            typeEmail("email@email.com")
+            typePassword("bad pass")
+            submit()
+        } verify {
+            badPasswordErrorIsShown()
+        }
+    }
 }
 
 

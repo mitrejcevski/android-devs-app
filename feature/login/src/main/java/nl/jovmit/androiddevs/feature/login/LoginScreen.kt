@@ -23,9 +23,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import nl.jovmit.androiddevs.core.view.R
 import nl.jovmit.androiddevs.core.view.theme.AppTheme
 import nl.jovmit.androiddevs.core.view.theme.PreviewLightDark
-import nl.jovmit.androiddevs.core.view.R
 
 @Composable
 internal fun LoginScreen(
@@ -102,9 +102,17 @@ private fun LoginScreenContent(
                 }
             )
             TextField(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("password"),
                 value = screenState.password,
                 onValueChange = onPasswordUpdate,
+                isError = screenState.isBadPasswordFormat,
+                supportingText = {
+                    if (screenState.isBadPasswordFormat) {
+                        Text(text = stringResource(id = R.string.error_bad_password_format))
+                    }
+                },
                 label = {
                     Text(text = "Password")
                 }
