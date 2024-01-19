@@ -40,6 +40,41 @@ class LoginTest {
             badPasswordErrorIsShown()
         }
     }
+
+    @Test
+    fun resetBadPasswordFormatError() {
+        launchLoginScreen(loginTestRule) {
+            typeEmail("email@email.com")
+            typePassword("bad pass")
+            submit()
+            typePassword("bad pass1")
+        } verify {
+            badPasswordErrorIsGone()
+        }
+    }
+
+    @Test
+    fun errorLoggingIn() {
+        launchLoginScreen(loginTestRule) {
+            typeEmail("email@email.com")
+            typePassword("passWord12.")
+            submit()
+        } verify {
+            loginErrorMessageIsShown()
+        }
+    }
+
+    @Test
+    fun successfulLogin() {
+        //setup
+        launchLoginScreen(loginTestRule) {
+            typeEmail("email@email.com")
+            typePassword("passWord12.")
+            submit()
+        } verify {
+            userLoggedInSuccessfully()
+        }
+    }
 }
 
 

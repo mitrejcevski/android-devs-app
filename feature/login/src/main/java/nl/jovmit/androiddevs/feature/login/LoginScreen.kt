@@ -117,6 +117,9 @@ private fun LoginScreenContent(
                     Text(text = "Password")
                 }
             )
+            if (screenState.wrongCredentials) {
+                Text(text = stringResource(id = R.string.error_invalid_credentials))
+            }
             Button(
                 modifier = Modifier
                     .fillMaxWidth()

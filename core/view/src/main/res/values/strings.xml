@@ -3,4 +3,5 @@
     <string name="login_title">Login</string>
     <string name="error_bad_email_format">Bad email format</string>
     <string name="error_bad_password_format">Bad password. Type min 7 chars, uppercase and digit</string>
+    <string name="error_invalid_credentials">Invalid credentials. Try again</string>
 </resources>

@@ -64,4 +64,21 @@ class LoginVerification(
         rule.onNodeWithText(badPasswordErrorMessage)
             .assertIsDisplayed()
     }
+
+    fun badPasswordErrorIsGone() {
+        val badPasswordErrorMessage = rule.activity.getString(R.string.error_bad_password_format)
+        rule.onNodeWithText(badPasswordErrorMessage)
+            .assertDoesNotExist()
+    }
+
+    fun loginErrorMessageIsShown() {
+        val invalidCredentialsError = rule.activity.getString(R.string.error_invalid_credentials)
+        rule.onNodeWithText(invalidCredentialsError)
+            .assertIsDisplayed()
+    }
+
+    fun userLoggedInSuccessfully() {
+        rule.onNodeWithText("Timeline")
+            .assertIsDisplayed()
+    }
 }
