@@ -37,6 +37,8 @@
     hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt-version" }
     hilt-navigation = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-version" }
     hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt-version" }
+    hilt-android-test = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt-version" }
+    hilt-android-test-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt-version" }
 
     androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-unit-version" }
     androidx-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-espresso-version"}
@@ -51,7 +53,7 @@
     compose = ["compose-activity", "compose-ui", "compose-graphics", "compose-preview", "compose-material3", "compose-navigation", "compose-lifecycle-runtime"]
     compose-debug = ["compose-ui-tooling", "compose-ui-test-manifest"]
     hilt = ["hilt-android", "hilt-navigation"]
-    ui-testing = ["androidx-junit", "androidx-espresso", "androidx-compose-test"]
+    ui-testing = ["androidx-junit", "androidx-espresso", "androidx-compose-test", "hilt-android-test"]
     unit-testing = ["jupiter", "jupiter-params", "truth"]
 
 [plugins]
