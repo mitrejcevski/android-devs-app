@@ -9,6 +9,8 @@ import nl.jovmit.androiddevs.feature.login.loginScreen
 import nl.jovmit.androiddevs.feature.login.navigateToLogin
 import nl.jovmit.androiddevs.feature.signup.navigateToSignUp
 import nl.jovmit.androiddevs.feature.signup.signUpScreen
+import nl.jovmit.androiddevs.feature.timeline.navigateToTimeline
+import nl.jovmit.androiddevs.feature.timeline.timelineScreen
 import nl.jovmit.androiddevs.feature.welcome.WELCOME_ROUTE
 import nl.jovmit.androiddevs.feature.welcome.welcomeScreen
 
@@ -31,7 +33,12 @@ fun MainApp() {
         )
 
         loginScreen(
-            onNavigateUp = { navController.navigateUp() }
+            onLoggedIn = { navController.navigateToTimeline() },
+            onNavigateUp = { navController.navigateUp() },
+        )
+
+        timelineScreen(
+            onItemClicked = {}
         )
     }
 }

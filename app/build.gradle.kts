@@ -16,7 +16,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "nl.jovmit.androiddevs.CustomTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -80,6 +80,8 @@ dependencies {
 
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.bundles.ui.testing)
+
+    kaptAndroidTest(libs.hilt.android.test.compiler)
 
     testImplementation(libs.bundles.unit.testing)
 

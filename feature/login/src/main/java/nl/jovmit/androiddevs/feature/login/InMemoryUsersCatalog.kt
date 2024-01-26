@@ -1,10 +1,17 @@
 package nl.jovmit.androiddevs.feature.login
 
 class InMemoryUsersCatalog(
-    private val usersForPassword: Map<String, List<User>>
+    usersForPassword: Map<String, List<User>>
 ) : UsersCatalog {
 
+    private val _usersForPassword = usersForPassword.toMutableMap()
+
     override fun performLogin(email: String, password: String): User? {
-        return usersForPassword[password]?.find { it.email == email }
+        return _usersForPassword[password]?.find { it.email == email }
+    }
+
+    fun setLoggedInUsers(usersForPassword: Map<String, List<User>>) {
+        _usersForPassword.clear()
+        _usersForPassword.putAll(usersForPassword)
     }
 }

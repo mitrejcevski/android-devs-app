@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -30,9 +31,13 @@ import nl.jovmit.androiddevs.core.view.theme.PreviewLightDark
 @Composable
 internal fun LoginScreen(
     loginViewModel: LoginViewModel = hiltViewModel(),
+    onLoggedIn: (user: User) -> Unit,
     onNavigateUp: () -> Unit,
 ) {
     val state by loginViewModel.screenState.collectAsState()
+    LaunchedEffect(key1 = state.loggedInUser) {
+        state.loggedInUser?.let { user -> onLoggedIn(user) }
+    }
     LoginScreenContent(
         screenState = state,
         onNavigateUp = onNavigateUp,
