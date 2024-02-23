@@ -1,5 +1,6 @@
 package nl.jovmit.androiddevs.feature.login
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,8 +21,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import nl.jovmit.androiddevs.core.view.R
@@ -49,7 +52,7 @@ internal fun LoginScreen(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun LoginScreenContent(
+internal fun LoginScreenContent(
     screenState: LoginScreenState,
     onNavigateUp: () -> Unit,
     onEmailUpdate: (newValue: String) -> Unit,
@@ -88,7 +91,8 @@ private fun LoginScreenContent(
                 .fillMaxSize()
                 .padding(paddingValues)
                 .padding(horizontal = AppTheme.size.medium),
-            verticalArrangement = Arrangement.spacedBy(AppTheme.size.medium)
+            verticalArrangement = Arrangement.spacedBy(AppTheme.size.medium),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             TextField(
                 modifier = Modifier
@@ -121,6 +125,10 @@ private fun LoginScreenContent(
                 label = {
                     Text(text = "Password")
                 }
+            )
+            Image(
+                painter = painterResource(id = R.drawable.logo_android_devs),
+                contentDescription = stringResource(id = R.string.cd_logo)
             )
             if (screenState.wrongCredentials) {
                 Text(text = stringResource(id = R.string.error_invalid_credentials))

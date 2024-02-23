@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.parcelable)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
+    alias(libs.plugins.paparazzi)
 }
 
 android {
