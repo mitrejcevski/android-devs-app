@@ -1,8 +1,11 @@
 package nl.jovmit.androiddevs.feature.welcome
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -12,6 +15,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import nl.jovmit.androiddevs.core.view.R
 import nl.jovmit.androiddevs.core.view.composables.PrimaryButton
 import nl.jovmit.androiddevs.core.view.composables.SecondaryButton
 import nl.jovmit.androiddevs.core.view.theme.AppTheme
@@ -30,7 +36,7 @@ internal fun WelcomeScreen(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = "Badass Android Devs",
+                        text = stringResource(id = R.string.app_name),
                         color = AppTheme.colorScheme.onBackground,
                         style = AppTheme.typography.titleNormal
                     )
@@ -46,21 +52,43 @@ internal fun WelcomeScreen(
                 .fillMaxSize()
                 .padding(paddingValues),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(AppTheme.size.large)
+            verticalArrangement = Arrangement.SpaceEvenly
         ) {
-            Text(
-                text = "Welcome!",
-                color = AppTheme.colorScheme.onBackground,
-                style = AppTheme.typography.titleLarge
+            Box(
+                modifier = Modifier.weight(.8f),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = stringResource(id = R.string.welcome_message),
+                    color = AppTheme.colorScheme.onBackground,
+                    style = AppTheme.typography.titleLarge
+                )
+            }
+            Image(
+                modifier = Modifier.weight(1f),
+                painter = painterResource(id = R.drawable.logo_android_devs),
+                contentDescription = stringResource(id = R.string.cd_logo)
             )
-            PrimaryButton(
-                label = "Sign Up",
-                onClick = onSignUp
-            )
-            SecondaryButton(
-                label = "Login",
-                onClick = onLogin
-            )
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(AppTheme.size.large),
+                verticalArrangement = Arrangement.spacedBy(
+                    space = AppTheme.size.small,
+                    alignment = Alignment.Bottom
+                )
+            ) {
+                PrimaryButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    label = stringResource(id = R.string.sign_up_title),
+                    onClick = onSignUp
+                )
+                SecondaryButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    label = stringResource(id = R.string.login_title),
+                    onClick = onLogin
+                )
+            }
         }
     }
 }
