@@ -6,7 +6,7 @@ class InMemoryUsersCatalog(
 
     private val _usersForPassword = usersForPassword.toMutableMap()
 
-    override fun performLogin(email: String, password: String): User? {
+    override suspend fun performLogin(email: String, password: String): User? {
         return _usersForPassword[password]?.find { it.email == email }
     }
 

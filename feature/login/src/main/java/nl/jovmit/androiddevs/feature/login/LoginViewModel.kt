@@ -2,14 +2,19 @@ package nl.jovmit.androiddevs.feature.login
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val usersCatalog: UsersCatalog
+    private val usersCatalog: UsersCatalog,
+    private val background: CoroutineDispatcher
 ) : ViewModel() {
 
     private val emailValidator = EmailValidator()
@@ -42,7 +47,15 @@ class LoginViewModel @Inject constructor(
         } else if (!passwordValidator.validatePassword(password)) {
             setIncorrectPasswordFormat()
         } else {
-            val found = usersCatalog.performLogin(email, password)
+            proceedLoggingIn(email, password)
+        }
+    }
+
+    private fun proceedLoggingIn(email: String, password: String) {
+        viewModelScope.launch {
+            val found = withContext(background) {
+                usersCatalog.performLogin(email, password)
+            }
             onLoginResults(found)
         }
     }

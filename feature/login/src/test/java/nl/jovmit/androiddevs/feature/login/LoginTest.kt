@@ -2,9 +2,11 @@ package nl.jovmit.androiddevs.feature.login
 
 import androidx.lifecycle.SavedStateHandle
 import com.google.common.truth.Truth.assertThat
-import org.junit.jupiter.api.Disabled
+import kotlinx.coroutines.Dispatchers
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 
+@ExtendWith(CoroutineTestExtension::class)
 class LoginTest {
 
     private val alycia = User(email = "alycia@app.com")
@@ -18,12 +20,12 @@ class LoginTest {
         bobPassword to listOf(bob)
     )
     private val usersCatalog = InMemoryUsersCatalog(usersForPassword)
-
     private val savedStateHandle = SavedStateHandle()
+    private val backgroundDispatcher = Dispatchers.Unconfined
 
     @Test
     fun userLoggedIn() {
-        val viewModel = LoginViewModel(savedStateHandle, usersCatalog).apply {
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog, backgroundDispatcher).apply {
             updateEmail(alice.email)
             updatePassword(alicePassword)
         }
@@ -36,7 +38,7 @@ class LoginTest {
 
     @Test
     fun providedIncorrectPassword() {
-        val viewModel = LoginViewModel(savedStateHandle, usersCatalog).apply {
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog, backgroundDispatcher).apply {
             updateEmail(alice.email)
             updatePassword("anythingBut$alicePassword")
         }
@@ -49,7 +51,7 @@ class LoginTest {
 
     @Test
     fun providedIncorrectEmail() {
-        val viewModel = LoginViewModel(savedStateHandle, usersCatalog).apply {
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog, backgroundDispatcher).apply {
             updateEmail(unknownEmail)
             updatePassword(alicePassword)
         }
@@ -62,7 +64,7 @@ class LoginTest {
 
     @Test
     fun loginWithUserHavingSamePassword() {
-        val viewModel = LoginViewModel(savedStateHandle, usersCatalog).apply {
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog, backgroundDispatcher).apply {
             updateEmail(alycia.email)
             updatePassword(alicePassword)
         }
@@ -75,7 +77,7 @@ class LoginTest {
 
     @Test
     fun anotherLoggedInUser() {
-        val viewModel = LoginViewModel(savedStateHandle, usersCatalog).apply {
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog, backgroundDispatcher).apply {
             updateEmail(bob.email)
             updatePassword(bobPassword)
         }
@@ -88,7 +90,7 @@ class LoginTest {
 
     @Test
     fun noUserFound() {
-        val viewModel = LoginViewModel(savedStateHandle, usersCatalog).apply {
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog, backgroundDispatcher).apply {
             updateEmail(unknownEmail)
             updatePassword("validPassword1")
         }
@@ -101,7 +103,7 @@ class LoginTest {
 
     @Test
     fun attemptToLoginWithIncorrectEmail() {
-        val viewModel = LoginViewModel(savedStateHandle, usersCatalog).apply {
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog, backgroundDispatcher).apply {
             updateEmail(" ")
             updatePassword(bobPassword)
         }
@@ -114,7 +116,7 @@ class LoginTest {
 
     @Test
     fun attemptToLoginWithIncorrectPassword() {
-        val viewModel = LoginViewModel(savedStateHandle, usersCatalog).apply {
+        val viewModel = LoginViewModel(savedStateHandle, usersCatalog, backgroundDispatcher).apply {
             updateEmail(bob.email)
             updatePassword("wrong")
         }

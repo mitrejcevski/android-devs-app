@@ -1,5 +1,5 @@
 package nl.jovmit.androiddevs.feature.login
 
 interface UsersCatalog {
-    fun performLogin(email: String, password: String): User?
+    suspend fun performLogin(email: String, password: String): User?
 }
