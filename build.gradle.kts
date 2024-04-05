@@ -6,4 +6,5 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.kapt) apply false
     alias(libs.plugins.paparazzi) apply false
+    alias(libs.plugins.kotlix.serialization.plugin) apply false
 }

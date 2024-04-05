@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
     alias(libs.plugins.paparazzi)
+    alias(libs.plugins.kotlix.serialization.plugin)
 }
 
 android {
@@ -60,6 +61,7 @@ dependencies {
     implementation(project(":core:view"))
     implementation(libs.bundles.androidx)
     implementation(libs.bundles.hilt)
+    implementation(libs.bundles.retrofit)
 
     kapt(libs.hilt.compiler)
 
