@@ -3,24 +3,14 @@ package nl.jovmit.androiddevs.feature.login
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import nl.jovmit.androiddevs.feature.login.data.LoginData
-import nl.jovmit.androiddevs.feature.login.data.LoginResponse
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
-import retrofit2.HttpException
 import retrofit2.Retrofit
-import retrofit2.http.Body
-import retrofit2.http.POST
 
 class HttpUsersCatalogTest : UserCatalogContractTest() {
-
-    interface AuthorizationApi {
-
-        @POST("/login")
-        suspend fun login(@Body loginData: LoginData): LoginResponse
-    }
 
     private val mockWebServer = MockWebServer()
     private val retrofit = Retrofit.Builder()
@@ -34,34 +24,6 @@ class HttpUsersCatalogTest : UserCatalogContractTest() {
         return HttpUsersCatalog(authorizationApi)
     }
 
-    private class CustomDispatcher(
-        private val password: String,
-        private val users: List<User>
-    ) : Dispatcher() {
-
-        override fun dispatch(request: RecordedRequest): MockResponse {
-            val requestBody = request.body.readUtf8()
-            val loginData = Json.decodeFromString<LoginData>(requestBody)
-
-            return if (loginData.password == password) {
-                val matchingUser = users.find { it.email == loginData.email }
-                matchingUser?.let {
-                    MockResponse()
-                        .setResponseCode(200)
-                        .setBody("""{"email":"${matchingUser.email}"}""")
-                } ?: invalidCredentials()
-            } else {
-                invalidCredentials()
-            }
-        }
-
-        private fun invalidCredentials(): MockResponse {
-            return MockResponse()
-                .setResponseCode(401)
-                .setBody("""{"error":"Invalid credentials"}""")
-        }
-    }
-
     override fun usersCatalogWithoutPassword(password: String, users: List<User>): UsersCatalog {
         return usersCatalogWith("different$password", users)
     }
@@ -70,17 +32,30 @@ class HttpUsersCatalogTest : UserCatalogContractTest() {
         return usersCatalogWith(password, listOf(User("different$email")))
     }
 
-    class HttpUsersCatalog(
-        private val authApi: AuthorizationApi
-    ) : UsersCatalog {
+    private class CustomDispatcher(
+        private val password: String,
+        private val users: List<User>
+    ) : Dispatcher() {
 
-        override suspend fun performLogin(email: String, password: String): User? {
-            return try {
-                val response = authApi.login(LoginData(email, password))
-                User(response.email)
-            } catch (httpException: HttpException) {
-                null
+        override fun dispatch(request: RecordedRequest): MockResponse {
+            val requestBody = request.body.readUtf8()
+            val loginData = Json.decodeFromString<LoginData>(requestBody)
+            return if (loginData.password == password) {
+                val matchingUser = users.find { it.email == loginData.email }
+                matchingUser?.let { userResponse(matchingUser) } ?: invalidCredentials()
+            } else {
+                invalidCredentials()
             }
+        }
+
+        private fun userResponse(matchingUser: User) = MockResponse()
+            .setResponseCode(200)
+            .setBody("""{"email":"${matchingUser.email}"}""")
+
+        private fun invalidCredentials(): MockResponse {
+            return MockResponse()
+                .setResponseCode(401)
+                .setBody("""{"error":"Invalid credentials"}""")
         }
     }
 }
