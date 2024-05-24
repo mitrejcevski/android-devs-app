@@ -16,7 +16,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "nl.jovmit.androiddevs.CustomTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -54,6 +54,16 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    testOptions.unitTests {
+        isReturnDefaultValues = true
+        all { tests ->
+            tests.useJUnitPlatform()
+            tests.testLogging {
+                events("passed", "failed", "skipped")
+            }
+        }
+    }
 }
 
 dependencies {
@@ -69,9 +79,12 @@ dependencies {
 
     kapt(libs.hilt.compiler)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation(platform(libs.compose.bom))
+    androidTestImplementation(libs.bundles.ui.testing)
+
+    kaptAndroidTest(libs.hilt.android.test.compiler)
+
+    testImplementation(libs.bundles.unit.testing)
+
+    testRuntimeOnly(libs.junit.jupiter.engine)
 }

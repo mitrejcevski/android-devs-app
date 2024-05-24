@@ -7,11 +7,11 @@ import androidx.navigation.compose.composable
 private const val LOGIN_ROUTE = "login"
 
 fun NavGraphBuilder.loginScreen(
-    onLoggedIn: () -> Unit,
+    onLoggedIn: (user: User) -> Unit,
     onNavigateUp: () -> Unit
 ) {
     composable(LOGIN_ROUTE) {
-        LoginScreenContainer(
+        LoginScreen(
             onLoggedIn = onLoggedIn,
             onNavigateUp = onNavigateUp
         )

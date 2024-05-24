@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Android Devs</string>
+    <string name="welcome_message">Welcome!</string>
+    <string name="sign_up_title">Sign Up</string>
+    <string name="login_title">Login</string>
+    <string name="error_bad_email_format">Bad email format</string>
+    <string name="error_bad_password_format">Bad password. Type min 7 chars, uppercase and digit</string>
+    <string name="error_invalid_credentials">Invalid credentials. Try again</string>
+    <string name="cd_logo">App Logo</string>
+</resources>

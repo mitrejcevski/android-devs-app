@@ -3,6 +3,9 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kapt)
+    alias(libs.plugins.parcelable)
+    alias(libs.plugins.paparazzi)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -42,13 +45,29 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.kotlin.compiler.extension.version.get()
     }
+
+    testOptions.unitTests {
+        isReturnDefaultValues = true
+        all { tests ->
+            tests.useJUnitPlatform()
+            tests.testLogging {
+                events("passed", "failed", "skipped")
+            }
+        }
+    }
 }
 
 dependencies {
     implementation(project(":core:view"))
     implementation(project(":base:auth"))
 
+    implementation(libs.bundles.androidx)
     implementation(libs.bundles.hilt)
+    implementation(libs.bundles.retrofit)
 
     kapt(libs.hilt.compiler)
+
+    testImplementation(libs.bundles.unit.testing)
+
+    testRuntimeOnly(libs.junit.jupiter.engine)
 }

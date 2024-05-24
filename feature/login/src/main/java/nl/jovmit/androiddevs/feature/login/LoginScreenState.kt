@@ -1,9 +1,14 @@
 package nl.jovmit.androiddevs.feature.login
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class LoginScreenState(
-    val isLoading: Boolean = false,
     val email: String = "",
     val password: String = "",
-    val didAuthorize: Boolean = false,
-    val isAuthError: Boolean = false
-)
+    val loggedInUser: User? = null,
+    val wrongCredentials: Boolean = false,
+    val isWrongEmailFormat: Boolean = false,
+    val isBadPasswordFormat: Boolean = false
+) : Parcelable
