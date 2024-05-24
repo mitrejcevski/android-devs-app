@@ -6,10 +6,10 @@ plugins {
 
 android {
     namespace = "nl.jovmit.androiddevs.core.database"
-    compileSdk = 33
+    compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
-        minSdk = 24
+        minSdk = libs.versions.minSdkVersion.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -26,12 +26,13 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        val javaVersion = libs.versions.javaVersion.get()
+        sourceCompatibility = JavaVersion.toVersion(javaVersion)
+        targetCompatibility = JavaVersion.toVersion(javaVersion)
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = libs.versions.javaVersion.get()
     }
 }
 

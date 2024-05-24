@@ -10,10 +10,10 @@ plugins {
 
 android {
     namespace = "nl.jovmit.androiddevs.feature.login"
-    compileSdk = libs.versions.target.sdk.version.get().toInt()
+    compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
-        minSdk = libs.versions.min.sdk.version.get().toInt()
+        minSdk = libs.versions.minSdkVersion.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -30,12 +30,13 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        val javaVersion = libs.versions.javaVersion.get()
+        sourceCompatibility = JavaVersion.toVersion(javaVersion)
+        targetCompatibility = JavaVersion.toVersion(javaVersion)
     }
 
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = libs.versions.javaVersion.get()
     }
 
     buildFeatures {
@@ -43,7 +44,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.kotlin.compiler.extension.version.get()
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
     }
 
     testOptions.unitTests {

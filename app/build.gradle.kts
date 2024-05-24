@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "nl.jovmit.androiddevs"
-    compileSdk = libs.versions.target.sdk.version.get().toInt()
+    compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
         applicationId = "nl.jovmit.androiddevs"
-        minSdk = libs.versions.min.sdk.version.get().toInt()
-        targetSdk = libs.versions.target.sdk.version.get().toInt()
+        minSdk = libs.versions.minSdkVersion.get().toInt()
+        targetSdk = libs.versions.compileSdkVersion.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -33,12 +33,13 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        val javaVersion = libs.versions.javaVersion.get()
+        sourceCompatibility = JavaVersion.toVersion(javaVersion)
+        targetCompatibility = JavaVersion.toVersion(javaVersion)
     }
 
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = libs.versions.javaVersion.get()
     }
 
     buildFeatures {
@@ -46,7 +47,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.kotlin.compiler.extension.version.get()
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
     }
 
     packaging {

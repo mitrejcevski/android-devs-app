@@ -1,79 +1,68 @@
 [versions]
-    min-sdk-version = "24"
-    target-sdk-version = "34"
-    gradle-plugin-version = "8.1.4"
-    kotlin-serialization-version = "1.9.0"
-    json-serialization-version = "1.6.0"
-    retrofit-serialization-converter-version = "1.0.0"
-    room-version = "2.6.0"
-    truth-version = "1.1.5"
-    kotlin-version = "1.9.22"
-    kotlin-compiler-extension-version = "1.5.10"
-    androidx-core-ktx-version = "1.12.0"
-    compose-bom-version = "2024.02.02"
-    compose-activity-version = "1.8.2"
-    compose-nav-version = "2.7.7"
-    coil-version = "2.4.0"
-    androidx-unit-version = "1.1.5"
-    androidx-espresso-version = "3.5.1"
-    test-junit-jupiter = "5.10.0"
-    androidx-lifecycle-version = "2.7.0"
-    hilt-version = "2.50"
-    hilt-navigation-version = "1.2.0"
-    paparazzi-version = "1.3.1"
-    retrofit-version = "2.9.0"
-    okhttp-version = "4.12.0"
-
+    minSdkVersion = "26"
+    compileSdkVersion = "34"
+    kotlinCompilerExtensionVersion = "1.5.10"
+    javaVersion = "17"
+    gradlePluginVersion = "8.1.4"
+    kotlinSerializationVersion = "1.9.22"
+    roomVersion = "2.6.1"
+    truthVersion = "1.1.5"
+    kotlinVersion = "1.9.22"
+    androidxCoreKtxVersion = "1.13.1"
+    composeBomVersion = "2024.05.00"
+    composeActivityVersion = "1.9.0"
+    composeNavVersion = "2.7.7"
+    coilVersion = "2.6.0"
+    androidxUnitVersion = "1.1.5"
+    androidxEspressoVersion = "3.5.1"
+    testJunitJupiterVersion = "5.10.0"
+    androidxLifecycleVersion = "2.8.0"
+    hiltVersion = "2.50"
+    hiltNavigationVersion = "1.2.0"
+    paparazziVersion = "1.3.1"
+    retrofitVersion = "2.9.0"
+    okhttpVersion = "4.12.0"
 
 [libraries]
-    androidx-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core-ktx-version" }
-    androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle-version" }
+    androidx-ktx = { module = "androidx.core:core-ktx", version.ref = "androidxCoreKtxVersion" }
+    androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycleVersion" }
 
-    compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom-version" }
-    compose-activity = { module = "androidx.activity:activity-compose", version.ref = "compose-activity-version" }
+    compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBomVersion" }
+    compose-activity = { module = "androidx.activity:activity-compose", version.ref = "composeActivityVersion" }
     compose-ui = { module = "androidx.compose.ui:ui" }
     compose-graphics = { module = "androidx.compose.ui:ui-graphics" }
     compose-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
     compose-material3 = { module = "androidx.compose.material3:material3" }
     compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
     compose-ui-test-manifest = { module = "androidx.compose.ui:ui-tooling" }
-    compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "compose-nav-version" }
-    compose-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle-version" }
+    compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavVersion" }
+    compose-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycleVersion" }
 
-    coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-version" }
+    coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilVersion" }
 
-    retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit-version" }
-    reotrfit-serialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-serialization-converter-version" }
-    kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "json-serialization-version" }
-    okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp-version" }
+    room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
+    room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
 
-    room-runtime = { module = "androidx.room:room-runtime", version.ref = "room-version" }
-    room-compiler = { module = "androidx.room:room-compiler", version.ref = "room-version" }
+    hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltVersion" }
+    hilt-navigation = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationVersion" }
+    hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltVersion" }
+    hilt-android-test = { module = "com.google.dagger:hilt-android-testing", version.ref = "hiltVersion" }
+    hilt-android-test-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltVersion" }
 
-    androidx-test-ext = { module = "androidx.test.ext:junit", version = "1.1.5" }
-    androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", version = "3.5.1" }
-    androidx-test-compose = { module = "androidx.compose.ui:ui-test-junit4", version = "1.5.4" }
-
-    hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt-version" }
-    hilt-navigation = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-version" }
-    hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt-version" }
-    hilt-android-test = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt-version" }
-    hilt-android-test-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt-version" }
-
-    network-okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp-version" }
-    network-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit-version" }
-    network-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.6.0" }
+    network-okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttpVersion" }
+    network-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
+    network-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.6.3" }
     network-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version = "1.0.0" }
 
-    androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-unit-version" }
-    androidx-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-espresso-version"}
+    androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidxUnitVersion" }
+    androidx-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "androidxEspressoVersion" }
     androidx-compose-test = { module = "androidx.compose.ui:ui-test-junit4" }
-    junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "test-junit-jupiter" }
-    jupiter = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "test-junit-jupiter" }
-    jupiter-vintage = { module = "org.junit.vintage:junit-vintage-engine", version.ref = "test-junit-jupiter" }
-    jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "test-junit-jupiter" }
-    truth = { module = "com.google.truth:truth", version.ref = "truth-version" }
-    test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.7.3" }
+    junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "testJunitJupiterVersion" }
+    jupiter = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "testJunitJupiterVersion" }
+    jupiter-vintage = { module = "org.junit.vintage:junit-vintage-engine", version.ref = "testJunitJupiterVersion" }
+    jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "testJunitJupiterVersion" }
+    truth = { module = "com.google.truth:truth", version.ref = "truthVersion" }
+    test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.8.0" }
     test-okhttp-mockserver = { module = "com.squareup.okhttp3:mockwebserver", version = "4.10.0" }
 
 [bundles]
@@ -86,11 +75,11 @@
     unit-testing = ["jupiter", "jupiter-params", "truth", "jupiter-vintage", "test-coroutines", "test-okhttp-mockserver"]
 
 [plugins]
-    android-application = { id = "com.android.application", version.ref = "gradle-plugin-version" }
-    android-library = { id = "com.android.library", version.ref = "gradle-plugin-version" }
-    kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin-version" }
-    kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin-version" }
-    kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-serialization-version" }
-    hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt-version" }
-    paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi-version" }
-    parcelable = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin-version" }
+    android-application = { id = "com.android.application", version.ref = "gradlePluginVersion" }
+    android-library = { id = "com.android.library", version.ref = "gradlePluginVersion" }
+    kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVersion" }
+    kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlinVersion" }
+    kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerializationVersion" }
+    hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
+    paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazziVersion" }
+    parcelable = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlinVersion" }
