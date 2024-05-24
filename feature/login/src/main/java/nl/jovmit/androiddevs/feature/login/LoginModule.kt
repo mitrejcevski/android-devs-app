@@ -17,10 +17,4 @@ object LoginModule {
     fun provideUserCatalog(): UsersCatalog {
         return InMemoryUsersCatalog(emptyMap())
     }
-
-    @Provides
-    @Singleton
-    fun provideBackgroundDispatcher(): CoroutineDispatcher {
-        return Dispatchers.IO
-    }
 }

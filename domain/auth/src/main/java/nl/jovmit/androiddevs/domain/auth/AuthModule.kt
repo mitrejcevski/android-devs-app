@@ -1,11 +1,11 @@
-package nl.jovmit.androiddevs.base.auth
+package nl.jovmit.androiddevs.domain.auth
 
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import nl.jovmit.androiddevs.base.auth.data.repository.InMemoryAuthRepo
-import nl.jovmit.androiddevs.base.auth.domain.repository.AuthRepository
+import nl.jovmit.androiddevs.domain.auth.data.repository.InMemoryAuthRepo
+import nl.jovmit.androiddevs.domain.auth.domain.repository.AuthRepository
 import javax.inject.Singleton
 
 @Module

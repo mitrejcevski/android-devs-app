@@ -1,8 +1,8 @@
-package nl.jovmit.androiddevs.base.auth.data.repository
+package nl.jovmit.androiddevs.domain.auth.data.repository
 
-import nl.jovmit.androiddevs.base.auth.data.mapper.toDomain
-import nl.jovmit.androiddevs.base.auth.domain.model.AuthResult
-import nl.jovmit.androiddevs.base.auth.domain.repository.AuthRepository
+import nl.jovmit.androiddevs.domain.auth.data.mapper.toDomain
+import nl.jovmit.androiddevs.domain.auth.domain.model.AuthResult
+import nl.jovmit.androiddevs.domain.auth.domain.repository.AuthRepository
 import nl.jovmit.androiddevs.core.netowrk.AuthService
 import nl.jovmit.androiddevs.core.netowrk.LoginData
 import nl.jovmit.androiddevs.core.netowrk.SignUpData

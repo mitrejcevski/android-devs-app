@@ -1,6 +1,6 @@
-package nl.jovmit.androiddevs.base.auth.domain.repository
+package nl.jovmit.androiddevs.domain.auth.domain.repository
 
-import nl.jovmit.androiddevs.base.auth.domain.model.AuthResult
+import nl.jovmit.androiddevs.domain.auth.domain.model.AuthResult
 
 interface AuthRepository {
 

@@ -1,8 +1,8 @@
-package nl.jovmit.androiddevs.base.auth.data.repository
+package nl.jovmit.androiddevs.domain.auth.data.repository
 
-import nl.jovmit.androiddevs.base.auth.domain.model.AuthResult
-import nl.jovmit.androiddevs.base.auth.domain.model.User
-import nl.jovmit.androiddevs.base.auth.domain.repository.AuthRepository
+import nl.jovmit.androiddevs.domain.auth.domain.model.AuthResult
+import nl.jovmit.androiddevs.domain.auth.domain.model.User
+import nl.jovmit.androiddevs.domain.auth.domain.repository.AuthRepository
 import javax.inject.Inject
 
 class InMemoryAuthRepo @Inject constructor() : AuthRepository {

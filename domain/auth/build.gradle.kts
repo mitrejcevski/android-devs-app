@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "nl.jovmit.androiddevs.base.auth"
+    namespace = "nl.jovmit.androiddevs.domain.auth"
     compileSdk = libs.versions.target.sdk.version.get().toInt()
 
     defaultConfig {

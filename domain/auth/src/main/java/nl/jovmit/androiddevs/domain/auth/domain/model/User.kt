@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.base.auth.domain.model
+package nl.jovmit.androiddevs.domain.auth.domain.model
 
 data class User(
     val userId: String,

@@ -59,7 +59,7 @@ android {
 
 dependencies {
     implementation(project(":core:view"))
-    implementation(project(":base:auth"))
+    implementation(project(":domain:auth"))
 
     implementation(libs.bundles.androidx)
     implementation(libs.bundles.hilt)
