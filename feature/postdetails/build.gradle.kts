@@ -43,11 +43,25 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
     }
+
+    testOptions.unitTests {
+        isReturnDefaultValues = true
+        all { tests ->
+            tests.useJUnitPlatform()
+            tests.testLogging {
+                events("passed", "failed", "skipped")
+            }
+        }
+    }
 }
 
 dependencies {
-    implementation(project(":core:view"))
+    implementation(projects.core.view)
     implementation(libs.bundles.hilt)
 
     kapt(libs.hilt.compiler)
+
+    testImplementation(libs.bundles.unit.testing)
+
+    testRuntimeOnly(libs.junit.jupiter.engine)
 }

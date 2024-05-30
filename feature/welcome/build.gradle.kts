@@ -55,8 +55,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:view"))
-    implementation(project(":domain:auth"))
+    implementation(projects.core.view)
+    implementation(projects.domain.auth)
 
     testImplementation(libs.bundles.unit.testing)
 

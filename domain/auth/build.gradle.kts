@@ -35,11 +35,25 @@ android {
     kotlinOptions {
         jvmTarget = libs.versions.javaVersion.get()
     }
+
+    testOptions.unitTests {
+        isReturnDefaultValues = true
+        all { tests ->
+            tests.useJUnitPlatform()
+            tests.testLogging {
+                events("passed", "failed", "skipped")
+            }
+        }
+    }
 }
 dependencies {
-    implementation(project(":core:network"))
+    implementation(projects.core.network)
     implementation(libs.bundles.hilt)
 
     kapt(libs.hilt.compiler)
+
+    testImplementation(libs.bundles.unit.testing)
+
+    testRuntimeOnly(libs.junit.jupiter.engine)
 }
 
