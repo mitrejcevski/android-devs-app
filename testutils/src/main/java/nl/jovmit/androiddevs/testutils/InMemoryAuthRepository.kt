@@ -1,11 +1,10 @@
-package nl.jovmit.androiddevs.domain.auth.data.repository
+package nl.jovmit.androiddevs.testutils
 
 import nl.jovmit.androiddevs.domain.auth.domain.model.AuthResult
 import nl.jovmit.androiddevs.domain.auth.domain.model.User
 import nl.jovmit.androiddevs.domain.auth.domain.repository.AuthRepository
-import javax.inject.Inject
 
-class InMemoryAuthRepo @Inject constructor() : AuthRepository {
+class InMemoryAuthRepository : AuthRepository {
 
     override suspend fun login(email: String, password: String): AuthResult {
         if (email == "email" && password == "password") {

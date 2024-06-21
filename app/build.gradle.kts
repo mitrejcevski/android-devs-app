@@ -68,12 +68,12 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:view"))
-    implementation(project(":feature:welcome"))
-    implementation(project(":feature:signup"))
-    implementation(project(":feature:login"))
-    implementation(project(":feature:timeline"))
-    implementation(project(":feature:postdetails"))
+    implementation(projects.core.view)
+    implementation(projects.feature.welcome)
+    implementation(projects.feature.signup)
+    implementation(projects.feature.login)
+    implementation(projects.feature.timeline)
+    implementation(projects.feature.postdetails)
 
     implementation(libs.bundles.androidx)
     implementation(libs.bundles.hilt)
