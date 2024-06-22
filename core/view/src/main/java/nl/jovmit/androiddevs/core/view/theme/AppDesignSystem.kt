@@ -24,6 +24,13 @@ data class AppColorScheme(
 }
 
 @Stable
+data class CardColorScheme(
+    val low: Color,
+    val medium: Color,
+    val high: Color
+)
+
+@Stable
 data class AppTypography(
     val titleLarge: TextStyle,
     val titleNormal: TextStyle,
@@ -56,6 +63,14 @@ val LocalAppColorScheme = staticCompositionLocalOf {
         onPrimary = Color.Unspecified,
         secondary = Color.Unspecified,
         onSecondary = Color.Unspecified
+    )
+}
+
+val LocalAppCardColorScheme = staticCompositionLocalOf {
+    CardColorScheme(
+        low = Color.Unspecified,
+        medium = Color.Unspecified,
+        high = Color.Unspecified
     )
 }
 

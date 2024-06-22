@@ -31,6 +31,18 @@ private val lightColorScheme = AppColorScheme(
     onSecondary = Pink40,
 )
 
+private val darkCardColorScheme = CardColorScheme(
+    low = Color(0xFF009688),
+    medium = Color(0xFFCDDC39),
+    high = Color(0xFF673AB7)
+)
+
+private val lightCardColorScheme = CardColorScheme(
+    low = Color(0xFF4CAF50),
+    medium = Color(0xFFFFEB3B),
+    high = Color(0xFF9C27B0)
+)
+
 private val typography = AppTypography(
     titleLarge = TextStyle(
         fontFamily = OpenSans,
@@ -80,12 +92,14 @@ fun AppTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = if (isDarkTheme) darkColorScheme else lightColorScheme
+    val cardIndicatorColorscheme = if (isDarkTheme) darkCardColorScheme else lightCardColorScheme
     val rippleIndication = rememberRipple()
     CompositionLocalProvider(
         LocalAppColorScheme provides colorScheme,
         LocalAppTypography provides typography,
         LocalAppShape provides shape,
         LocalAppSize provides size,
+        LocalAppCardColorScheme provides cardIndicatorColorscheme,
         LocalIndication provides rippleIndication,
         content = content
     )
@@ -104,4 +118,7 @@ object AppTheme {
 
     val size: AppSize
         @Composable get() = LocalAppSize.current
+
+    val cardColorScheme: CardColorScheme
+        @Composable get() = LocalAppCardColorScheme.current
 }
