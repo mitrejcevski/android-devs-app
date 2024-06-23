@@ -13,7 +13,10 @@ import nl.jovmit.androiddevs.feature.signup.navigateToSignUp
 import nl.jovmit.androiddevs.feature.signup.signUpScreen
 import nl.jovmit.androiddevs.feature.timeline.navigateToTimeline
 import nl.jovmit.androiddevs.feature.timeline.timelineScreen
-import nl.jovmit.androiddevs.feature.welcome.WELCOME_ROUTE
+import nl.jovmit.androiddevs.feature.welcome.Cards
+import nl.jovmit.androiddevs.feature.welcome.cardDetailsScreen
+import nl.jovmit.androiddevs.feature.welcome.cardsScreen
+import nl.jovmit.androiddevs.feature.welcome.navigateToCardDetails
 import nl.jovmit.androiddevs.feature.welcome.welcomeScreen
 
 @Composable
@@ -23,7 +26,7 @@ fun MainApp() {
     NavHost(
         modifier = Modifier.fillMaxSize(),
         navController = navController,
-        startDestination = WELCOME_ROUTE
+        startDestination = Cards
     ) {
         welcomeScreen(
             onLogin = { navController.navigateToLogin() },
@@ -46,6 +49,16 @@ fun MainApp() {
         )
 
         postDetailsScreen(
+            onNavigateUp = { navController.navigateUp() }
+        )
+
+        cardsScreen(
+            onNavigateToCardDetails = { cardType ->
+                navController.navigateToCardDetails(cardType)
+            }
+        )
+
+        cardDetailsScreen(
             onNavigateUp = { navController.navigateUp() }
         )
     }
