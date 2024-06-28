@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.core.netowrk
+package nl.jovmit.androiddevs.core.network
 
 import kotlinx.serialization.Serializable
 

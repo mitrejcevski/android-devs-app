@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "nl.jovmit.androiddevs.core.netowrk"
+    namespace = "nl.jovmit.androiddevs.core.network"
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {

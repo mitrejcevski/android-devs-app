@@ -3,9 +3,9 @@ package nl.jovmit.androiddevs.domain.auth.data.repository
 import nl.jovmit.androiddevs.domain.auth.data.mapper.toDomain
 import nl.jovmit.androiddevs.domain.auth.domain.model.AuthResult
 import nl.jovmit.androiddevs.domain.auth.domain.repository.AuthRepository
-import nl.jovmit.androiddevs.core.netowrk.AuthService
-import nl.jovmit.androiddevs.core.netowrk.LoginData
-import nl.jovmit.androiddevs.core.netowrk.SignUpData
+import nl.jovmit.androiddevs.core.network.AuthService
+import nl.jovmit.androiddevs.core.network.LoginData
+import nl.jovmit.androiddevs.core.network.SignUpData
 import javax.inject.Inject
 
 internal class RemoteAuthRepository @Inject constructor(

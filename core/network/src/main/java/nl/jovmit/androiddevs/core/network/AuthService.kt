@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.core.netowrk
+package nl.jovmit.androiddevs.core.network
 
 import retrofit2.http.Body
 import retrofit2.http.POST
