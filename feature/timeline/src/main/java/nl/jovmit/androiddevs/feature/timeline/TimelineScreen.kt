@@ -1,6 +1,7 @@
 package nl.jovmit.androiddevs.feature.timeline
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,13 +16,28 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
+import nl.jovmit.androiddevs.core.view.composables.PrimaryButton
 import nl.jovmit.androiddevs.core.view.theme.AppTheme
 import nl.jovmit.androiddevs.core.view.theme.PreviewLightDark
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun TimelineScreen(
-    onItemClicked: (itemId: String) -> Unit
+    viewModel: TimelineViewModel = hiltViewModel(),
+    onItemClicked: (itemId: String) -> Unit,
+) {
+
+    TimelineScreenContent(
+        onItemClicked = onItemClicked,
+        onForceLogOut = viewModel::doLogout
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun TimelineScreenContent(
+    onItemClicked: (itemId: String) -> Unit,
+    onForceLogOut: () -> Unit
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -41,29 +57,38 @@ internal fun TimelineScreen(
             )
         }
     ) { paddingValues ->
-        val items = (1..50).map { ListItem(it.toString(), "Item $it") }
-        LazyColumn(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .padding(paddingValues),
+            contentAlignment = Alignment.Center
         ) {
-            items(items) { item ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                            onItemClicked(item.id)
-                        }
-                        .padding(AppTheme.size.medium),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = item.title,
-                        style = AppTheme.typography.labelLarge,
-                        color = AppTheme.colorScheme.onPrimary
-                    )
+            val items = (1..50).map { ListItem(it.toString(), "Item $it") }
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(items) { item ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                onItemClicked(item.id)
+                            }
+                            .padding(AppTheme.size.medium),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = item.title,
+                            style = AppTheme.typography.labelLarge,
+                            color = AppTheme.colorScheme.onPrimary
+                        )
+                    }
                 }
             }
+            PrimaryButton(
+                label = "Log Me Out",
+                onClick = onForceLogOut
+            )
         }
     }
 }

@@ -15,6 +15,8 @@ object LoginModule {
     @Provides
     @Singleton
     fun provideUserCatalog(): UsersCatalog {
-        return InMemoryUsersCatalog(emptyMap())
+        return InMemoryUsersCatalog(
+            mapOf("pAssW0rd" to listOf(User("email@email.com")))
+        )
     }
 }
