@@ -17,9 +17,25 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideHttpClient(): OkHttpClient {
+    fun provideLogoutSignal(): LogoutSignal {
+        return LogoutSignal()
+    }
+
+    @Singleton
+    @Provides
+    fun provideUnauthorizedInterceptor(
+        logoutSignal: LogoutSignal
+    ): ExpiredTokenInterceptor {
+        return ExpiredTokenInterceptor(logoutSignal)
+    }
+
+    @Singleton
+    @Provides
+    fun provideHttpClient(
+        expiredAuthInterceptor: ExpiredTokenInterceptor
+    ): OkHttpClient {
         return OkHttpClient.Builder()
-//            .addInterceptor()
+            .addInterceptor(expiredAuthInterceptor)
             .build()
     }
 

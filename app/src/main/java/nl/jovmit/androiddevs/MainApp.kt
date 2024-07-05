@@ -2,9 +2,12 @@ package nl.jovmit.androiddevs
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import kotlinx.coroutines.flow.collect
 import nl.jovmit.androiddevs.feature.login.loginScreen
 import nl.jovmit.androiddevs.feature.login.navigateToLogin
 import nl.jovmit.androiddevs.feature.postdetails.navigateToPostDetails
@@ -17,8 +20,18 @@ import nl.jovmit.androiddevs.feature.welcome.WELCOME_ROUTE
 import nl.jovmit.androiddevs.feature.welcome.welcomeScreen
 
 @Composable
-fun MainApp() {
+fun MainApp(
+    mainViewModel: MainAppViewModel = hiltViewModel()
+) {
+
     val navController = rememberNavController()
+
+    LaunchedEffect(Unit) {
+        mainViewModel.observeLoggedOut()
+        mainViewModel.loggedOut.collect {
+            navController.navigateToLogin()
+        }
+    }
 
     NavHost(
         modifier = Modifier.fillMaxSize(),

@@ -69,6 +69,7 @@ android {
 
 dependencies {
     implementation(projects.core.view)
+    implementation(projects.core.network)
     implementation(projects.feature.welcome)
     implementation(projects.feature.signup)
     implementation(projects.feature.login)
@@ -85,7 +86,7 @@ dependencies {
 
     kaptAndroidTest(libs.hilt.android.test.compiler)
 
-    testImplementation(libs.bundles.unit.testing)
+    testImplementation(projects.testutils)
 
     testRuntimeOnly(libs.junit.jupiter.engine)
 }
