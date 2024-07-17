@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.parcelable)
     alias(libs.plugins.paparazzi)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlin.compose.compiler)
 }
 
 android {
@@ -41,10 +42,6 @@ android {
 
     buildFeatures {
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
     }
 
     testOptions.unitTests {
