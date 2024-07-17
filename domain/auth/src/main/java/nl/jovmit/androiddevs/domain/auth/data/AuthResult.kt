@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.domain.auth.domain.model
+package nl.jovmit.androiddevs.domain.auth.data
 
 sealed class AuthResult {
 

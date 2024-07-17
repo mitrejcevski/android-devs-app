@@ -1,11 +1,10 @@
-package nl.jovmit.androiddevs.domain.auth.data.repository
+package nl.jovmit.androiddevs.domain.auth
 
-import nl.jovmit.androiddevs.domain.auth.data.mapper.toDomain
-import nl.jovmit.androiddevs.domain.auth.domain.model.AuthResult
-import nl.jovmit.androiddevs.domain.auth.domain.repository.AuthRepository
 import nl.jovmit.androiddevs.core.network.AuthService
 import nl.jovmit.androiddevs.core.network.LoginData
 import nl.jovmit.androiddevs.core.network.SignUpData
+import nl.jovmit.androiddevs.domain.auth.data.AuthResult
+import nl.jovmit.androiddevs.domain.auth.data.toDomain
 import javax.inject.Inject
 
 internal class RemoteAuthRepository @Inject constructor(

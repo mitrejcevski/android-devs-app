@@ -49,7 +49,7 @@ android {
 }
 
 dependencies {
-    implementation(libs.bundles.retrofit)
+    api(libs.bundles.retrofit)
     implementation(libs.bundles.hilt)
 
     kapt(libs.hilt.compiler)

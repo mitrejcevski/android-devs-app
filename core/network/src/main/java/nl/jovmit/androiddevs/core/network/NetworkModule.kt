@@ -44,7 +44,7 @@ object NetworkModule {
     fun provideRetrofit(): Retrofit {
         val contentType = "application/json".toMediaType()
         return Retrofit.Builder()
-            .baseUrl("https://api.androiddevs.nl/")
+            .baseUrl("https://api.skool.com/")
             .addConverterFactory(Json.asConverterFactory(contentType))
             .build()
     }

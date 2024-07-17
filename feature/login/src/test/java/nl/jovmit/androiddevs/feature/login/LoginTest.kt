@@ -3,23 +3,26 @@ package nl.jovmit.androiddevs.feature.login
 import androidx.lifecycle.SavedStateHandle
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.Dispatchers
+import nl.jovmit.androiddevs.domain.auth.InMemoryAuthRepository
+import nl.jovmit.androiddevs.domain.auth.data.UserBuilder.Companion.aUser
+import nl.jovmit.androiddevs.testutils.CoroutineTestExtension
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
 @ExtendWith(CoroutineTestExtension::class)
 class LoginTest {
 
-    private val alycia = User(email = "alycia@app.com")
-    private val alice = User(email = "alice@app.com")
+    private val alycia = aUser().withEmail("alycia@app.com").build()
+    private val alice = aUser().withEmail("alice@app.com").build()
     private val alicePassword = ":Passw0rd:"
-    private val bob = User(email = "bob@app.com")
+    private val bob = aUser().withEmail("bob@app.com").build()
     private val bobPassword = "bobsPassword1"
     private val unknownEmail = "valid@email.com"
     private val usersForPassword = mapOf(
         alicePassword to listOf(alice, alycia),
         bobPassword to listOf(bob)
     )
-    private val usersCatalog = InMemoryUsersCatalog(usersForPassword)
+    private val usersCatalog = InMemoryAuthRepository(usersForPassword = usersForPassword)
     private val savedStateHandle = SavedStateHandle()
     private val backgroundDispatcher = Dispatchers.Unconfined
 
@@ -32,8 +35,7 @@ class LoginTest {
 
         viewModel.login()
 
-        assertThat(viewModel.screenState.value)
-            .isEqualTo(viewModel.screenState.value.copy(loggedInUser = alice))
+        assertThat(viewModel.screenState.value.loggedInUser).isEqualTo(alice.email)
     }
 
     @Test
@@ -71,8 +73,7 @@ class LoginTest {
 
         viewModel.login()
 
-        assertThat(viewModel.screenState.value.loggedInUser)
-            .isEqualTo(alycia)
+        assertThat(viewModel.screenState.value.loggedInUser).isEqualTo(alycia.email)
     }
 
     @Test
@@ -84,8 +85,7 @@ class LoginTest {
 
         viewModel.login()
 
-        assertThat(viewModel.screenState.value)
-            .isEqualTo(viewModel.screenState.value.copy(loggedInUser = bob))
+        assertThat(viewModel.screenState.value.loggedInUser).isEqualTo(bob.email)
     }
 
     @Test

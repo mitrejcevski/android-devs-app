@@ -8,12 +8,14 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import nl.jovmit.androiddevs.domain.auth.AuthRepository
+import nl.jovmit.androiddevs.domain.auth.data.AuthResult
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val usersCatalog: UsersCatalog,
+    private val authRepository: AuthRepository,
     private val background: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -53,17 +55,17 @@ class LoginViewModel @Inject constructor(
 
     private fun proceedLoggingIn(email: String, password: String) {
         viewModelScope.launch {
-            val found = withContext(background) {
-                usersCatalog.performLogin(email, password)
+            val loginResult = withContext(background) {
+                authRepository.login(email, password)
             }
-            onLoginResults(found)
+            onLoginResults(loginResult)
         }
     }
 
-    private fun onLoginResults(found: User?) {
+    private fun onLoginResults(loginResult: AuthResult) {
         val value = savedStateHandle.get<LoginScreenState>(LOGIN_SCREEN_STATE)
-        if (found != null) {
-            savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(loggedInUser = found)
+        if (loginResult is AuthResult.Success) {
+            savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(loggedInUser = loginResult.user.email)
         } else {
             savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(wrongCredentials = true)
         }

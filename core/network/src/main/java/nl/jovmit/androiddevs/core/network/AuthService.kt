@@ -8,6 +8,6 @@ interface AuthService {
     @POST("/signUp")
     suspend fun signUp(@Body signUpData: SignUpData): AuthResponse
 
-    @POST("/login")
+    @POST("/auth/login")
     suspend fun login(@Body loginData: LoginData): AuthResponse
 }

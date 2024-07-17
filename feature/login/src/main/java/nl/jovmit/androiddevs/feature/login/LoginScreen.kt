@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.Button
@@ -41,12 +40,12 @@ import nl.jovmit.androiddevs.core.view.theme.PreviewLightDark
 @Composable
 internal fun LoginScreen(
     loginViewModel: LoginViewModel = hiltViewModel(),
-    onLoggedIn: (user: User) -> Unit,
+    onLoggedIn: () -> Unit,
     onNavigateUp: () -> Unit,
 ) {
     val state by loginViewModel.screenState.collectAsState()
     LaunchedEffect(key1 = state.loggedInUser) {
-        state.loggedInUser?.let { user -> onLoggedIn(user) }
+        state.loggedInUser?.let { _ -> onLoggedIn() }
     }
     LoginScreenContent(
         screenState = state,

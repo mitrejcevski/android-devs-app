@@ -1,6 +1,5 @@
-package nl.jovmit.androiddevs.domain.auth.data.mapper
+package nl.jovmit.androiddevs.domain.auth.data
 
-import nl.jovmit.androiddevs.domain.auth.domain.model.User
 import nl.jovmit.androiddevs.core.network.AuthResponse
 
 fun AuthResponse.UserData.toDomain(): User {

@@ -52,7 +52,7 @@ dependencies {
 
     kapt(libs.hilt.compiler)
 
-    testImplementation(libs.bundles.unit.testing)
+    testImplementation(projects.testutils)
 
     testRuntimeOnly(libs.junit.jupiter.engine)
 }

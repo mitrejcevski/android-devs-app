@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class LoginScreenState(
     val email: String = "",
     val password: String = "",
-    val loggedInUser: User? = null,
+    val loggedInUser: String? = null,
     val wrongCredentials: Boolean = false,
     val isWrongEmailFormat: Boolean = false,
     val isBadPasswordFormat: Boolean = false

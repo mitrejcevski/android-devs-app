@@ -3,6 +3,8 @@ package nl.jovmit.androiddevs.feature.login
 import androidx.lifecycle.SavedStateHandle
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.Dispatchers
+import nl.jovmit.androiddevs.domain.auth.InMemoryAuthRepository
+import nl.jovmit.androiddevs.testutils.CoroutineTestExtension
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
@@ -10,18 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 class LoginScreenStateTest {
 
     private val savedStateHandle = SavedStateHandle()
-    private val usersCatalog = InMemoryUsersCatalog(
-        mapOf(
-            ":password:" to listOf(
-                User(email = "bob@app.com"),
-                User(email = "alice@app.com")
-            ),
-            "bobsPassword" to listOf(
-                User(email = "bob@app.com"),
-                User(email = "alice@app.com")
-            )
-        )
-    )
+    private val usersCatalog = InMemoryAuthRepository(usersForPassword = emptyMap())
     private val backgroundDispatcher = Dispatchers.Unconfined
 
     @Test
@@ -83,18 +74,3 @@ class LoginScreenStateTest {
             .isEqualTo(false)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

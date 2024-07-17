@@ -36,8 +36,9 @@ android {
 }
 
 dependencies {
-    implementation(projects.domain.auth)
-
+    api(projects.core.network)
+    api(projects.core.database)
+    api(projects.domain.auth)
     api(libs.bundles.unit.testing)
 
     testRuntimeOnly(libs.junit.jupiter.engine)
