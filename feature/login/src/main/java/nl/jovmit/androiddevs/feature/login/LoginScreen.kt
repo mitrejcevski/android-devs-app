@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -100,52 +101,60 @@ internal fun LoginScreenContent(
             verticalArrangement = Arrangement.spacedBy(AppTheme.size.medium),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .testTag("email"),
-                value = screenState.email,
-                onValueChange = onEmailUpdate,
-                isError = screenState.isWrongEmailFormat,
-                supportingText = {
-                    if (screenState.isWrongEmailFormat) {
-                        Text(text = stringResource(id = R.string.error_bad_email_format))
-                    }
-                },
-                label = {
-                    Text(text = "Email")
-                }
-            )
-            TextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .testTag("password"),
-                value = screenState.password,
-                onValueChange = onPasswordUpdate,
-                isError = screenState.isBadPasswordFormat,
-                supportingText = {
-                    if (screenState.isBadPasswordFormat) {
-                        Text(text = stringResource(id = R.string.error_bad_password_format))
-                    }
-                },
-                label = {
-                    Text(text = "Password")
-                }
-            )
-            Image(
-                painter = painterResource(id = R.drawable.logo_android_devs),
-                contentDescription = stringResource(id = R.string.cd_logo)
-            )
-            if (screenState.wrongCredentials) {
-                Text(text = stringResource(id = R.string.error_invalid_credentials))
+            Column(modifier = Modifier.padding(AppTheme.size.large)) {
+                Image(
+                    painter = painterResource(id = R.drawable.logo_android_devs),
+                    contentDescription = stringResource(id = R.string.cd_logo)
+                )
             }
-            Button(
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .testTag("loginButton"),
-                onClick = onLoginClicked
+                    .imePadding()
             ) {
-                Text(text = "Login")
+                TextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("email"),
+                    value = screenState.email,
+                    onValueChange = onEmailUpdate,
+                    isError = screenState.isWrongEmailFormat,
+                    supportingText = {
+                        if (screenState.isWrongEmailFormat) {
+                            Text(text = stringResource(id = R.string.error_bad_email_format))
+                        }
+                    },
+                    label = {
+                        Text(text = "Email")
+                    }
+                )
+                TextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("password"),
+                    value = screenState.password,
+                    onValueChange = onPasswordUpdate,
+                    isError = screenState.isBadPasswordFormat,
+                    supportingText = {
+                        if (screenState.isBadPasswordFormat) {
+                            Text(text = stringResource(id = R.string.error_bad_password_format))
+                        }
+                    },
+                    label = {
+                        Text(text = "Password")
+                    }
+                )
+                if (screenState.wrongCredentials) {
+                    Text(text = stringResource(id = R.string.error_invalid_credentials))
+                }
+                Button(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("loginButton"),
+                    onClick = onLoginClicked
+                ) {
+                    Text(text = "Login")
+                }
             }
         }
     }
