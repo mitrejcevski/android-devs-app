@@ -17,11 +17,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import nl.jovmit.androiddevs.core.view.R
 import nl.jovmit.androiddevs.core.view.composables.PrimaryButton
 import nl.jovmit.androiddevs.core.view.composables.SecondaryButton
 import nl.jovmit.androiddevs.core.view.theme.AppTheme
-import nl.jovmit.androiddevs.core.view.theme.PreviewLightDark
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
