@@ -8,4 +8,10 @@
     <string name="error_bad_password_format">Bad password. Type min 7 chars, uppercase and digit</string>
     <string name="error_invalid_credentials">Invalid credentials. Try again</string>
     <string name="cd_logo">App Logo</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="email_hint">email@company.com</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="password_hint">type min 8 chars</string>
+    <string name="cd_show_password">Show Password</string>
+    <string name="cd_hide_password">Hide Password</string>
 </resources>

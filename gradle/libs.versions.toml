@@ -31,6 +31,7 @@
     compose-graphics = { module = "androidx.compose.ui:ui-graphics" }
     compose-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
     compose-material3 = { module = "androidx.compose.material3:material3" }
+    compose-material-icons = { module = "androidx.compose.material:material-icons-extended" }
     compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
     compose-ui-test-manifest = { module = "androidx.compose.ui:ui-tooling" }
     compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavVersion" }
@@ -66,7 +67,7 @@
 
 [bundles]
     androidx = ["androidx-ktx", "androidx-lifecycle-runtime"]
-    compose = ["compose-activity", "compose-ui", "compose-graphics", "compose-preview", "compose-material3", "compose-navigation", "compose-lifecycle-runtime"]
+    compose = ["compose-activity", "compose-ui", "compose-graphics", "compose-preview", "compose-material3", "compose-navigation", "compose-lifecycle-runtime", "compose-material-icons"]
     compose-debug = ["compose-ui-tooling", "compose-ui-test-manifest"]
     hilt = ["hilt-android", "hilt-navigation"]
     room = ["room-ktx", "room-runtime"]

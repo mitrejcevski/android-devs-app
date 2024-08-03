@@ -2,6 +2,9 @@ package nl.jovmit.androiddevs.core.view.theme
 
 import androidx.compose.ui.graphics.Color
 
+val LightGray = Color(0xFFB9B8B8)
+val DarkGray = Color(0xFF8A8A8A)
+
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
 val Pink80 = Color(0xFFEFB8C8)

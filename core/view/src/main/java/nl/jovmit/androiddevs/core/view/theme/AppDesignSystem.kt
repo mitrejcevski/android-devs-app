@@ -17,7 +17,8 @@ data class AppColorScheme(
     val primary: Color,
     val onPrimary: Color,
     val secondary: Color,
-    val onSecondary: Color
+    val onSecondary: Color,
+    val separator: Color
 ) {
 
     val primaryHorizontalGradient: Brush = Brush.horizontalGradient(listOf(primary, secondary))
@@ -55,7 +56,8 @@ val LocalAppColorScheme = staticCompositionLocalOf {
         primary = Color.Unspecified,
         onPrimary = Color.Unspecified,
         secondary = Color.Unspecified,
-        onSecondary = Color.Unspecified
+        onSecondary = Color.Unspecified,
+        separator = Color.Unspecified
     )
 }
 
