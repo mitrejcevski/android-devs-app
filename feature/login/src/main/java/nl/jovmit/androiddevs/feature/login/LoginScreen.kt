@@ -7,7 +7,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.AlertDialogDefaults
@@ -20,7 +24,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,13 +31,19 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.hilt.navigation.compose.hiltViewModel
 import nl.jovmit.androiddevs.core.view.R
+import nl.jovmit.androiddevs.core.view.composables.EmailInput
+import nl.jovmit.androiddevs.core.view.composables.PasswordInput
 import nl.jovmit.androiddevs.core.view.composables.PrimaryButton
 import nl.jovmit.androiddevs.core.view.theme.AppTheme
 
@@ -93,11 +102,14 @@ internal fun LoginScreenContent(
             )
         }
     ) { paddingValues ->
+        val verticalScrollState = rememberScrollState()
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .padding(horizontal = AppTheme.size.medium),
+                .padding(horizontal = AppTheme.size.medium)
+                .verticalScroll(verticalScrollState)
+                .imePadding(),
             verticalArrangement = Arrangement.spacedBy(AppTheme.size.medium),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -109,40 +121,35 @@ internal fun LoginScreenContent(
             }
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .imePadding()
+                    .fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(AppTheme.size.normal)
             ) {
-                TextField(
+                //todo: Show bad email
+                val passwordFocusRequester = FocusRequester()
+                EmailInput(
                     modifier = Modifier
                         .fillMaxWidth()
                         .testTag("email"),
-                    value = screenState.email,
-                    onValueChange = onEmailUpdate,
-                    isError = screenState.isWrongEmailFormat,
-                    supportingText = {
-                        if (screenState.isWrongEmailFormat) {
-                            Text(text = stringResource(id = R.string.error_bad_email_format))
-                        }
-                    },
-                    label = {
-                        Text(text = "Email")
-                    }
+                    email = screenState.email,
+                    onEmailChanged = onEmailUpdate,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Next
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onNext = { passwordFocusRequester.requestFocus() }
+                    )
                 )
-                TextField(
+                PasswordInput(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .focusRequester(passwordFocusRequester)
                         .testTag("password"),
-                    value = screenState.password,
-                    onValueChange = onPasswordUpdate,
-                    isError = screenState.isBadPasswordFormat,
-                    supportingText = {
-                        if (screenState.isBadPasswordFormat) {
-                            Text(text = stringResource(id = R.string.error_bad_password_format))
-                        }
-                    },
-                    label = {
-                        Text(text = "Password")
-                    }
+                    password = screenState.password,
+                    onPasswordChanged = onPasswordUpdate,
+                    keyboardActions = KeyboardActions(
+                        onDone = { onLoginClicked() }
+                    )
                 )
                 if (screenState.wrongCredentials) {
                     Text(text = stringResource(id = R.string.error_invalid_credentials))
