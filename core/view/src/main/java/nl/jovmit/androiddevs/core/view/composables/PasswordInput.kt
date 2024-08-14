@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons.Default
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,6 +25,7 @@ import nl.jovmit.androiddevs.core.view.theme.AppTheme
 fun PasswordInput(
     modifier: Modifier = Modifier,
     password: String,
+    isInvalidPasswordFormat: Boolean = false,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     onPasswordChanged: (newValue: String) -> Unit
@@ -58,6 +60,14 @@ fun PasswordInput(
                 contentDescription = null,
                 tint = AppTheme.colorScheme.onBackground
             )
+        },
+        error = {
+            if (isInvalidPasswordFormat) {
+                Text(
+                    text = stringResource(id = R.string.error_bad_password_format),
+                    color = AppTheme.colorScheme.error
+                )
+            }
         }
     )
 }
@@ -80,6 +90,18 @@ private fun PreviewPasswordInputWithHint() {
         PasswordInput(
             password = "",
             onPasswordChanged = {}
+        )
+    }
+}
+
+@Composable
+@PreviewLightDark
+private fun PreviewPasswordInputWithError() {
+    AppTheme {
+        PasswordInput(
+            password = "",
+            onPasswordChanged = {},
+            isInvalidPasswordFormat = true
         )
     }
 }

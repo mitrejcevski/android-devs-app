@@ -124,7 +124,6 @@ internal fun LoginScreenContent(
                     .fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(AppTheme.size.normal)
             ) {
-                //todo: Show bad email
                 val passwordFocusRequester = FocusRequester()
                 EmailInput(
                     modifier = Modifier
@@ -132,6 +131,7 @@ internal fun LoginScreenContent(
                         .testTag("email"),
                     email = screenState.email,
                     onEmailChanged = onEmailUpdate,
+                    isInvalidEmailFormat = screenState.isWrongEmailFormat,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Email,
                         imeAction = ImeAction.Next
@@ -146,6 +146,7 @@ internal fun LoginScreenContent(
                         .focusRequester(passwordFocusRequester)
                         .testTag("password"),
                     password = screenState.password,
+                    isInvalidPasswordFormat = screenState.isBadPasswordFormat,
                     onPasswordChanged = onPasswordUpdate,
                     keyboardActions = KeyboardActions(
                         onDone = { onLoginClicked() }

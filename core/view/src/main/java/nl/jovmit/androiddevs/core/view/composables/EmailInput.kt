@@ -2,6 +2,7 @@ package nl.jovmit.androiddevs.core.view.composables
 
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -15,6 +16,7 @@ import nl.jovmit.androiddevs.core.view.theme.AppTheme
 fun EmailInput(
     modifier: Modifier = Modifier,
     email: String,
+    isInvalidEmailFormat: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions(
         keyboardType = KeyboardType.Email,
         imeAction = ImeAction.Done
@@ -29,7 +31,15 @@ fun EmailInput(
         hint = stringResource(id = R.string.email_hint),
         onTextChanged = onEmailChanged,
         keyboardOptions = keyboardOptions,
-        keyboardActions = keyboardActions
+        keyboardActions = keyboardActions,
+        error = {
+            if (isInvalidEmailFormat) {
+                Text(
+                    text = stringResource(id = R.string.error_bad_email_format),
+                    color = AppTheme.colorScheme.error
+                )
+            }
+        }
     )
 }
 
@@ -40,6 +50,18 @@ private fun EmailInputPreview() {
         EmailInput(
             email = "",
             onEmailChanged = {}
+        )
+    }
+}
+
+@Composable
+@PreviewLightDark
+private fun EmailInputPreviewWithError() {
+    AppTheme {
+        EmailInput(
+            email = "",
+            onEmailChanged = {},
+            isInvalidEmailFormat = true
         )
     }
 }

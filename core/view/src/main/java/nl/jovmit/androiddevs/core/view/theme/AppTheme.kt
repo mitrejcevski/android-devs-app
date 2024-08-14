@@ -20,7 +20,8 @@ private val darkColorScheme = AppColorScheme(
     onPrimary = PurpleGrey80,
     secondary = Pink40,
     onSecondary = Pink80,
-    separator = LightGray
+    separator = LightGray,
+    error = DarkRed
 )
 
 private val lightColorScheme = AppColorScheme(
@@ -30,7 +31,8 @@ private val lightColorScheme = AppColorScheme(
     onPrimary = PurpleGrey40,
     secondary = Pink80,
     onSecondary = Pink40,
-    separator = DarkGray
+    separator = DarkGray,
+    error = LightRed
 )
 
 private val typography = AppTypography(

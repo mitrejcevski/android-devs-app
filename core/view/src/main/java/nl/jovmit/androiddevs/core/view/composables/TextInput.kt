@@ -47,6 +47,7 @@ internal fun TextInput(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     trailingIcon: (@Composable () -> Unit)? = null,
+    error: (@Composable () -> Unit)? = null,
     onTextChanged: (newValue: String) -> Unit
 ) {
     var actualBorderColor by remember { mutableStateOf(borderColor) }
@@ -121,6 +122,9 @@ internal fun TextInput(
                     }
                 }
             }
+        }
+        if (error != null) {
+            error()
         }
     }
 }
@@ -208,6 +212,32 @@ private fun TextInputPreviewWithTrailingIcon() {
                         contentDescription = null,
                         tint = AppTheme.colorScheme.onBackground
                     )
+                }
+            )
+        }
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun TextInputPreviewWithError() {
+    AppTheme {
+        Box(
+            modifier = Modifier
+                .background(AppTheme.colorScheme.background)
+                .padding(AppTheme.size.normal)
+        ) {
+            TextInput(
+                modifier = Modifier.fillMaxWidth(),
+                text = "something",
+                label = "Enter Pass",
+                onTextChanged = {},
+                visualTransformation = PasswordVisualTransformation(),
+                error = {
+                   Text(
+                       text = "Error of some kind",
+                       color = AppTheme.colorScheme.onBackground
+                   )
                 }
             )
         }
