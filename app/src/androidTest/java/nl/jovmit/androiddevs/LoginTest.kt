@@ -5,11 +5,15 @@ import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
+import nl.jovmit.androiddevs.domain.auth.AuthModule
+import nl.jovmit.androiddevs.domain.auth.AuthRepository
+import nl.jovmit.androiddevs.domain.auth.InMemoryAuthRepository
+import nl.jovmit.androiddevs.domain.auth.data.User
 import org.junit.Rule
 import org.junit.Test
 
 @HiltAndroidTest
-@UninstallModules(LoginModule::class)
+@UninstallModules(AuthModule::class)
 class LoginTest {
 
     @get:Rule(order = 0)
@@ -20,7 +24,7 @@ class LoginTest {
 
     @BindValue
     @JvmField
-    val usersCatalog: UsersCatalog = InMemoryUsersCatalog(emptyMap())
+    val usersCatalog: AuthRepository = InMemoryAuthRepository(usersForPassword = emptyMap())
 
     @Test
     fun displayBadEmailFormatError() {
@@ -81,7 +85,7 @@ class LoginTest {
     fun successfulLogin() {
         val email = "email@email.com"
         val password = "passWord12."
-        setupUserCatalogWith(email, password)
+        setupAuthRepositoryWith(email, password)
 
         launchLoginScreen(loginTestRule) {
             typeEmail(email)
@@ -92,9 +96,9 @@ class LoginTest {
         }
     }
 
-    private fun setupUserCatalogWith(email: String, password: String) {
-        (usersCatalog as InMemoryUsersCatalog)
-            .setLoggedInUsers(mapOf(password to listOf(User(email))))
+    private fun setupAuthRepositoryWith(email: String, password: String) {
+        (usersCatalog as InMemoryAuthRepository)
+            .setLoggedInUsers(mapOf(password to listOf(User("", email, ""))))
     }
 }
 

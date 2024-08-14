@@ -68,7 +68,8 @@ fun PasswordInput(
                     color = AppTheme.colorScheme.error
                 )
             }
-        }
+        },
+        testTag = "password"
     )
 }
 

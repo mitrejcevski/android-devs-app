@@ -22,4 +22,8 @@ class InMemoryAuthRepository(
     override suspend fun signUp(email: String, password: String, about: String): AuthResult {
         TODO("Not yet implemented")
     }
+
+    fun setLoggedInUsers(usersForPassword: Map<String, List<User>>) {
+        _usersForPassword.putAll(usersForPassword)
+    }
 }

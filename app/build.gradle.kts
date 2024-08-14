@@ -50,6 +50,8 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/LICENSE.md"
+            excludes += "META-INF/LICENSE-notice.md"
         }
     }
 
@@ -80,6 +82,7 @@ dependencies {
 
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.bundles.ui.testing)
+    androidTestImplementation(projects.testutils)
 
     kaptAndroidTest(libs.hilt.android.test.compiler)
 

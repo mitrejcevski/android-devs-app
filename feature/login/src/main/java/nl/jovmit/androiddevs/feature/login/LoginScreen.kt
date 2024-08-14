@@ -126,9 +126,7 @@ internal fun LoginScreenContent(
             ) {
                 val passwordFocusRequester = FocusRequester()
                 EmailInput(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .testTag("email"),
+                    modifier = Modifier.fillMaxWidth(),
                     email = screenState.email,
                     onEmailChanged = onEmailUpdate,
                     isInvalidEmailFormat = screenState.isWrongEmailFormat,
@@ -143,8 +141,7 @@ internal fun LoginScreenContent(
                 PasswordInput(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .focusRequester(passwordFocusRequester)
-                        .testTag("password"),
+                        .focusRequester(passwordFocusRequester),
                     password = screenState.password,
                     isInvalidPasswordFormat = screenState.isBadPasswordFormat,
                     onPasswordChanged = onPasswordUpdate,

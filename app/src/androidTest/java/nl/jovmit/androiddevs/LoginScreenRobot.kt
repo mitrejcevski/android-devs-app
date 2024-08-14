@@ -13,7 +13,8 @@ fun launchLoginScreen(
     rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>,
     block: LoginRobot.() -> Unit
 ): LoginRobot {
-    rule.onNodeWithText("Login").performClick()
+    val loginButtonText = rule.activity.getString(R.string.login_title)
+    rule.onNodeWithText(loginButtonText).performClick()
     return LoginRobot(rule).apply(block)
 }
 

@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -48,7 +49,8 @@ internal fun TextInput(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     trailingIcon: (@Composable () -> Unit)? = null,
     error: (@Composable () -> Unit)? = null,
-    onTextChanged: (newValue: String) -> Unit
+    onTextChanged: (newValue: String) -> Unit,
+    testTag: String = ""
 ) {
     var actualBorderColor by remember { mutableStateOf(borderColor) }
     Column(
@@ -85,9 +87,9 @@ internal fun TextInput(
                     BasicTextField(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .testTag(testTag)
                             .onFocusChanged { state ->
-                                val actualColor =
-                                    if (state.isFocused) selectedBorderColor else borderColor
+                                val actualColor = if (state.isFocused) selectedBorderColor else borderColor
                                 actualBorderColor = actualColor
                             }
                             .padding(horizontal = AppTheme.size.small),

@@ -22,7 +22,7 @@ fun EmailInput(
         imeAction = ImeAction.Done
     ),
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    onEmailChanged: (newValue: String) -> Unit
+    onEmailChanged: (newValue: String) -> Unit,
 ) {
     TextInput(
         modifier = modifier,
@@ -39,7 +39,8 @@ fun EmailInput(
                     color = AppTheme.colorScheme.error
                 )
             }
-        }
+        },
+        testTag = "email"
     )
 }
 
