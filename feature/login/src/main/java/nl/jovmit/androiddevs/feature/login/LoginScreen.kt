@@ -144,10 +144,10 @@ internal fun LoginScreenContent(
                         .focusRequester(passwordFocusRequester),
                     password = screenState.password,
                     isInvalidPasswordFormat = screenState.isBadPasswordFormat,
-                    onPasswordChanged = onPasswordUpdate,
                     keyboardActions = KeyboardActions(
                         onDone = { onLoginClicked() }
-                    )
+                    ),
+                    onPasswordChanged = onPasswordUpdate
                 )
                 if (screenState.wrongCredentials) {
                     Text(text = stringResource(id = R.string.error_invalid_credentials))

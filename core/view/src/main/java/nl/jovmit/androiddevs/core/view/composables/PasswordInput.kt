@@ -28,7 +28,8 @@ fun PasswordInput(
     isInvalidPasswordFormat: Boolean = false,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    onPasswordChanged: (newValue: String) -> Unit
+    onPasswordChanged: (newValue: String) -> Unit,
+    testTag: String = "password"
 ) {
     var isPasswordHidden by remember { mutableStateOf(true) }
     val visualTransformation = if (isPasswordHidden) {
@@ -69,7 +70,7 @@ fun PasswordInput(
                 )
             }
         },
-        testTag = "password"
+        testTag = testTag
     )
 }
 
@@ -101,8 +102,8 @@ private fun PreviewPasswordInputWithError() {
     AppTheme {
         PasswordInput(
             password = "",
-            onPasswordChanged = {},
-            isInvalidPasswordFormat = true
+            isInvalidPasswordFormat = true,
+            onPasswordChanged = {}
         )
     }
 }

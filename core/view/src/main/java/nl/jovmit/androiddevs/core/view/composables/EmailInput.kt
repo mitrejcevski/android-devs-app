@@ -23,6 +23,7 @@ fun EmailInput(
     ),
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     onEmailChanged: (newValue: String) -> Unit,
+    testTag: String = "email"
 ) {
     TextInput(
         modifier = modifier,
@@ -40,7 +41,7 @@ fun EmailInput(
                 )
             }
         },
-        testTag = "email"
+        testTag = testTag
     )
 }
 
