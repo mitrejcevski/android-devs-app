@@ -60,7 +60,6 @@ dependencies {
     implementation(projects.domain.auth)
     implementation(libs.bundles.androidx)
     implementation(libs.bundles.hilt)
-    implementation(libs.bundles.retrofit)
 
     kapt(libs.hilt.compiler)
 

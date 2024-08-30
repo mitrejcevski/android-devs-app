@@ -108,8 +108,7 @@ internal fun LoginScreenContent(
                 .fillMaxSize()
                 .padding(paddingValues)
                 .padding(horizontal = AppTheme.size.medium)
-                .verticalScroll(verticalScrollState)
-                .imePadding(),
+                .verticalScroll(verticalScrollState),
             verticalArrangement = Arrangement.spacedBy(AppTheme.size.medium),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -121,6 +120,7 @@ internal fun LoginScreenContent(
             }
             Column(
                 modifier = Modifier
+                    .imePadding()
                     .fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(AppTheme.size.normal)
             ) {

@@ -1,7 +1,6 @@
 package nl.jovmit.androiddevs.feature.signup
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -19,9 +18,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import nl.jovmit.androiddevs.core.view.theme.AppTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SignUpScreen(
+    onNavigateUp: () -> Unit
+) {
+    SignUpScreenContent(
+        onNavigateUp = onNavigateUp
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun SignUpScreenContent(
     onNavigateUp: () -> Unit,
 ) {
     Scaffold(
@@ -69,7 +77,7 @@ internal fun SignUpScreen(
 @PreviewLightDark
 private fun PreviewLoginScreen() {
     AppTheme {
-        SignUpScreen(
+        SignUpScreenContent(
             onNavigateUp = {}
         )
     }
