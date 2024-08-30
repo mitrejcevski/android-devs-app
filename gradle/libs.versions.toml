@@ -9,7 +9,7 @@
     androidxCoreKtxVersion = "1.13.1"
     composeBomVersion = "2024.08.00"
     composeActivityVersion = "1.9.1"
-    composeNavVersion = "2.7.7"
+    composeNavVersion = "2.8.0-rc01"
     coilVersion = "2.6.0"
     androidxUnitVersion = "1.2.1"
     androidxEspressoVersion = "3.6.1"
@@ -67,7 +67,7 @@
 
 [bundles]
     androidx = ["androidx-ktx", "androidx-lifecycle-runtime"]
-    compose = ["compose-activity", "compose-ui", "compose-graphics", "compose-preview", "compose-material3", "compose-navigation", "compose-lifecycle-runtime", "compose-material-icons"]
+    compose = ["compose-activity", "compose-ui", "compose-graphics", "compose-preview", "compose-material3", "compose-navigation", "compose-lifecycle-runtime", "compose-material-icons", "network-serialization"]
     compose-debug = ["compose-ui-tooling", "compose-ui-test-manifest"]
     hilt = ["hilt-android", "hilt-navigation"]
     room = ["room-ktx", "room-runtime"]

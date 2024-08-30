@@ -3,13 +3,15 @@ package nl.jovmit.androiddevs.feature.signup
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import kotlinx.serialization.Serializable
 
-private const val SIGN_UP_ROUTE = "signup"
+@Serializable
+private data object SignUpRoute
 
 fun NavGraphBuilder.signUpScreen(
     onNavigateUp: () -> Unit,
 ) {
-    composable(SIGN_UP_ROUTE) {
+    composable<SignUpRoute> {
         SignUpScreen(
             onNavigateUp = onNavigateUp,
         )
@@ -17,5 +19,5 @@ fun NavGraphBuilder.signUpScreen(
 }
 
 fun NavController.navigateToSignUp() {
-    navigate(SIGN_UP_ROUTE)
+    navigate(SignUpRoute)
 }

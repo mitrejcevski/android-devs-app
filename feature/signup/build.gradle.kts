@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose.compiler)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kapt)
 }
 
 android {
@@ -52,6 +54,9 @@ android {
 
 dependencies {
     implementation(projects.core.view)
+    implementation(libs.bundles.hilt)
+
+    kapt(libs.hilt.compiler)
 
     testImplementation(libs.bundles.unit.testing)
 
