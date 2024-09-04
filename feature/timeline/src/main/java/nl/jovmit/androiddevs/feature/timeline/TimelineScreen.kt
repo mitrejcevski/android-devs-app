@@ -102,8 +102,9 @@ private data class ListItem(
 @Composable
 private fun PreviewTimelineScreen() {
     AppTheme {
-        TimelineScreen(
-            onItemClicked = {}
+        TimelineScreenContent(
+            onItemClicked = {},
+            onForceLogOut = {}
         )
     }
 }
