@@ -7,7 +7,6 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import kotlinx.coroutines.flow.collect
 import nl.jovmit.androiddevs.feature.login.loginScreen
 import nl.jovmit.androiddevs.feature.login.navigateToLogin
 import nl.jovmit.androiddevs.feature.postdetails.navigateToPostDetails

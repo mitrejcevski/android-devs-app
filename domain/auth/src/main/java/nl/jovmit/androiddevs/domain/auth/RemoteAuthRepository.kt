@@ -22,12 +22,6 @@ internal class RemoteAuthRepository @Inject constructor(
     }
 
     override suspend fun signUp(email: String, password: String, about: String): AuthResult {
-        val signUpData = SignUpData(email, password, about)
-        return try {
-            val response = authService.signUp(signUpData)
-            AuthResult.Success(response.token, response.userData.toDomain())
-        } catch (exception: Exception) {
-            AuthResult.Error
-        }
+       TODO()
     }
 }
