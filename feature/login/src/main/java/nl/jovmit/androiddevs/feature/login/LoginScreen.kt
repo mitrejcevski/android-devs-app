@@ -152,14 +152,13 @@ internal fun LoginScreenContent(
                 if (screenState.wrongCredentials) {
                     Text(text = stringResource(id = R.string.error_invalid_credentials))
                 }
-                Button(
+                PrimaryButton(
                     modifier = Modifier
                         .fillMaxWidth()
                         .testTag("loginButton"),
+                    label = stringResource(R.string.login_title),
                     onClick = onLoginClicked
-                ) {
-                    Text(text = "Login")
-                }
+                )
             }
         }
     }
