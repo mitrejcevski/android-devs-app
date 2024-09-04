@@ -36,7 +36,7 @@ import androidx.compose.ui.unit.dp
 import nl.jovmit.androiddevs.core.view.theme.AppTheme
 
 @Composable
-internal fun TextInput(
+fun TextInput(
     modifier: Modifier = Modifier,
     text: String,
     label: String,
