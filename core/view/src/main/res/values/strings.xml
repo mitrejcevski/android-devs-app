@@ -14,4 +14,6 @@
     <string name="password_hint">type min 8 chars</string>
     <string name="cd_show_password">Show Password</string>
     <string name="cd_hide_password">Hide Password</string>
+    <string name="label_about">About</string>
+    <string name="bio_hint">bio</string>
 </resources>

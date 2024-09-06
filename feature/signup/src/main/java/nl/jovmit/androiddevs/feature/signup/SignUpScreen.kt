@@ -36,15 +36,20 @@ import nl.jovmit.androiddevs.core.view.composables.PasswordInput
 import nl.jovmit.androiddevs.core.view.composables.PrimaryButton
 import nl.jovmit.androiddevs.core.view.composables.TextInput
 import nl.jovmit.androiddevs.core.view.theme.AppTheme
+import nl.jovmit.androiddevs.feature.signup.state.SignUpScreenState
 
 @Composable
 internal fun SignUpScreen(
     onNavigateUp: () -> Unit
 ) {
+
+    //TODO call view model
     SignUpScreenContent(
-        onSignUp = {
-            //TODO call view model
-        },
+        signUpScreenState = SignUpScreenState(),
+        onEmailChanged = {},
+        onPasswordChanged = {},
+        onAboutChanged = {},
+        onSignUp = {},
         onNavigateUp = onNavigateUp
     )
 }
@@ -52,6 +57,10 @@ internal fun SignUpScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SignUpScreenContent(
+    signUpScreenState: SignUpScreenState,
+    onEmailChanged: (newValue: String) -> Unit,
+    onPasswordChanged: (newValue: String) -> Unit,
+    onAboutChanged: (newValue: String) -> Unit,
     onSignUp: () -> Unit,
     onNavigateUp: () -> Unit,
 ) {
@@ -71,7 +80,7 @@ private fun SignUpScreenContent(
                 },
                 title = {
                     Text(
-                        text = "Sign Up",
+                        text = stringResource(R.string.sign_up_title),
                         color = AppTheme.colorScheme.onBackground,
                         style = AppTheme.typography.titleNormal
                     )
@@ -109,7 +118,7 @@ private fun SignUpScreenContent(
                 val aboutFocus = FocusRequester()
                 EmailInput(
                     modifier = Modifier.fillMaxWidth(),
-                    email = "",
+                    email = signUpScreenState.email,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Email,
                         imeAction = ImeAction.Next
@@ -117,7 +126,7 @@ private fun SignUpScreenContent(
                     keyboardActions = KeyboardActions(
                         onNext = { passwordFocus.requestFocus() }
                     ),
-                    onEmailChanged = {}
+                    onEmailChanged = onEmailChanged,
                 )
                 PasswordInput(
                     modifier = Modifier
@@ -129,23 +138,23 @@ private fun SignUpScreenContent(
                     keyboardActions = KeyboardActions(
                         onNext = { aboutFocus.requestFocus() }
                     ),
-                    password = "",
-                    onPasswordChanged = {}
+                    password = signUpScreenState.password,
+                    onPasswordChanged = onPasswordChanged
                 )
                 TextInput(
                     modifier = Modifier
                         .focusRequester(aboutFocus)
                         .fillMaxWidth(),
-                    text = "",
-                    onTextChanged = {},
+                    text = signUpScreenState.about,
+                    onTextChanged = onAboutChanged,
                     keyboardOptions = KeyboardOptions(
                         imeAction = ImeAction.Done
                     ),
                     keyboardActions = KeyboardActions(
                         onDone = { onSignUp() }
                     ),
-                    label = "About",
-                    hint = "Bio"
+                    label = stringResource(R.string.label_about),
+                    hint = stringResource(R.string.bio_hint)
                 )
                 PrimaryButton(
                     modifier = Modifier.fillMaxWidth(),
@@ -162,6 +171,10 @@ private fun SignUpScreenContent(
 private fun PreviewLoginScreen() {
     AppTheme {
         SignUpScreenContent(
+            signUpScreenState = SignUpScreenState(),
+            onEmailChanged = {},
+            onPasswordChanged = {},
+            onAboutChanged = {},
             onSignUp = {},
             onNavigateUp = {}
         )
