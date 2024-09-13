@@ -19,12 +19,24 @@ class LoginScreenshotTest {
             AppTheme {
                 LoginScreenContent(
                     screenState = LoginScreenState(),
-                    onNavigateUp = {},
-                    onEmailUpdate = {},
-                    onPasswordUpdate = {},
-                    onLoginClicked = {}
+                    loginActions = EmptyLoginActions(),
+                    onNavigateUp = {}
                 )
             }
+        }
+    }
+
+    private class EmptyLoginActions: LoginActions {
+        override fun updateEmail(newValue: String) {
+            TODO("Not yet implemented")
+        }
+
+        override fun updatePassword(newValue: String) {
+            TODO("Not yet implemented")
+        }
+
+        override fun login() {
+            TODO("Not yet implemented")
         }
     }
 }

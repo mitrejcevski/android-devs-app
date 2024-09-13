@@ -17,7 +17,7 @@ class LoginViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val authRepository: AuthRepository,
     private val background: CoroutineDispatcher
-) : ViewModel() {
+) : ViewModel(), LoginActions {
 
     private val emailValidator = EmailValidator()
     private val passwordValidator = PasswordValidator()
@@ -25,7 +25,7 @@ class LoginViewModel @Inject constructor(
     val screenState: StateFlow<LoginScreenState> =
         savedStateHandle.getStateFlow(LOGIN_SCREEN_STATE, LoginScreenState())
 
-    fun updateEmail(newValue: String) {
+    override fun updateEmail(newValue: String) {
         val value = savedStateHandle.get<LoginScreenState>(LOGIN_SCREEN_STATE)
         savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(
             email = newValue,
@@ -33,7 +33,7 @@ class LoginViewModel @Inject constructor(
         )
     }
 
-    fun updatePassword(newValue: String) {
+    override fun updatePassword(newValue: String) {
         val value = savedStateHandle.get<LoginScreenState>(LOGIN_SCREEN_STATE)
         savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(
             password = newValue,
@@ -41,7 +41,7 @@ class LoginViewModel @Inject constructor(
         )
     }
 
-    fun login() {
+    override fun login() {
         val email = screenState.value.email
         val password = screenState.value.password
         if (!emailValidator.validateEmail(email)) {

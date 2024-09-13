@@ -16,7 +16,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.BasicAlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -59,10 +58,8 @@ internal fun LoginScreen(
     }
     LoginScreenContent(
         screenState = state,
-        onNavigateUp = onNavigateUp,
-        onEmailUpdate = loginViewModel::updateEmail,
-        onPasswordUpdate = loginViewModel::updatePassword,
-        onLoginClicked = loginViewModel::login
+        loginActions = loginViewModel,
+        onNavigateUp = onNavigateUp
     )
 }
 
@@ -70,10 +67,8 @@ internal fun LoginScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun LoginScreenContent(
     screenState: LoginScreenState,
-    onNavigateUp: () -> Unit,
-    onEmailUpdate: (newValue: String) -> Unit,
-    onPasswordUpdate: (newValue: String) -> Unit,
-    onLoginClicked: () -> Unit
+    loginActions: LoginActions,
+    onNavigateUp: () -> Unit
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -128,7 +123,7 @@ internal fun LoginScreenContent(
                 EmailInput(
                     modifier = Modifier.fillMaxWidth(),
                     email = screenState.email,
-                    onEmailChanged = onEmailUpdate,
+                    onEmailChanged = loginActions::updateEmail,
                     isInvalidEmailFormat = screenState.isWrongEmailFormat,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Email,
@@ -145,9 +140,9 @@ internal fun LoginScreenContent(
                     password = screenState.password,
                     isInvalidPasswordFormat = screenState.isBadPasswordFormat,
                     keyboardActions = KeyboardActions(
-                        onDone = { onLoginClicked() }
+                        onDone = { loginActions.login() }
                     ),
-                    onPasswordChanged = onPasswordUpdate
+                    onPasswordChanged = loginActions::updatePassword
                 )
                 if (screenState.wrongCredentials) {
                     Text(text = stringResource(id = R.string.error_invalid_credentials))
@@ -157,7 +152,7 @@ internal fun LoginScreenContent(
                         .fillMaxWidth()
                         .testTag("loginButton"),
                     label = stringResource(R.string.login_title),
-                    onClick = onLoginClicked
+                    onClick = loginActions::login
                 )
             }
         }
@@ -218,10 +213,8 @@ private fun PreviewLoginScreen() {
     AppTheme {
         LoginScreenContent(
             screenState = LoginScreenState(),
-            onNavigateUp = {},
-            onEmailUpdate = {},
-            onPasswordUpdate = {},
-            onLoginClicked = {}
+            loginActions = EmptyLoginActions(),
+            onNavigateUp = {}
         )
     }
 }
@@ -234,5 +227,19 @@ private fun PreviewErrorAlert() {
             errorMessage = "Something went wrong",
             onDismiss = {}
         )
+    }
+}
+
+private class EmptyLoginActions : LoginActions {
+    override fun updateEmail(newValue: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun updatePassword(newValue: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun login() {
+        TODO("Not yet implemented")
     }
 }
