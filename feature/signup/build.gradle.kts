@@ -55,10 +55,11 @@ android {
 dependencies {
     implementation(projects.core.view)
     implementation(libs.bundles.hilt)
+    testImplementation(project(":testutils"))
 
     kapt(libs.hilt.compiler)
 
-    testImplementation(libs.bundles.unit.testing)
+    testImplementation(projects.testutils)
 
     testRuntimeOnly(libs.junit.jupiter.engine)
 }
