@@ -1,20 +1,34 @@
 package nl.jovmit.androiddevs.feature.signup
 
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import androidx.lifecycle.SavedStateHandle
+import nl.jovmit.androiddevs.core.view.extensions.update
 import nl.jovmit.androiddevs.feature.signup.state.SignUpScreenState
 
-class SignUpViewModel {
+class SignUpViewModel(
+    private val savedStateHandle: SavedStateHandle
+) {
 
-    private val _screenState = MutableStateFlow(SignUpScreenState())
-    val screenState = _screenState.asStateFlow()
+    val screenState = savedStateHandle.getStateFlow(SIGN_UP, SignUpScreenState())
 
     fun updateEmail(value: String) {
-        _screenState.update { it.copy(email = value) }
+        savedStateHandle.update<SignUpScreenState>(SIGN_UP) {
+            it.copy(email = value)
+        }
     }
 
     fun updatePassword(value: String) {
-        _screenState.update { it.copy(password = value) }
+        savedStateHandle.update<SignUpScreenState>(SIGN_UP) {
+            it.copy(password = value)
+        }
+    }
+
+    fun updateAbout(value: String) {
+        savedStateHandle.update<SignUpScreenState>(SIGN_UP) {
+            it.copy(about = value)
+        }
+    }
+
+    companion object {
+        private const val SIGN_UP = "signUpKey"
     }
 }
