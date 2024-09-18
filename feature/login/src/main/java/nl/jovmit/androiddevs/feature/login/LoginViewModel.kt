@@ -8,6 +8,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import nl.jovmit.androiddevs.core.view.extensions.update
 import nl.jovmit.androiddevs.domain.auth.AuthRepository
 import nl.jovmit.androiddevs.domain.auth.data.AuthResult
 import javax.inject.Inject
@@ -26,19 +27,15 @@ class LoginViewModel @Inject constructor(
         savedStateHandle.getStateFlow(LOGIN_SCREEN_STATE, LoginScreenState())
 
     override fun updateEmail(newValue: String) {
-        val value = savedStateHandle.get<LoginScreenState>(LOGIN_SCREEN_STATE)
-        savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(
-            email = newValue,
-            isWrongEmailFormat = false
-        )
+        savedStateHandle.update<LoginScreenState>(LOGIN_SCREEN_STATE) {
+            it.copy(email = newValue, isWrongEmailFormat = false)
+        }
     }
 
     override fun updatePassword(newValue: String) {
-        val value = savedStateHandle.get<LoginScreenState>(LOGIN_SCREEN_STATE)
-        savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(
-            password = newValue,
-            isBadPasswordFormat = false
-        )
+        savedStateHandle.update<LoginScreenState>(LOGIN_SCREEN_STATE) {
+            it.copy(password = newValue, isBadPasswordFormat = false)
+        }
     }
 
     override fun login() {
@@ -63,22 +60,27 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun onLoginResults(loginResult: AuthResult) {
-        val value = savedStateHandle.get<LoginScreenState>(LOGIN_SCREEN_STATE)
         if (loginResult is AuthResult.Success) {
-            savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(loggedInUser = loginResult.user.email)
+            savedStateHandle.update<LoginScreenState>(LOGIN_SCREEN_STATE) {
+                it.copy(loggedInUser = loginResult.user.email)
+            }
         } else {
-            savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(wrongCredentials = true)
+            savedStateHandle.update<LoginScreenState>(LOGIN_SCREEN_STATE) {
+                it.copy(wrongCredentials = true)
+            }
         }
     }
 
     private fun setIncorrectEmailFormatError() {
-        val value = savedStateHandle.get<LoginScreenState>(LOGIN_SCREEN_STATE)
-        savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(isWrongEmailFormat = true)
+        savedStateHandle.update<LoginScreenState>(LOGIN_SCREEN_STATE) {
+            it.copy(isWrongEmailFormat = true)
+        }
     }
 
     private fun setIncorrectPasswordFormat() {
-        val value = savedStateHandle.get<LoginScreenState>(LOGIN_SCREEN_STATE)
-        savedStateHandle[LOGIN_SCREEN_STATE] = value?.copy(isBadPasswordFormat = true)
+        savedStateHandle.update<LoginScreenState>(LOGIN_SCREEN_STATE) {
+            it.copy(isBadPasswordFormat = true)
+        }
     }
 
     companion object {
