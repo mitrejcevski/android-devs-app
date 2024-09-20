@@ -19,5 +19,7 @@ fun NavGraphBuilder.loginScreen(
 }
 
 fun NavController.navigateToLogin() {
-    navigate(LOGIN_ROUTE)
+    navigate(LOGIN_ROUTE) {
+        launchSingleTop = true
+    }
 }
