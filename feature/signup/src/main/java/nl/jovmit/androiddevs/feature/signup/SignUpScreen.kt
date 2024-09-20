@@ -21,6 +21,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -30,6 +31,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import nl.jovmit.androiddevs.core.view.R
 import nl.jovmit.androiddevs.core.view.composables.EmailInput
 import nl.jovmit.androiddevs.core.view.composables.PasswordInput
@@ -40,15 +43,17 @@ import nl.jovmit.androiddevs.feature.signup.state.SignUpScreenState
 
 @Composable
 internal fun SignUpScreen(
+    viewModel: SignUpViewModel = hiltViewModel(),
     onNavigateUp: () -> Unit
 ) {
 
-    //TODO call view model
+    val screenState by viewModel.screenState.collectAsStateWithLifecycle()
+
     SignUpScreenContent(
-        signUpScreenState = SignUpScreenState(),
-        onEmailChanged = {},
-        onPasswordChanged = {},
-        onAboutChanged = {},
+        signUpScreenState = screenState,
+        onEmailChanged = viewModel::updateEmail,
+        onPasswordChanged = viewModel::updatePassword,
+        onAboutChanged = viewModel::updateAbout,
         onSignUp = {},
         onNavigateUp = onNavigateUp
     )

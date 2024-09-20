@@ -1,12 +1,13 @@
 package nl.jovmit.androiddevs.feature.signup
 
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import nl.jovmit.androiddevs.core.view.extensions.update
 import nl.jovmit.androiddevs.feature.signup.state.SignUpScreenState
 
 class SignUpViewModel(
     private val savedStateHandle: SavedStateHandle
-) {
+) : ViewModel() {
 
     val screenState = savedStateHandle.getStateFlow(SIGN_UP, SignUpScreenState())
 
