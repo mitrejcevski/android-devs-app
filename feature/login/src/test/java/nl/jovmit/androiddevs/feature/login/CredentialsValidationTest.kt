@@ -1,6 +1,8 @@
 package nl.jovmit.androiddevs.feature.login
 
 import com.google.common.truth.Truth.assertThat
+import nl.jovmit.androiddevs.core.view.validation.EmailValidator
+import nl.jovmit.androiddevs.core.view.validation.PasswordValidator
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 

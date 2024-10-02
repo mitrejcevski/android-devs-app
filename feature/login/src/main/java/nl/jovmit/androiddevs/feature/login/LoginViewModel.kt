@@ -8,7 +8,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import nl.jovmit.androiddevs.core.view.validation.EmailValidator
 import nl.jovmit.androiddevs.core.view.extensions.update
+import nl.jovmit.androiddevs.core.view.validation.PasswordValidator
 import nl.jovmit.androiddevs.domain.auth.AuthRepository
 import nl.jovmit.androiddevs.domain.auth.data.AuthResult
 import javax.inject.Inject

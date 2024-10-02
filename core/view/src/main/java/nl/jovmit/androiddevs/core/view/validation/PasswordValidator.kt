@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.feature.login
+package nl.jovmit.androiddevs.core.view.validation
 
 class PasswordValidator {
 
