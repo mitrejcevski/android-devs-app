@@ -30,7 +30,7 @@ abstract class AuthContractTest {
 
         val result = usersCatalog.login(bob.email, bobPassword)
 
-        assertThat(result).isEqualTo(AuthResult.Error)
+        assertThat(result).isEqualTo(AuthResult.ExistingUserError)
     }
 
     @Test
@@ -39,7 +39,7 @@ abstract class AuthContractTest {
 
         val result = usersCatalog.login(bob.email, bobPassword)
 
-        assertThat(result).isEqualTo(AuthResult.Error)
+        assertThat(result).isEqualTo(AuthResult.ExistingUserError)
     }
 
     abstract fun usersCatalogWith(authToken: String, password: String, users: List<User>): AuthRepository

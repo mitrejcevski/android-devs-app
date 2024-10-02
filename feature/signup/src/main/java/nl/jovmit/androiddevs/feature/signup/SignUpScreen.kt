@@ -176,7 +176,7 @@ private fun SignUpScreenContent(
 private fun PreviewLoginScreen() {
     AppTheme {
         SignUpScreenContent(
-            signUpScreenState = SignUpScreenState(),
+            signUpScreenState = SignUpScreenState(incorrectEmailFormat = true),
             onEmailChanged = {},
             onPasswordChanged = {},
             onAboutChanged = {},

@@ -7,5 +7,9 @@ sealed class AuthResult {
         val user: User
     ) : AuthResult()
 
-    data object Error : AuthResult()
+    data object BackendError : AuthResult()
+
+    data object ExistingUserError : AuthResult()
+
+    data object OfflineError : AuthResult()
 }
