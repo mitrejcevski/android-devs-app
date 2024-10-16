@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class SignUpScreenState(
+    val isLoading: Boolean = false,
     val email: String = "",
     val password: String = "",
     val about: String = "",

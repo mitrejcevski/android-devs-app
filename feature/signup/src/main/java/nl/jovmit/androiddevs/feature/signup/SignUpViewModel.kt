@@ -75,10 +75,17 @@ class SignUpViewModel @Inject constructor(
 
     private fun performSignUp(email: String, password: String, about: String) {
         viewModelScope.launch {
+            setLoading()
             val result = withContext(backgroundDispatcher) {
                 authRepository.signUp(email, password, about)
             }
             onAuthResults(result)
+        }
+    }
+
+    private fun setLoading() {
+        savedStateHandle.update<SignUpScreenState>(SIGN_UP) {
+            it.copy(isLoading = true)
         }
     }
 
@@ -93,25 +100,25 @@ class SignUpViewModel @Inject constructor(
 
     private fun onSignedUp() {
         savedStateHandle.update<SignUpScreenState>(SIGN_UP) {
-            it.copy(isSignedUp = true)
+            it.copy(isLoading = false, isSignedUp = true)
         }
     }
 
     private fun onBackendError() {
         savedStateHandle.update<SignUpScreenState>(SIGN_UP) {
-            it.copy(isBackendError = true)
+            it.copy(isLoading = false, isBackendError = true)
         }
     }
 
     private fun onExistingUserError() {
         savedStateHandle.update<SignUpScreenState>(SIGN_UP) {
-            it.copy(isExistingEmail = true)
+            it.copy(isLoading = false, isExistingEmail = true)
         }
     }
 
     private fun onOfflineError() {
         savedStateHandle.update<SignUpScreenState>(SIGN_UP) {
-            it.copy(isOfflineError = true)
+            it.copy(isLoading = false, isOfflineError = true)
         }
     }
 

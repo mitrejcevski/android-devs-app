@@ -4,7 +4,7 @@ import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
 import nl.jovmit.androiddevs.core.network.LogoutSignal
 import nl.jovmit.androiddevs.testutils.CoroutineTestExtension
-import nl.jovmit.androiddevs.testutils.collectStateFlow
+import nl.jovmit.androiddevs.testutils.collectSharedFlow
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
@@ -19,7 +19,7 @@ class DetectLogoutSignalTest {
             observeLoggedOut()
         }
 
-        val observedEvent = collectStateFlow(viewModel.loggedOut) {
+        val observedEvent = collectSharedFlow(viewModel.loggedOut) {
             loggedOutSignal.onLoggedOut()
         }
 

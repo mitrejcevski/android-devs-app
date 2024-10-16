@@ -13,8 +13,6 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(CoroutineTestExtension::class)
 class SignUpTest {
 
-    // - we don't want long running operations in the main thread
-    // - state delivery in order
     // - contract test to make sure prod code is aligned with the fake
 
     private val validEmail = "email@email.com"
