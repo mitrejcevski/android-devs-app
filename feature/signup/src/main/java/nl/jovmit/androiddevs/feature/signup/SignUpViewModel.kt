@@ -3,17 +3,23 @@ package nl.jovmit.androiddevs.feature.signup
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import nl.jovmit.androiddevs.core.view.extensions.update
 import nl.jovmit.androiddevs.core.view.validation.EmailValidator
 import nl.jovmit.androiddevs.core.view.validation.PasswordValidator
 import nl.jovmit.androiddevs.domain.auth.AuthRepository
 import nl.jovmit.androiddevs.domain.auth.data.AuthResult
 import nl.jovmit.androiddevs.feature.signup.state.SignUpScreenState
+import javax.inject.Inject
 
-class SignUpViewModel (
+@HiltViewModel
+class SignUpViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val backgroundDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private val emailValidator = EmailValidator()
@@ -68,8 +74,10 @@ class SignUpViewModel (
     }
 
     private fun performSignUp(email: String, password: String, about: String) {
-        viewModelScope.launch { //TODO (we need to offload from main thread)
-            val result = authRepository.signUp(email, password, about)
+        viewModelScope.launch {
+            val result = withContext(backgroundDispatcher) {
+                authRepository.signUp(email, password, about)
+            }
             onAuthResults(result)
         }
     }

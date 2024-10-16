@@ -2,6 +2,7 @@ package nl.jovmit.androiddevs.feature.signup
 
 import androidx.lifecycle.SavedStateHandle
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.Dispatchers
 import nl.jovmit.androiddevs.domain.auth.InMemoryAuthRepository
 import nl.jovmit.androiddevs.domain.auth.data.User
 import nl.jovmit.androiddevs.feature.signup.state.SignUpScreenState
@@ -21,11 +22,12 @@ class SignUpTest {
 
     private val authRepository = InMemoryAuthRepository()
     private val savedStateHandle = SavedStateHandle()
+    private val coroutineDispatcher = Dispatchers.Unconfined
 
     @Test
     fun invalidEmail() {
         val email = "invalid email format"
-        val viewModel = SignUpViewModel(savedStateHandle, authRepository)
+        val viewModel = SignUpViewModel(savedStateHandle, authRepository, coroutineDispatcher)
 
         viewModel.signUp(email = email)
 
@@ -40,7 +42,7 @@ class SignUpTest {
 
     @Test
     fun invalidPassword() {
-        val viewModel = SignUpViewModel(savedStateHandle, authRepository)
+        val viewModel = SignUpViewModel(savedStateHandle, authRepository, coroutineDispatcher)
 
         viewModel.signUp(email = validEmail)
 
@@ -51,7 +53,7 @@ class SignUpTest {
 
     @Test
     fun invalidEmailWithValidPassword() {
-        val viewModel = SignUpViewModel(savedStateHandle, authRepository)
+        val viewModel = SignUpViewModel(savedStateHandle, authRepository, coroutineDispatcher)
 
         viewModel.signUp(password = validPassword)
 
@@ -62,7 +64,7 @@ class SignUpTest {
 
     @Test
     fun signedUpSuccessfully() {
-        val viewModel = SignUpViewModel(savedStateHandle, authRepository)
+        val viewModel = SignUpViewModel(savedStateHandle, authRepository, coroutineDispatcher)
 
         viewModel.signUp(validEmail, validPassword)
 
@@ -81,7 +83,7 @@ class SignUpTest {
         val repository = InMemoryAuthRepository(
             usersForPassword = mapOf(validPassword to listOf(User("userId", validEmail, "")))
         )
-        val viewModel = SignUpViewModel(savedStateHandle, repository)
+        val viewModel = SignUpViewModel(savedStateHandle, repository, coroutineDispatcher)
 
         viewModel.signUp(validEmail, newPassword)
 
@@ -99,7 +101,11 @@ class SignUpTest {
         val unavailableAuthRepository = InMemoryAuthRepository().apply {
             setUnavailable()
         }
-        val viewModel = SignUpViewModel(savedStateHandle, unavailableAuthRepository)
+        val viewModel = SignUpViewModel(
+            savedStateHandle,
+            unavailableAuthRepository,
+            coroutineDispatcher
+        )
 
         viewModel.signUp(validEmail, validPassword)
 
@@ -117,7 +123,11 @@ class SignUpTest {
         val offlineAuthRepository = InMemoryAuthRepository().apply {
             setOffline()
         }
-        val viewModel = SignUpViewModel(savedStateHandle, offlineAuthRepository)
+        val viewModel = SignUpViewModel(
+            savedStateHandle,
+            offlineAuthRepository,
+            coroutineDispatcher
+        )
 
         viewModel.signUp(validEmail, validPassword)
 
