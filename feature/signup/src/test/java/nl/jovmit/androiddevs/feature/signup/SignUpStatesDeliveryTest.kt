@@ -2,16 +2,12 @@ package nl.jovmit.androiddevs.feature.signup
 
 import androidx.lifecycle.SavedStateHandle
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.toCollection
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
 import nl.jovmit.androiddevs.domain.auth.InMemoryAuthRepository
 import nl.jovmit.androiddevs.feature.signup.state.SignUpScreenState
 import nl.jovmit.androiddevs.testutils.CoroutineTestExtension
-import nl.jovmit.androiddevs.testutils.observeStateFlow
+import nl.jovmit.androiddevs.testutils.collectStateFlow
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
@@ -32,7 +28,7 @@ class SignUpStatesDeliveryTest {
             updatePassword(password)
         }
 
-        val deliveredStates = observeStateFlow(viewModel.screenState) {
+        val deliveredStates = collectStateFlow(viewModel.screenState) {
             viewModel.signUp()
         }
 

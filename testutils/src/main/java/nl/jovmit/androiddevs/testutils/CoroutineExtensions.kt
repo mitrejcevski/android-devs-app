@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.toCollection
 import kotlinx.coroutines.launch
 
-fun <T> CoroutineScope.collectSharedFlow(
+inline fun <T> CoroutineScope.collectSharedFlow(
     flow: SharedFlow<T>,
     block: () -> Unit
 ): T {
@@ -20,7 +20,7 @@ fun <T> CoroutineScope.collectSharedFlow(
     return values.first()
 }
 
-inline fun <T> CoroutineScope.observeStateFlow(
+inline fun <T> CoroutineScope.collectStateFlow(
     stateFlow: StateFlow<T>,
     dropInitialValue: Boolean = true,
     action: () -> Unit
