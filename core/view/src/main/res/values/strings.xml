@@ -16,4 +16,6 @@
     <string name="cd_hide_password">Hide Password</string>
     <string name="label_about">About</string>
     <string name="bio_hint">bio</string>
+    <string name="label_ok">OK</string>
+    <string name="label_error">Error</string>
 </resources>

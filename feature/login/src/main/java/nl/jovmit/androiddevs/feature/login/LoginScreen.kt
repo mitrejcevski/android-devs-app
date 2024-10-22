@@ -183,7 +183,7 @@ private fun ErrorPrompt(
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
-                        text = "Error",
+                        text = stringResource(R.string.label_error),
                         color = AppTheme.colorScheme.onBackground,
                         style = AppTheme.typography.titleLarge,
                         textAlign = TextAlign.Center,
@@ -197,10 +197,8 @@ private fun ErrorPrompt(
                 }
                 PrimaryButton(
                     modifier = Modifier.fillMaxWidth(),
-                    label = "OK",
-                    onClick = {
-                        onDismiss()
-                    }
+                    label = stringResource(R.string.label_ok),
+                    onClick = onDismiss
                 )
             }
         }
