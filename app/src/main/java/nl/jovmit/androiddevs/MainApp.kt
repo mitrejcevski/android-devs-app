@@ -1,5 +1,9 @@
 package nl.jovmit.androiddevs
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -35,7 +39,23 @@ fun MainApp(
     NavHost(
         modifier = Modifier.fillMaxSize(),
         navController = navController,
-        startDestination = WELCOME_ROUTE
+        startDestination = WELCOME_ROUTE,
+        enterTransition = {
+            slideIntoContainer(
+                towards = AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween()
+            )
+        },
+        exitTransition = {
+            scaleOut(targetScale = .9f, animationSpec = tween())
+        },
+        popEnterTransition = {
+            scaleIn(initialScale = .9f, animationSpec = tween())
+        },
+        popExitTransition = {
+            slideOutOfContainer(
+                towards = AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween()
+            )
+        }
     ) {
         welcomeScreen(
             onLogin = { navController.navigateToLogin() },
