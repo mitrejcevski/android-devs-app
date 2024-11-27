@@ -14,7 +14,7 @@
     androidxUnitVersion = "1.2.1"
     androidxEspressoVersion = "3.6.1"
     testJunitJupiterVersion = "5.10.0"
-    androidxLifecycleVersion = "2.8.6"
+    androidxLifecycleVersion = "2.8.7"
     hiltVersion = "2.51.1"
     hiltNavigationVersion = "1.2.0"
     paparazziVersion = "1.3.1"
