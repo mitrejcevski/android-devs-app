@@ -1,6 +1,7 @@
 name: Deploy To Google Play
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
 
