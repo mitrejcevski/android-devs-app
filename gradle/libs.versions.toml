@@ -2,7 +2,7 @@
     minSdkVersion = "26"
     compileSdkVersion = "34"
     javaVersion = "17"
-    gradlePluginVersion = "8.7.1"
+    gradlePluginVersion = "8.8.0"
     roomVersion = "2.6.1"
     truthVersion = "1.1.5"
     kotlinVersion = "2.0.20"

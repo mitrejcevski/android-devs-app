@@ -55,7 +55,7 @@ dependencies {
     implementation(projects.core.view)
     implementation(projects.domain.auth)
 
-    testImplementation(libs.bundles.unit.testing)
+    testImplementation(projects.testutils)
 
     testRuntimeOnly(libs.junit.jupiter.engine)
 }
