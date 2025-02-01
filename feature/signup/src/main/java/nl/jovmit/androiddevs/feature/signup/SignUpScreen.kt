@@ -33,6 +33,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.airbnb.android.showkase.annotation.ShowkaseComposable
 import nl.jovmit.androiddevs.core.view.R
 import nl.jovmit.androiddevs.core.view.composables.EmailInput
 import nl.jovmit.androiddevs.core.view.composables.PasswordInput
@@ -171,9 +172,10 @@ private fun SignUpScreenContent(
     }
 }
 
+@ShowkaseComposable(name = "Name of component", group = "Group Name")
 @Composable
-@PreviewLightDark
-private fun PreviewLoginScreen() {
+//@PreviewLightDark
+fun PreviewLoginScreen() {
     AppTheme {
         SignUpScreenContent(
             signUpScreenState = SignUpScreenState(incorrectEmailFormat = true),

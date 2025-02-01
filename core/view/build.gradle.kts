@@ -52,4 +52,8 @@ dependencies {
     implementation(libs.bundles.hilt)
 
     kapt(libs.hilt.compiler)
+
+    debugImplementation(libs.showkase)
+    implementation(libs.showkase.annotation)
+    kaptDebug(libs.showkase.processor)
 }

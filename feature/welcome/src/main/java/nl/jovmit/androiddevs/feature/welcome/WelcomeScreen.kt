@@ -95,7 +95,7 @@ internal fun WelcomeScreen(
 
 @Composable
 @PreviewLightDark
-private fun PreviewLoginScreen() {
+fun PreviewLoginScreen() {
     AppTheme {
         WelcomeScreen(
             onLogin = {},

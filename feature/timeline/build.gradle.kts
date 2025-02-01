@@ -62,4 +62,7 @@ dependencies {
     testImplementation(libs.bundles.unit.testing)
 
     testRuntimeOnly(libs.junit.jupiter.engine)
+    debugImplementation(libs.showkase)
+    implementation(libs.showkase.annotation)
+    kaptDebug(libs.showkase.processor)
 }

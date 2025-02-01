@@ -32,7 +32,11 @@ android {
             )
         }
     }
-
+    kapt {
+        arguments {
+            arg("skipPrivatePreviews", "true")
+        }
+    }
     compileOptions {
         val javaVersion = libs.versions.javaVersion.get()
         sourceCompatibility = JavaVersion.toVersion(javaVersion)
@@ -89,4 +93,8 @@ dependencies {
     testImplementation(projects.testutils)
 
     testRuntimeOnly(libs.junit.jupiter.engine)
+
+    debugImplementation(libs.showkase)
+    implementation(libs.showkase.annotation)
+    kaptDebug(libs.showkase.processor)
 }

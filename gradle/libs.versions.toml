@@ -4,6 +4,9 @@
     javaVersion = "17"
     gradlePluginVersion = "8.8.0"
     roomVersion = "2.6.1"
+    showkaseAnnotationVersion = "1.0.3"
+    showkaseProcessorVersion = "1.0.3"
+    showkaseVersion = "1.0.3"
     truthVersion = "1.1.5"
     kotlinVersion = "2.0.20"
     androidxCoreKtxVersion = "1.13.1"
@@ -61,6 +64,12 @@
     jupiter = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "testJunitJupiterVersion" }
     jupiter-vintage = { module = "org.junit.vintage:junit-vintage-engine", version.ref = "testJunitJupiterVersion" }
     jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "testJunitJupiterVersion" }
+
+    showkase = { module = "com.airbnb.android:showkase", version.ref = "showkaseVersion" }
+    showkase-annotation = { module = "com.airbnb.android:showkase-annotation", version.ref = "showkaseAnnotationVersion" }
+
+
+    showkase-processor = { module = "com.airbnb.android:showkase-processor", version.ref = "showkaseProcessorVersion" }
     truth = { module = "com.google.truth:truth", version.ref = "truthVersion" }
     test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.8.0" }
     test-okhttp-mockserver = { module = "com.squareup.okhttp3:mockwebserver", version = "4.10.0" }
