@@ -1,6 +1,6 @@
 [versions]
     minSdkVersion = "26"
-    compileSdkVersion = "34"
+    compileSdkVersion = "35"
     javaVersion = "17"
     gradlePluginVersion = "8.8.0"
     roomVersion = "2.6.1"
