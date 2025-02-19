@@ -93,6 +93,7 @@ class SignUpViewModel @Inject constructor(
         when (result) {
             is AuthResult.Success -> onSignedUp()
             is AuthResult.BackendError -> onBackendError()
+            is AuthResult.IncorrectCredentials -> {}
             is AuthResult.ExistingUserError -> onExistingUserError()
             is AuthResult.OfflineError -> onOfflineError()
         }

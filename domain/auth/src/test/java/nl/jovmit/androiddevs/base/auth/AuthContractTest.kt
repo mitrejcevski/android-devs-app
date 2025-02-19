@@ -17,34 +17,58 @@ abstract class AuthContractTest {
 
     @Test
     fun successfulLogin() = runTest {
-        val usersCatalog = usersCatalogWith(authToken, bobPassword, listOf(bob))
+        val usersForPassword = mapOf(bobPassword to listOf(bob))
+        val repository = authRepositoryWith(authToken, usersForPassword)
 
-        val result = usersCatalog.login(bob.email, bobPassword)
+        val result = repository.login(bob.email, bobPassword)
 
         assertThat(result).isEqualTo(AuthResult.Success(authToken, bob))
     }
 
     @Test
-    fun wrongPassword() = runTest {
-        val usersCatalog = usersCatalogWithoutPassword(bobPassword, listOf(bob))
+    fun attemptToLoginWithWrongPassword() = runTest {
+        val usersForPassword = mapOf(bobPassword to listOf(bob))
+        val repository = authRepositoryWith(authToken, usersForPassword)
 
-        val result = usersCatalog.login(bob.email, bobPassword)
+        val result = repository.login(bob.email, "otherThan$bobPassword")
 
-        assertThat(result).isEqualTo(AuthResult.ExistingUserError)
+        assertThat(result).isEqualTo(AuthResult.IncorrectCredentials)
     }
 
     @Test
-    fun wrongEmail() = runTest {
-        val usersCatalog = usersCatalogWithoutEmail(bobPassword, bob.email)
+    fun attemptToLoginWithWrongEmail() = runTest {
+        val usersForPassword = mapOf(bobPassword to listOf(bob))
+        val repository = authRepositoryWith(authToken, usersForPassword)
 
-        val result = usersCatalog.login(bob.email, bobPassword)
+        val result = repository.login("anythingBut${bob.email}", bobPassword)
 
-        assertThat(result).isEqualTo(AuthResult.ExistingUserError)
+        assertThat(result).isEqualTo(AuthResult.IncorrectCredentials)
     }
 
-    abstract fun usersCatalogWith(authToken: String, password: String, users: List<User>): AuthRepository
+    @Test
+    fun backendErrorWhenLoggingIn() = runTest {
+        val repository = unavailableAuthRepository()
 
-    abstract fun usersCatalogWithoutPassword(password: String, users: List<User>): AuthRepository
+        val result = repository.login(":irrelevant:", ":irrelevant")
 
-    abstract fun usersCatalogWithoutEmail(password: String, email: String): AuthRepository
+        assertThat(result).isEqualTo(AuthResult.BackendError)
+    }
+
+    @Test
+    fun offlineErrorWhenLoggingIn() = runTest {
+        val repository = offlineAuthRepository()
+
+        val result = repository.login(":irrelevant:", ":irrelevant")
+
+        assertThat(result).isEqualTo(AuthResult.OfflineError)
+    }
+
+    abstract fun authRepositoryWith(
+        authToken: String,
+        usersForPassword: Map<String, List<User>>
+    ): AuthRepository
+
+    abstract fun unavailableAuthRepository(): AuthRepository
+
+    abstract fun offlineAuthRepository(): AuthRepository
 }

@@ -15,12 +15,14 @@ class InMemoryAuthRepository(
     private val _usersForPassword = usersForPassword.toMutableMap()
 
     override suspend fun login(email: String, password: String): AuthResult {
+        if (isUnavailable) return AuthResult.BackendError
+        if (isOffline) return AuthResult.OfflineError
         val matchingUsers = _usersForPassword.getOrElse(password) { emptyList() }
         val found = matchingUsers.find { it.email == email }
         found?.let { user ->
             return AuthResult.Success(authToken, user)
         }
-        return AuthResult.ExistingUserError
+        return AuthResult.IncorrectCredentials
     }
 
     override suspend fun signUp(

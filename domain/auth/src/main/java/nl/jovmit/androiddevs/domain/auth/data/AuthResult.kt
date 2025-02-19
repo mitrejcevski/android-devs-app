@@ -9,6 +9,8 @@ sealed class AuthResult {
 
     data object BackendError : AuthResult()
 
+    data object IncorrectCredentials: AuthResult()
+
     data object ExistingUserError : AuthResult()
 
     data object OfflineError : AuthResult()

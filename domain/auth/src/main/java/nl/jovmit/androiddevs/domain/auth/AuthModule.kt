@@ -4,6 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import nl.jovmit.androiddevs.domain.auth.data.AuthResult
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module
@@ -13,6 +15,15 @@ abstract class AuthModule {
     @Binds
     @Singleton
     internal abstract fun bindAuthRepository(
-        repository: RemoteAuthRepository
+        repository: DummyAuthRepo
     ): AuthRepository
+
+    class DummyAuthRepo @Inject constructor() : AuthRepository {
+        override suspend fun login(email: String, password: String): AuthResult {
+            TODO("Not yet implemented")
+        }
+        override suspend fun signUp(email: String, password: String, about: String): AuthResult {
+            TODO("Not yet implemented")
+        }
+    }
 }

@@ -6,16 +6,20 @@ import kotlinx.serialization.json.Json
 import nl.jovmit.androiddevs.core.network.AuthResponse
 import nl.jovmit.androiddevs.core.network.AuthService
 import nl.jovmit.androiddevs.core.network.LoginData
+import nl.jovmit.androiddevs.core.network.SignUpData
 import nl.jovmit.androiddevs.domain.auth.AuthRepository
 import nl.jovmit.androiddevs.domain.auth.RemoteAuthRepository
 import nl.jovmit.androiddevs.domain.auth.data.User
-import nl.jovmit.androiddevs.domain.auth.data.UserBuilder.Companion.aUser
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.ResponseBody.Companion.toResponseBody
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
+import retrofit2.HttpException
+import retrofit2.Response
 import retrofit2.Retrofit
+import java.io.IOException
 
 class HttpAuthTest : AuthContractTest() {
 
@@ -24,57 +28,78 @@ class HttpAuthTest : AuthContractTest() {
         .baseUrl(mockWebServer.url("/"))
         .addConverterFactory(Json.Default.asConverterFactory("application/json".toMediaType()))
         .build()
-    private val authorizationApi = retrofit.create(AuthService::class.java)
 
-    override fun usersCatalogWith(
+    private val authService = retrofit.create(AuthService::class.java)
+
+    override fun authRepositoryWith(
         authToken: String,
-        password: String,
-        users: List<User>
+        usersForPassword: Map<String, List<User>>
     ): AuthRepository {
-        mockWebServer.dispatcher = CustomDispatcher(authToken, password, users)
-        return RemoteAuthRepository(authorizationApi)
+        mockWebServer.dispatcher = CustomDispatcher(
+            authToken = authToken,
+            usersForPassword = usersForPassword
+        )
+        return RemoteAuthRepository(authService)
     }
 
-    override fun usersCatalogWithoutPassword(password: String, users: List<User>): AuthRepository {
-        return usersCatalogWith("", "different$password", users)
+    override fun unavailableAuthRepository(): AuthRepository {
+        val unavailableApi = object : AuthService {
+            override suspend fun signUp(signUpData: SignUpData): AuthResponse {
+                TODO("Not yet implemented")
+            }
+
+            override suspend fun login(loginData: LoginData): AuthResponse {
+                throw HttpException(Response.error<String>(400, "".toResponseBody()))
+            }
+        }
+        return RemoteAuthRepository(unavailableApi)
     }
 
-    override fun usersCatalogWithoutEmail(password: String, email: String): AuthRepository {
-        return usersCatalogWith("", password, listOf(aUser().withEmail("different$email").build()))
+    override fun offlineAuthRepository(): AuthRepository {
+        val offline = object : AuthService {
+            override suspend fun signUp(signUpData: SignUpData): AuthResponse {
+                TODO("Not yet implemented")
+            }
+
+            override suspend fun login(loginData: LoginData): AuthResponse {
+                throw IOException()
+            }
+        }
+        return RemoteAuthRepository(offline)
     }
 
     private class CustomDispatcher(
         private val authToken: String,
-        private val password: String,
-        private val users: List<User>
+        private val usersForPassword: Map<String, List<User>>
     ) : Dispatcher() {
 
         override fun dispatch(request: RecordedRequest): MockResponse {
             val requestBody = request.body.readUtf8()
             val loginData = Json.Default.decodeFromString<LoginData>(requestBody)
-            return if (loginData.password == password) {
-                val matchingUser = users.find { it.email == loginData.email }
-                matchingUser?.let { userResponse(matchingUser) } ?: invalidCredentials()
+            if (usersForPassword.keys.contains(loginData.password)) {
+                val matchingUsers = usersForPassword[loginData.password]
+                val user = matchingUsers?.find { it.email == loginData.email }
+                return user?.let { userResponse(authToken, it) } ?: invalidCredentials()
             } else {
-                invalidCredentials()
+                return invalidCredentials()
             }
         }
 
-        private fun userResponse(matchingUser: User): MockResponse {
-            val entity = Json.encodeToString(matchingUser.toResponseEntity())
-            return MockResponse()
-                .setResponseCode(200)
-                .setBody("""{"token":"$authToken", "userData": $entity}""")
+        private fun userResponse(authToken: String, user: User): MockResponse {
+            val response = AuthResponse(
+                token = authToken,
+                userData = AuthResponse.UserData(
+                    id = user.userId,
+                    email = user.email,
+                    about = user.about
+                )
+            )
+            val entity = Json.encodeToString(response)
+            return MockResponse().setResponseCode(200)
+                .setBody(entity)
         }
 
-        private fun User.toResponseEntity(): AuthResponse.UserData {
-            return AuthResponse.UserData(userId, email, about)
-        }
-
-        private fun invalidCredentials(): MockResponse {
-            return MockResponse()
-                .setResponseCode(401)
-                .setBody("""{"error":"Invalid credentials"}""")
-        }
+        private fun invalidCredentials() = MockResponse().setResponseCode(401)
+            .setBody("""{"error":"Invalid Credentials"}""")
     }
 }
