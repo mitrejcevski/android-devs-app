@@ -36,8 +36,8 @@ android {
 }
 
 dependencies {
-    api(projects.core.network)
-    api(projects.core.database)
+    api(projects.shared.network)
+    api(projects.shared.database)
     api(projects.domain.auth)
     api(libs.bundles.unit.testing)
 

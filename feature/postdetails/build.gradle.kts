@@ -53,7 +53,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.view)
+    implementation(projects.shared.ui)
     implementation(libs.bundles.hilt)
 
     kapt(libs.hilt.compiler)

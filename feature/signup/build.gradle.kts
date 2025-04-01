@@ -54,7 +54,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.view)
+    implementation(projects.shared.ui)
     implementation(projects.domain.auth)
     implementation(libs.bundles.hilt)
 

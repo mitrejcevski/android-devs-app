@@ -67,8 +67,8 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.view)
-    implementation(projects.core.network)
+    implementation(projects.shared.ui)
+    implementation(projects.shared.network)
     implementation(projects.feature.welcome)
     implementation(projects.feature.signup)
     implementation(projects.feature.login)

@@ -52,7 +52,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.view)
+    implementation(projects.shared.ui)
     implementation(projects.domain.auth)
 
     testImplementation(projects.testutils)

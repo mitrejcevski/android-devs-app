@@ -53,8 +53,8 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.view)
-    implementation(projects.core.network)
+    implementation(projects.shared.ui)
+    implementation(projects.shared.network)
     implementation(libs.bundles.hilt)
 
     kapt(libs.hilt.compiler)

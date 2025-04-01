@@ -47,7 +47,7 @@ android {
     }
 }
 dependencies {
-    implementation(projects.core.network)
+    implementation(projects.shared.network)
     implementation(libs.bundles.hilt)
 
     kapt(libs.hilt.compiler)
