@@ -1,0 +1,19 @@
+CREATE TABLE UserEntity (
+    uid TEXT PRIMARY KEY NOT NULL,
+    email TEXT NOT NULL,
+    about TEXT NOT NULL
+);
+
+fetchAll:
+SELECT * FROM UserEntity;
+
+addUser:
+INSERT INTO UserEntity(uid, email, about)
+VALUES (?, ?, ?);
+
+addFullUser:
+INSERT INTO UserEntity(uid, email, about)
+VALUES ?;
+
+deleteUser:
+DELETE FROM UserEntity WHERE uid IN :uid;

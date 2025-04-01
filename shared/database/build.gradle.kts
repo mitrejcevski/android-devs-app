@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kapt)
+    alias(libs.plugins.sql.delight)
 }
 
 android {
@@ -46,11 +46,17 @@ android {
     }
 }
 
+sqldelight {
+    databases {
+        create("UsersDatabase") {
+            packageName.set("nl.jovmit.androiddevs.core.database")
+        }
+    }
+}
+
 dependencies {
     implementation(libs.bundles.hilt)
-    implementation(libs.bundles.room)
-
-    kapt(libs.room.compiler)
+    implementation(libs.sql.delight.android)
 
     testImplementation(libs.bundles.unit.testing)
 

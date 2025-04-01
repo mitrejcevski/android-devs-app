@@ -8,4 +8,5 @@ plugins {
     alias(libs.plugins.kapt) apply false
     alias(libs.plugins.parcelable) apply false
     alias(libs.plugins.paparazzi) apply false
+    alias(libs.plugins.sql.delight) apply false
 }

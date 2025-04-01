@@ -3,7 +3,7 @@
     compileSdkVersion = "35"
     javaVersion = "17"
     gradlePluginVersion = "8.8.2"
-    roomVersion = "2.6.1"
+    sqlDelightVersion = "2.0.2"
     truthVersion = "1.1.5"
     kotlinVersion = "2.0.20"
     androidxCoreKtxVersion = "1.15.0"
@@ -39,9 +39,7 @@
 
     coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilVersion" }
 
-    room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
-    room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
-    room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
+    sql-delight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelightVersion" }
 
     hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltVersion" }
     hilt-navigation = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationVersion" }
@@ -70,7 +68,6 @@
     compose = ["compose-activity", "compose-ui", "compose-graphics", "compose-preview", "compose-material3", "compose-navigation", "compose-lifecycle-runtime", "compose-material-icons", "network-serialization"]
     compose-debug = ["compose-ui-tooling", "compose-ui-test-manifest"]
     hilt = ["hilt-android", "hilt-navigation"]
-    room = ["room-ktx", "room-runtime"]
     retrofit = ["network-okhttp", "network-retrofit", "network-serialization", "network-serialization-converter"]
     ui-testing = ["androidx-junit", "androidx-espresso", "androidx-compose-test", "hilt-android-test"]
     unit-testing = ["jupiter", "jupiter-params", "truth", "jupiter-vintage", "test-coroutines", "test-okhttp-mockserver"]
@@ -85,3 +82,4 @@
     hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
     paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazziVersion" }
     parcelable = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlinVersion" }
+    sql-delight = { id = "app.cash.sqldelight", version.ref = "sqlDelightVersion" }

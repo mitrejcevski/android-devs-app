@@ -1,7 +1,8 @@
 package nl.jovmit.androiddevs.core.database
 
 import android.content.Context
-import androidx.room.Room
+import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,24 +14,27 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
-    private const val DATABASE_NAME = "android_devs"
-
     @Provides
     @Singleton
-    fun provideDatabase(
-        @ApplicationContext appContext: Context
-    ): AppDatabase {
-        return Room
-            .databaseBuilder(
-                context = appContext,
-                klass = AppDatabase::class.java,
-                name = DATABASE_NAME
-            ).build()
+    fun provideSqlDriver(
+        @ApplicationContext context: Context
+    ): SqlDriver {
+        return AndroidSqliteDriver(UsersDatabase.Schema, context, "users.db")
     }
 
     @Provides
     @Singleton
-    fun provideUserDao(database: AppDatabase): UserDao {
-        return database.userDao()
+    fun provideUsersDatabase(
+        driver: SqlDriver
+    ): UsersDatabase {
+        return UsersDatabase(driver)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUsersQueries(
+        database: UsersDatabase
+    ): UserEntityQueries {
+        return database.userEntityQueries
     }
 }
