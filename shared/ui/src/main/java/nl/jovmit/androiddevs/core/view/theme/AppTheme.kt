@@ -12,6 +12,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nl.jovmit.androiddevs.core.view.composables.ImperfectCircleShape
+import nl.jovmit.androiddevs.core.view.datetime.LocalDateTimeFormat
+import nl.jovmit.androiddevs.core.view.datetime.appZonedDateTimeFormat
 
 private val darkColorScheme = AppColorScheme(
     background = Color.Black,
@@ -89,6 +91,7 @@ fun AppTheme(
         LocalAppTypography provides typography,
         LocalAppShape provides shape,
         LocalAppSize provides size,
+        LocalDateTimeFormat provides appZonedDateTimeFormat,
         LocalIndication provides ripple(),
         content = content
     )
