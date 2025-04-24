@@ -20,7 +20,9 @@ class PostDetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _screenState = MutableStateFlow(PostDetailsScreenState())
-    private val postDetailsArgs = PostDetailsArgs(savedStateHandle)
+    private val postDetailsArgs = PostDetailsDestination(savedStateHandle)
+    //alternatively, we can do this (if you find it nicer API)
+    //private val postDetailsArgs = PostDetailsDestination.from(savedStateHandle)
 
     val screenState = _screenState.asStateFlow()
 
