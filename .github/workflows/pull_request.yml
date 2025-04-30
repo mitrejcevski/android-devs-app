@@ -2,7 +2,7 @@ name: Run test
 
 on:
   pull_request:
-    branches: [main]
+    branches: [shrinath-kopare-patch-1]
 
 jobs:
   test:
