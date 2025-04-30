@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.core.view.composables
+package nl.jovmit.androiddevs.shared.ui.composables
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import nl.jovmit.androiddevs.core.view.theme.AppTheme
+import nl.jovmit.androiddevs.shared.ui.theme.AppTheme
 
 @Composable
 fun PrimaryButton(

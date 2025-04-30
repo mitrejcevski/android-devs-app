@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.core.view.datetime
+package nl.jovmit.androiddevs.shared.ui.datetime
 
 interface AppDateTimeFormat {
 

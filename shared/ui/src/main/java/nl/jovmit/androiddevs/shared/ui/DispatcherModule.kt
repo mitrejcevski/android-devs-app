@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.core.view
+package nl.jovmit.androiddevs.shared.ui
 
 import dagger.Module
 import dagger.Provides

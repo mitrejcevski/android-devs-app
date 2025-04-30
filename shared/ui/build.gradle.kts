@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "nl.jovmit.androiddevs.core.view"
+    namespace = "nl.jovmit.androiddevs.shared.ui"
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
@@ -40,6 +40,16 @@ android {
     buildFeatures {
         compose = true
     }
+
+    testOptions.unitTests {
+        isReturnDefaultValues = true
+        all { tests ->
+            tests.useJUnitPlatform()
+            tests.testLogging {
+                events("passed", "failed", "skipped")
+            }
+        }
+    }
 }
 
 dependencies {
@@ -52,4 +62,8 @@ dependencies {
     implementation(libs.bundles.hilt)
 
     kapt(libs.hilt.compiler)
+
+    testImplementation(projects.testutils)
+
+    testRuntimeOnly(libs.junit.jupiter.engine)
 }

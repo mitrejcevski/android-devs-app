@@ -40,11 +40,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.hilt.navigation.compose.hiltViewModel
-import nl.jovmit.androiddevs.core.view.R
-import nl.jovmit.androiddevs.core.view.composables.EmailInput
-import nl.jovmit.androiddevs.core.view.composables.PasswordInput
-import nl.jovmit.androiddevs.core.view.composables.PrimaryButton
-import nl.jovmit.androiddevs.core.view.theme.AppTheme
+import nl.jovmit.androiddevs.shared.ui.R
+import nl.jovmit.androiddevs.shared.ui.composables.EmailInput
+import nl.jovmit.androiddevs.shared.ui.composables.PasswordInput
+import nl.jovmit.androiddevs.shared.ui.composables.PrimaryButton
+import nl.jovmit.androiddevs.shared.ui.theme.AppTheme
 
 @Composable
 internal fun LoginScreen(

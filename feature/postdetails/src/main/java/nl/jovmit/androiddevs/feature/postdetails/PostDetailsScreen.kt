@@ -23,7 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import nl.jovmit.androiddevs.core.view.theme.AppTheme
+import nl.jovmit.androiddevs.shared.ui.theme.AppTheme
 
 @Composable
 internal fun PostDetailsScreenContainer(

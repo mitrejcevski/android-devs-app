@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.core.view.datetime
+package nl.jovmit.androiddevs.shared.ui.datetime
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf

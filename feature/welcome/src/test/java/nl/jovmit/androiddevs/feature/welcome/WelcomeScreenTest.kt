@@ -2,7 +2,7 @@ package nl.jovmit.androiddevs.feature.welcome
 
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
-import nl.jovmit.androiddevs.core.view.theme.AppTheme
+import nl.jovmit.androiddevs.shared.ui.theme.AppTheme
 import org.junit.Rule
 import org.junit.Test
 

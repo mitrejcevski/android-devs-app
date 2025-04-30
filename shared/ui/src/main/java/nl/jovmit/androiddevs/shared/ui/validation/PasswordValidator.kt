@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.core.view.validation
+package nl.jovmit.androiddevs.shared.ui.validation
 
 class PasswordValidator {
 

@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.core.view.extensions
+package nl.jovmit.androiddevs.shared.ui.extensions
 
 import androidx.lifecycle.SavedStateHandle
 

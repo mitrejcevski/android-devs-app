@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.core.view.composables
+package nl.jovmit.androiddevs.shared.ui.composables
 
 import android.graphics.Matrix
 import androidx.compose.ui.geometry.Offset

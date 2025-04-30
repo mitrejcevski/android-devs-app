@@ -7,9 +7,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import nl.jovmit.androiddevs.core.view.extensions.update
-import nl.jovmit.androiddevs.core.view.validation.EmailValidator
-import nl.jovmit.androiddevs.core.view.validation.PasswordValidator
+import nl.jovmit.androiddevs.shared.ui.extensions.update
+import nl.jovmit.androiddevs.shared.ui.validation.EmailValidator
+import nl.jovmit.androiddevs.shared.ui.validation.PasswordValidator
 import nl.jovmit.androiddevs.domain.auth.AuthRepository
 import nl.jovmit.androiddevs.domain.auth.data.AuthResult
 import nl.jovmit.androiddevs.feature.signup.state.SignUpScreenState

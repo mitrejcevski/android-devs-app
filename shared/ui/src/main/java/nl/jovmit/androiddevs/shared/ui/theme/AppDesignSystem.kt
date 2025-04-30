@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.core.view.theme
+package nl.jovmit.androiddevs.shared.ui.theme
 
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Stable

@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.core.view.theme
+package nl.jovmit.androiddevs.shared.ui.theme
 
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -11,9 +11,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nl.jovmit.androiddevs.core.view.composables.ImperfectCircleShape
-import nl.jovmit.androiddevs.core.view.datetime.LocalDateTimeFormat
-import nl.jovmit.androiddevs.core.view.datetime.appZonedDateTimeFormat
+import nl.jovmit.androiddevs.shared.ui.composables.ImperfectCircleShape
+import nl.jovmit.androiddevs.shared.ui.datetime.LocalDateTimeFormat
+import nl.jovmit.androiddevs.shared.ui.datetime.appZonedDateTimeFormat
 
 private val darkColorScheme = AppColorScheme(
     background = Color.Black,

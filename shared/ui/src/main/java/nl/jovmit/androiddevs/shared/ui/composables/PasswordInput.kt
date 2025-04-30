@@ -1,4 +1,4 @@
-package nl.jovmit.androiddevs.core.view.composables
+package nl.jovmit.androiddevs.shared.ui.composables
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.text.KeyboardActions
@@ -18,8 +18,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import nl.jovmit.androiddevs.core.view.R
-import nl.jovmit.androiddevs.core.view.theme.AppTheme
+import nl.jovmit.androiddevs.shared.ui.R
+import nl.jovmit.androiddevs.shared.ui.theme.AppTheme
 
 @Composable
 fun PasswordInput(

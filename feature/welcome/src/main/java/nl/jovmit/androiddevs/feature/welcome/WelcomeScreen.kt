@@ -18,10 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import nl.jovmit.androiddevs.core.view.R
-import nl.jovmit.androiddevs.core.view.composables.PrimaryButton
-import nl.jovmit.androiddevs.core.view.composables.SecondaryButton
-import nl.jovmit.androiddevs.core.view.theme.AppTheme
+import nl.jovmit.androiddevs.shared.ui.R
+import nl.jovmit.androiddevs.shared.ui.composables.PrimaryButton
+import nl.jovmit.androiddevs.shared.ui.composables.SecondaryButton
+import nl.jovmit.androiddevs.shared.ui.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
