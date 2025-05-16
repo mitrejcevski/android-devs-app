@@ -18,12 +18,20 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize|stateVisible"
-            android:theme="@style/Theme.AndroidDevs">
+            android:theme="@style/Theme.AndroidDevs"
+            android:windowSoftInputMode="adjustResize|stateVisible">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:host="ali.zer" android:scheme="soci" />
             </intent-filter>
         </activity>
     </application>
