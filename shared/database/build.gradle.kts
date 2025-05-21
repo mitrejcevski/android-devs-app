@@ -50,6 +50,7 @@ sqldelight {
     databases {
         create("UsersDatabase") {
             packageName.set("nl.jovmit.androiddevs.core.database")
+            schemaOutputDirectory.set(file("src/main/sqldelight/databases"))
         }
     }
 }

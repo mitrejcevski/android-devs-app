@@ -1,18 +1,19 @@
 CREATE TABLE UserEntity (
     uid TEXT PRIMARY KEY NOT NULL,
     email TEXT NOT NULL,
-    about TEXT NOT NULL
+    about TEXT NOT NULL,
+    favorite INTEGER NOT NULL
 );
 
 fetchAll:
 SELECT * FROM UserEntity;
 
 addUser:
-INSERT INTO UserEntity(uid, email, about)
-VALUES (?, ?, ?);
+INSERT INTO UserEntity(uid, email, about, favorite)
+VALUES (?, ?, ?, ?);
 
 addFullUser:
-INSERT INTO UserEntity(uid, email, about)
+INSERT INTO UserEntity(uid, email, about, favorite)
 VALUES ?;
 
 deleteUser:
