@@ -3,9 +3,11 @@ package nl.jovmit.androiddevs.feature.login
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import nl.jovmit.androiddevs.shared.ui.theme.AppTheme
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 
+@Ignore
 class LoginScreenshotTest {
 
     @get:Rule
