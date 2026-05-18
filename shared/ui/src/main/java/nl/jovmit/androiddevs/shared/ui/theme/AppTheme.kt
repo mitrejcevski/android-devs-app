@@ -80,23 +80,6 @@ private val size = AppSize(
     small = 8.dp
 )
 
-@Composable
-fun AppTheme(
-    isDarkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
-) {
-    val colorScheme = if (isDarkTheme) darkColorScheme else lightColorScheme
-    CompositionLocalProvider(
-        LocalAppColorScheme provides colorScheme,
-        LocalAppTypography provides typography,
-        LocalAppShape provides shape,
-        LocalAppSize provides size,
-        LocalDateTimeFormat provides appZonedDateTimeFormat,
-        LocalIndication provides ripple(),
-        content = content
-    )
-}
-
 object AppTheme {
 
     val colorScheme: AppColorScheme
@@ -110,4 +93,21 @@ object AppTheme {
 
     val size: AppSize
         @Composable get() = LocalAppSize.current
+
+    @Composable
+    operator fun invoke(
+        isDarkTheme: Boolean = isSystemInDarkTheme(),
+        content: @Composable () -> Unit
+    ) {
+        val colorScheme = if (isDarkTheme) darkColorScheme else lightColorScheme
+        CompositionLocalProvider(
+            LocalAppColorScheme provides colorScheme,
+            LocalAppTypography provides nl.jovmit.androiddevs.shared.ui.theme.typography,
+            LocalAppShape provides nl.jovmit.androiddevs.shared.ui.theme.shape,
+            LocalAppSize provides nl.jovmit.androiddevs.shared.ui.theme.size,
+            LocalDateTimeFormat provides appZonedDateTimeFormat,
+            LocalIndication provides ripple(),
+            content = content
+        )
+    }
 }
