@@ -1,6 +1,5 @@
 package nl.jovmit.androiddevs.feature.postdetails
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,19 +18,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PostDetailsViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
     private val timelineRepository: TimelineRepository,
     private val userSession: UserSession,
     private val backgroundDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
     private val _screenState = MutableStateFlow(PostDetailsScreenState())
-    private val postDetailsArgs = PostDetailsDestination(savedStateHandle)
 
     val screenState = _screenState.asStateFlow()
 
-    fun loadPostDetails() {
-        val postId = postDetailsArgs.postId
+    fun loadPostDetails(postId: String) {
         viewModelScope.launch {
             setLoading()
             val result = withContext(backgroundDispatcher) {

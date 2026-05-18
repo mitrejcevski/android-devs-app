@@ -1,25 +1,20 @@
 package nl.jovmit.androiddevs.feature.timeline
 
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
+import kotlinx.serialization.Serializable
 
-private const val TIMELINE_ROUTE = "timeline"
+@Serializable
+data object TimelineRoute : NavKey
 
-fun NavGraphBuilder.timelineScreen(
+fun EntryProviderScope<NavKey>.timelineEntry(
     onItemClicked: (itemId: String) -> Unit,
     onAddPost: () -> Unit
 ) {
-    composable(TIMELINE_ROUTE) {
+    entry<TimelineRoute> {
         TimelineScreen(
             onItemClicked = onItemClicked,
             onAddPost = onAddPost
         )
-    }
-}
-
-fun NavController.navigateToTimeline() {
-    navigate(TIMELINE_ROUTE) {
-        popUpTo(0)
     }
 }

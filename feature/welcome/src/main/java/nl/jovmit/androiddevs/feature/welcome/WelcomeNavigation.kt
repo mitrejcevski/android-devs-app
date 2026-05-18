@@ -1,19 +1,20 @@
 package nl.jovmit.androiddevs.feature.welcome
 
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
+import kotlinx.serialization.Serializable
 
-const val WELCOME_ROUTE = "welcome"
+@Serializable
+data object WelcomeRoute : NavKey
 
-fun NavGraphBuilder.welcomeScreen(
+fun EntryProviderScope<NavKey>.welcomeEntry(
     onLogin: () -> Unit,
     onSignUp: () -> Unit
 ) {
-    composable(WELCOME_ROUTE) {
+    entry<WelcomeRoute> {
         WelcomeScreen(
             onLogin = onLogin,
             onSignUp = onSignUp
         )
     }
 }
-

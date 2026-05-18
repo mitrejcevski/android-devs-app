@@ -1,41 +1,23 @@
 package nl.jovmit.androiddevs.feature.postdetails
 
-import androidx.lifecycle.SavedStateHandle
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class PostDetailsDestination(
+data class PostDetailsRoute(
     val postId: String
-) {
+) : NavKey
 
-    constructor(savedStateHandle: SavedStateHandle):
-            this(requireNotNull(savedStateHandle.get<String>("postId")))
-
-    companion object {
-        fun from(savedStateHandle: SavedStateHandle): PostDetailsDestination {
-            val postId = requireNotNull(savedStateHandle.get<String>("postId"))
-            return PostDetailsDestination(postId)
-        }
-    }
-}
-
-fun NavGraphBuilder.postDetailsScreen(
+fun EntryProviderScope<NavKey>.postDetailsEntry(
     onNavigateUp: () -> Unit,
     onPostRemoved: () -> Unit
 ) {
-    composable<PostDetailsDestination> { backStackEntry ->
+    entry<PostDetailsRoute> { route ->
         PostDetailsScreenContainer(
+            postId = route.postId,
             onNavigateUp = onNavigateUp,
             onPostRemoved = onPostRemoved
         )
     }
-}
-
-fun NavController.navigateToPostDetails(
-    postId: String,
-) {
-    navigate(PostDetailsDestination(postId))
 }

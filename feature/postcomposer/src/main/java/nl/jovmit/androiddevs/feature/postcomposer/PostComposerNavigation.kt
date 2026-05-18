@@ -1,23 +1,20 @@
 package nl.jovmit.androiddevs.feature.postcomposer
 
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
+import kotlinx.serialization.Serializable
 
-private const val POST_COMPOSER_ROUTE = "postComposer"
+@Serializable
+data object PostComposerRoute : NavKey
 
-fun NavGraphBuilder.postComposerScreen(
+fun EntryProviderScope<NavKey>.postComposerEntry(
     onNavigateUp: () -> Unit,
     onPostAdded: () -> Unit
 ) {
-    composable(POST_COMPOSER_ROUTE) {
+    entry<PostComposerRoute> {
         PostComposerScreen(
             onNavigateUp = onNavigateUp,
             onPostAdded = onPostAdded
         )
     }
-}
-
-fun NavController.navigateToPostComposer() {
-    navigate(POST_COMPOSER_ROUTE)
 }

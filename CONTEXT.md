@@ -103,6 +103,7 @@ _Avoid_: Picture, photo
 - Seed **Posts** represent realistic Android developer community content
 - **Posts** added or removed during one app run are visible to all signed-in **Users** during that run
 - Ending a **Session** does not reset the **Timeline**
+- Ending a **Session** returns the **User** to authentication
 - Adding or removing **Posts** requires an active **Session**
 - A new **Post** requires a non-blank title and non-blank body
 - A new **Post** can be created without **Images** or **Tags**

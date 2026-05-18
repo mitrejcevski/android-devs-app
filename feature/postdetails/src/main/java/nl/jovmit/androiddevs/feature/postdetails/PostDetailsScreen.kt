@@ -32,7 +32,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.SubcomposeAsyncImage
 import nl.jovmit.androiddevs.domain.auth.data.User
@@ -44,14 +44,15 @@ import nl.jovmit.androiddevs.shared.ui.theme.AppTheme
 
 @Composable
 internal fun PostDetailsScreenContainer(
+  postId: String,
   viewModel: PostDetailsViewModel = hiltViewModel(),
   onNavigateUp: () -> Unit,
   onPostRemoved: () -> Unit
 ) {
   val screenState by viewModel.screenState.collectAsStateWithLifecycle()
 
-  LaunchedEffect(Unit) {
-    viewModel.loadPostDetails()
+  LaunchedEffect(postId) {
+    viewModel.loadPostDetails(postId)
   }
   LaunchedEffect(screenState.isRemoved) {
     if (screenState.isRemoved) onPostRemoved()

@@ -1,25 +1,20 @@
 package nl.jovmit.androiddevs.feature.login
 
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
+import kotlinx.serialization.Serializable
 
-private const val LOGIN_ROUTE = "login"
+@Serializable
+data object LoginRoute : NavKey
 
-fun NavGraphBuilder.loginScreen(
+fun EntryProviderScope<NavKey>.loginEntry(
     onLoggedIn: () -> Unit,
     onNavigateUp: () -> Unit
 ) {
-    composable(LOGIN_ROUTE) {
+    entry<LoginRoute> {
         LoginScreen(
             onLoggedIn = onLoggedIn,
             onNavigateUp = onNavigateUp
         )
-    }
-}
-
-fun NavController.navigateToLogin() {
-    navigate(LOGIN_ROUTE) {
-        launchSingleTop = true
     }
 }

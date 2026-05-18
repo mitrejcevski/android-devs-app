@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kapt)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.compose.compiler)
 }
 
@@ -79,6 +80,10 @@ dependencies {
 
     implementation(libs.bundles.androidx)
     implementation(libs.bundles.hilt)
+    implementation(libs.navigation3.runtime)
+    implementation(libs.navigation3.ui)
+    implementation(libs.lifecycle.viewmodel.navigation3)
+    implementation(libs.network.serialization.core)
 
     kapt(libs.hilt.compiler)
 

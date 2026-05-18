@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose.compiler)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kapt)
     alias(libs.plugins.parcelable)
@@ -57,6 +58,8 @@ dependencies {
     implementation(projects.domain.timeline)
     implementation(projects.shared.ui)
     implementation(libs.bundles.hilt)
+    implementation(libs.navigation3.runtime)
+    implementation(libs.network.serialization.core)
 
     kapt(libs.hilt.compiler)
 

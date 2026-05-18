@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.paparazzi)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.compose.compiler)
 }
 
@@ -54,6 +55,8 @@ android {
 dependencies {
     implementation(projects.shared.ui)
     implementation(projects.domain.auth)
+    implementation(libs.navigation3.runtime)
+    implementation(libs.network.serialization.core)
 
     testImplementation(projects.testutils)
 

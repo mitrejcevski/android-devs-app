@@ -59,6 +59,8 @@ dependencies {
     implementation(projects.shared.ui)
     implementation(libs.coil.compose)
     implementation(libs.bundles.hilt)
+    implementation(libs.navigation3.runtime)
+    implementation(libs.network.serialization.core)
 
     kapt(libs.hilt.compiler)
 

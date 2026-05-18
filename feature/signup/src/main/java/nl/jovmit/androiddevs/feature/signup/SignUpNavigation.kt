@@ -1,23 +1,18 @@
 package nl.jovmit.androiddevs.feature.signup
 
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-private data object SignUpRoute
+data object SignUpRoute : NavKey
 
-fun NavGraphBuilder.signUpScreen(
+fun EntryProviderScope<NavKey>.signUpEntry(
     onNavigateUp: () -> Unit,
 ) {
-    composable<SignUpRoute> {
+    entry<SignUpRoute> {
         SignUpScreen(
             onNavigateUp = onNavigateUp,
         )
     }
-}
-
-fun NavController.navigateToSignUp() {
-    navigate(SignUpRoute)
 }
