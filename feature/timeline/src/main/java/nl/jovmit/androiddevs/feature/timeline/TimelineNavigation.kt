@@ -7,11 +7,13 @@ import androidx.navigation.compose.composable
 private const val TIMELINE_ROUTE = "timeline"
 
 fun NavGraphBuilder.timelineScreen(
-    onItemClicked: (itemId: String) -> Unit
+    onItemClicked: (itemId: String) -> Unit,
+    onAddPost: () -> Unit
 ) {
     composable(TIMELINE_ROUTE) {
         TimelineScreen(
-            onItemClicked = onItemClicked
+            onItemClicked = onItemClicked,
+            onAddPost = onAddPost
         )
     }
 }

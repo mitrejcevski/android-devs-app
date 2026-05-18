@@ -12,6 +12,8 @@ import nl.jovmit.androiddevs.shared.ui.validation.EmailValidator
 import nl.jovmit.androiddevs.shared.ui.extensions.update
 import nl.jovmit.androiddevs.shared.ui.validation.PasswordValidator
 import nl.jovmit.androiddevs.domain.auth.AuthRepository
+import nl.jovmit.androiddevs.domain.auth.InMemoryUserSession
+import nl.jovmit.androiddevs.domain.auth.UserSession
 import nl.jovmit.androiddevs.domain.auth.data.AuthResult
 import javax.inject.Inject
 
@@ -19,7 +21,8 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val authRepository: AuthRepository,
-    private val background: CoroutineDispatcher
+    private val background: CoroutineDispatcher,
+    private val userSession: UserSession = InMemoryUserSession()
 ) : ViewModel(), LoginActions {
 
     private val emailValidator = EmailValidator()
@@ -63,6 +66,7 @@ class LoginViewModel @Inject constructor(
 
     private fun onLoginResults(loginResult: AuthResult) {
         if (loginResult is AuthResult.Success) {
+            userSession.setSessionUser(loginResult.user)
             savedStateHandle.update<LoginScreenState>(LOGIN_SCREEN_STATE) {
                 it.copy(loggedInUser = loginResult.user.email)
             }

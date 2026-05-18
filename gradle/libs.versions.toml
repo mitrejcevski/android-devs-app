@@ -51,6 +51,8 @@
     network-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
     network-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.9.0" }
     network-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version = "1.0.0" }
+    coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.10.2" }
+collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version = "0.4.0" }
 
     androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidxUnitVersion" }
     androidx-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "androidxEspressoVersion" }
@@ -66,7 +68,7 @@
 
 [bundles]
     androidx = ["androidx-ktx", "androidx-lifecycle-runtime"]
-    compose = ["compose-activity", "compose-ui", "compose-graphics", "compose-preview", "compose-material3", "compose-navigation", "compose-lifecycle-runtime", "compose-material-icons", "network-serialization"]
+    compose = ["compose-activity", "compose-ui", "compose-graphics", "compose-preview", "compose-material3", "compose-navigation", "compose-lifecycle-runtime", "compose-material-icons", "network-serialization", "collections-immutable"]
     compose-debug = ["compose-ui-tooling", "compose-ui-test-manifest"]
     hilt = ["hilt-android", "hilt-navigation"]
     retrofit = ["network-okhttp", "network-retrofit", "network-serialization", "network-serialization-converter"]

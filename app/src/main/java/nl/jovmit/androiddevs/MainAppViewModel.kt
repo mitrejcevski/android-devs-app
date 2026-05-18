@@ -7,12 +7,14 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import nl.jovmit.androiddevs.domain.auth.UserSession
 import nl.jovmit.androiddevs.core.network.LogoutSignal
 import javax.inject.Inject
 
 @HiltViewModel
 class MainAppViewModel @Inject constructor(
-    private val loggedOutSignal: LogoutSignal
+    private val loggedOutSignal: LogoutSignal,
+    private val userSession: UserSession
 ) : ViewModel() {
 
     private val _loggedOut = MutableSharedFlow<Unit>()
@@ -20,6 +22,7 @@ class MainAppViewModel @Inject constructor(
 
     fun observeLoggedOut() {
         loggedOutSignal.forcedLogout.onEach {
+            userSession.clear()
             _loggedOut.emit(Unit)
         }.launchIn(viewModelScope)
     }

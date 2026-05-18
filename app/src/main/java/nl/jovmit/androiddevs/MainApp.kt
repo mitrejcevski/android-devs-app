@@ -13,6 +13,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import nl.jovmit.androiddevs.feature.login.loginScreen
 import nl.jovmit.androiddevs.feature.login.navigateToLogin
+import nl.jovmit.androiddevs.feature.postcomposer.navigateToPostComposer
+import nl.jovmit.androiddevs.feature.postcomposer.postComposerScreen
 import nl.jovmit.androiddevs.feature.postdetails.navigateToPostDetails
 import nl.jovmit.androiddevs.feature.postdetails.postDetailsScreen
 import nl.jovmit.androiddevs.feature.signup.navigateToSignUp
@@ -74,11 +76,18 @@ fun MainApp(
         timelineScreen(
             onItemClicked = { itemId ->
                 navController.navigateToPostDetails(itemId)
-            }
+            },
+            onAddPost = { navController.navigateToPostComposer() }
         )
 
         postDetailsScreen(
-            onNavigateUp = { navController.navigateUp() }
+            onNavigateUp = { navController.navigateUp() },
+            onPostRemoved = { navController.navigateToTimeline() }
+        )
+
+        postComposerScreen(
+            onNavigateUp = { navController.navigateUp() },
+            onPostAdded = { navController.navigateUp() }
         )
     }
 }

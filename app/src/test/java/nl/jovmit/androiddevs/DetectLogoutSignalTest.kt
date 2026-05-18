@@ -3,6 +3,8 @@ package nl.jovmit.androiddevs
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
 import nl.jovmit.androiddevs.core.network.LogoutSignal
+import nl.jovmit.androiddevs.domain.auth.InMemoryUserSession
+import nl.jovmit.androiddevs.domain.auth.data.User
 import nl.jovmit.androiddevs.testutils.CoroutineTestExtension
 import nl.jovmit.androiddevs.testutils.collectSharedFlow
 import org.junit.jupiter.api.Test
@@ -15,7 +17,10 @@ class DetectLogoutSignalTest {
 
     @Test
     fun logoutSignalDetected() = runTest {
-        val viewModel = MainAppViewModel(loggedOutSignal).apply {
+        val userSession = InMemoryUserSession().apply {
+            setSessionUser(User("userId", "user@email.com", "about"))
+        }
+        val viewModel = MainAppViewModel(loggedOutSignal, userSession).apply {
             observeLoggedOut()
         }
 
@@ -24,5 +29,6 @@ class DetectLogoutSignalTest {
         }
 
         assertThat(observedEvent).isEqualTo(Unit)
+        assertThat(userSession.sessionUser.value).isNull()
     }
 }

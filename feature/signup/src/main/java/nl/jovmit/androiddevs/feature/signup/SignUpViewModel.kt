@@ -11,7 +11,10 @@ import nl.jovmit.androiddevs.shared.ui.extensions.update
 import nl.jovmit.androiddevs.shared.ui.validation.EmailValidator
 import nl.jovmit.androiddevs.shared.ui.validation.PasswordValidator
 import nl.jovmit.androiddevs.domain.auth.AuthRepository
+import nl.jovmit.androiddevs.domain.auth.InMemoryUserSession
+import nl.jovmit.androiddevs.domain.auth.UserSession
 import nl.jovmit.androiddevs.domain.auth.data.AuthResult
+import nl.jovmit.androiddevs.domain.auth.data.User
 import nl.jovmit.androiddevs.feature.signup.state.SignUpScreenState
 import javax.inject.Inject
 
@@ -19,7 +22,8 @@ import javax.inject.Inject
 class SignUpViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val authRepository: AuthRepository,
-    private val backgroundDispatcher: CoroutineDispatcher
+    private val backgroundDispatcher: CoroutineDispatcher,
+    private val userSession: UserSession = InMemoryUserSession()
 ) : ViewModel() {
 
     private val emailValidator = EmailValidator()
@@ -91,7 +95,7 @@ class SignUpViewModel @Inject constructor(
 
     private fun onAuthResults(result: AuthResult) {
         when (result) {
-            is AuthResult.Success -> onSignedUp()
+            is AuthResult.Success -> onSignedUp(result.user)
             is AuthResult.BackendError -> onBackendError()
             is AuthResult.IncorrectCredentials -> {}
             is AuthResult.ExistingUserError -> onExistingUserError()
@@ -99,7 +103,8 @@ class SignUpViewModel @Inject constructor(
         }
     }
 
-    private fun onSignedUp() {
+    private fun onSignedUp(user: User) {
+        userSession.setSessionUser(user)
         savedStateHandle.update<SignUpScreenState>(SIGN_UP) {
             it.copy(isLoading = false, isSignedUp = true)
         }

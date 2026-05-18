@@ -69,11 +69,13 @@ android {
 dependencies {
     implementation(projects.shared.ui)
     implementation(projects.shared.network)
+    implementation(projects.domain.auth)
     implementation(projects.feature.welcome)
     implementation(projects.feature.signup)
     implementation(projects.feature.login)
     implementation(projects.feature.timeline)
     implementation(projects.feature.postdetails)
+    implementation(projects.feature.postcomposer)
 
     implementation(libs.bundles.androidx)
     implementation(libs.bundles.hilt)

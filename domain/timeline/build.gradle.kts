@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "nl.jovmit.androiddevs.domain.auth"
+    namespace = "nl.jovmit.androiddevs.domain.timeline"
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
@@ -46,14 +46,15 @@ android {
         }
     }
 }
+
 dependencies {
-    implementation(projects.shared.network)
+    implementation(projects.domain.auth)
     implementation(libs.coroutines.core)
     implementation(libs.bundles.hilt)
 
     kapt(libs.hilt.compiler)
 
-    testImplementation(projects.testutils)
+    testImplementation(libs.bundles.unit.testing)
 
     testRuntimeOnly(libs.junit.jupiter.engine)
 }

@@ -19,12 +19,19 @@ abstract class AuthModule {
         repository: DummyAuthRepo
     ): AuthRepository
 
+    @Binds
+    @Singleton
+    internal abstract fun bindUserSession(
+        userSession: InMemoryUserSession
+    ): UserSession
+
     class DummyAuthRepo @Inject constructor() : AuthRepository {
         override suspend fun login(email: String, password: String): AuthResult {
             return AuthResult.Success("token", User("userId", email, "about"))
         }
+
         override suspend fun signUp(email: String, password: String, about: String): AuthResult {
-            TODO("Not yet implemented")
+            return AuthResult.Success("token", User("userId", email, about))
         }
     }
 }

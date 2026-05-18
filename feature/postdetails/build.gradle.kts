@@ -54,7 +54,10 @@ android {
 }
 
 dependencies {
+    implementation(projects.domain.auth)
+    implementation(projects.domain.timeline)
     implementation(projects.shared.ui)
+    implementation(libs.coil.compose)
     implementation(libs.bundles.hilt)
 
     kapt(libs.hilt.compiler)

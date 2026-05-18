@@ -23,10 +23,14 @@ internal data class PostDetailsDestination(
 }
 
 fun NavGraphBuilder.postDetailsScreen(
-    onNavigateUp: () -> Unit
+    onNavigateUp: () -> Unit,
+    onPostRemoved: () -> Unit
 ) {
     composable<PostDetailsDestination> { backStackEntry ->
-        PostDetailsScreenContainer(onNavigateUp = onNavigateUp)
+        PostDetailsScreenContainer(
+            onNavigateUp = onNavigateUp,
+            onPostRemoved = onPostRemoved
+        )
     }
 }
 

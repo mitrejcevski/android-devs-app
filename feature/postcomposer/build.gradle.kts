@@ -1,12 +1,14 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose.compiler)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kapt)
+    alias(libs.plugins.parcelable)
 }
 
 android {
-    namespace = "nl.jovmit.androiddevs.domain.auth"
+    namespace = "nl.jovmit.androiddevs.feature.postcomposer"
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
@@ -36,6 +38,10 @@ android {
         jvmTarget = libs.versions.javaVersion.get()
     }
 
+    buildFeatures {
+        compose = true
+    }
+
     testOptions.unitTests {
         isReturnDefaultValues = true
         all { tests ->
@@ -46,14 +52,15 @@ android {
         }
     }
 }
+
 dependencies {
-    implementation(projects.shared.network)
-    implementation(libs.coroutines.core)
+    implementation(projects.domain.timeline)
+    implementation(projects.shared.ui)
     implementation(libs.bundles.hilt)
 
     kapt(libs.hilt.compiler)
 
-    testImplementation(projects.testutils)
+    testImplementation(libs.bundles.unit.testing)
 
     testRuntimeOnly(libs.junit.jupiter.engine)
 }
