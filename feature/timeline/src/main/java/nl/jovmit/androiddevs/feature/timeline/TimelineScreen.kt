@@ -140,12 +140,12 @@ private fun TimelineScreenContent(
           verticalArrangement = Arrangement.spacedBy(AppTheme.size.normal),
           contentPadding = androidx.compose.foundation.layout.PaddingValues(AppTheme.size.medium)
         ) {
-          items(screenState.posts, key = { it.postItem.id }) { timelinePost ->
+          items(screenState.posts, key = { it.id }) { timelinePost ->
             TimelinePostCard(
               timelinePostItem = timelinePost,
-              onClick = { onItemClicked(timelinePost.postItem.id) },
+              onClick = { onItemClicked(timelinePost.id) },
               onReactionClick = { postReactions = timelinePost },
-              onRemovePost = { onRemovePost(timelinePost.postItem.id) }
+              onRemovePost = { onRemovePost(timelinePost.id) }
             )
           }
         }
@@ -187,7 +187,7 @@ private fun TimelinePostCard(
         Column(modifier = Modifier.weight(1f)) {
           val formatter = AppDateTime.formatter
           Text(
-            text = timelinePostItem.postItem.author.email,
+            text = timelinePostItem.author,
             style = AppTheme.typography.labelSmall,
             color = AppTheme.colorScheme.onBackground
           )
@@ -208,34 +208,34 @@ private fun TimelinePostCard(
         }
       }
       Text(
-        text = timelinePostItem.postItem.title,
+        text = timelinePostItem.title,
         style = AppTheme.typography.titleNormal,
         color = AppTheme.colorScheme.onBackground
       )
       Text(
-        text = timelinePostItem.postItem.body,
+        text = timelinePostItem.body,
         style = AppTheme.typography.paragraph,
         color = AppTheme.colorScheme.onBackground,
         maxLines = 3
       )
-      PostImage(timelinePostItem.postItem.imageUrls.firstOrNull())
+      PostImage(timelinePostItem.imageUrl)
       Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.size.normal),
         verticalAlignment = Alignment.CenterVertically
       ) {
         TextButton(
-          enabled = timelinePostItem.postItem.reactions.isNotEmpty(),
+          enabled = timelinePostItem.reactionCount > 0,
           onClick = onReactionClick
         ) {
           Text(
-            text = "${timelinePostItem.postItem.reactions.size} reactions",
+            text = "${timelinePostItem.reactionCount} reactions",
             style = AppTheme.typography.labelNormal,
             color = AppTheme.colorScheme.onBackground
           )
         }
         Text(
-          text = "${timelinePostItem.postItem.comments.size} comments",
+          text = "${timelinePostItem.commentCount} comments",
           style = AppTheme.typography.labelNormal,
           color = AppTheme.colorScheme.onBackground
         )
@@ -327,12 +327,11 @@ private fun ReactionSummary(
     verticalArrangement = Arrangement.spacedBy(AppTheme.size.normal)
   ) {
     Text(
-      text = "${timelinePost.postItem.reactions.size} reactions",
+      text = "${timelinePost.reactionCount} reactions",
       style = AppTheme.typography.titleNormal,
       color = AppTheme.colorScheme.onBackground
     )
-    val reactionSummary = timelinePost.postItem.reactions.groupingBy { it.type }.eachCount()
-    reactionSummary.entries
+    timelinePost.reactionSummary.entries
       .sortedBy { it.key.name }
       .forEach { (type, count) ->
         Row(

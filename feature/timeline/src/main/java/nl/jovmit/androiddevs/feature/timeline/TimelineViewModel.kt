@@ -19,6 +19,7 @@ import nl.jovmit.androiddevs.domain.auth.data.User
 import nl.jovmit.androiddevs.domain.timeline.TimelineRepository
 import nl.jovmit.androiddevs.domain.timeline.TimelineResult
 import nl.jovmit.androiddevs.domain.timeline.data.Post
+import nl.jovmit.androiddevs.domain.timeline.data.ReactionType
 import javax.inject.Inject
 
 @HiltViewModel
@@ -81,4 +82,13 @@ data class TimelineScreenState(
 data class TimelinePostItem(
   val postItem: Post,
   val canRemove: Boolean
-)
+) {
+  val id: String = postItem.id
+  val author: String = postItem.author.email
+  val title: String = postItem.title
+  val body: String = postItem.body
+  val imageUrl: String? = postItem.imageUrls.firstOrNull()
+  val commentCount: Int = postItem.comments.size
+  val reactionCount: Int = postItem.reactions.size
+  val reactionSummary: Map<ReactionType, Int> = postItem.reactions.groupingBy { it.type }.eachCount()
+}
