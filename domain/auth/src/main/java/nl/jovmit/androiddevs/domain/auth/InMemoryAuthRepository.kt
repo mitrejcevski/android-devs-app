@@ -17,6 +17,7 @@ class InMemoryAuthRepository(
     override suspend fun login(email: String, password: String): AuthResult {
         if (isUnavailable) return AuthResult.BackendError
         if (isOffline) return AuthResult.OfflineError
+
         val matchingUsers = _usersForPassword.getOrElse(password) { emptyList() }
         val found = matchingUsers.find { it.email == email }
         found?.let { user ->
@@ -33,6 +34,7 @@ class InMemoryAuthRepository(
         if (isUnavailable) return AuthResult.BackendError
         if (isOffline) return AuthResult.OfflineError
         if (isKnownUser(email)) return AuthResult.ExistingUserError
+
         val user = User(UUID.randomUUID().toString(), email, about)
         saveUserData(password, user)
         return AuthResult.Success(authToken, user)
@@ -44,10 +46,9 @@ class InMemoryAuthRepository(
 
     private fun saveUserData(password: String, user: User) {
         val currentUsers = _usersForPassword.getOrElse(password) { emptyList() }
-        currentUsers.toMutableList().apply {
+        _usersForPassword[password] = currentUsers.toMutableList().apply {
             add(user)
         }
-        _usersForPassword[password] = currentUsers
     }
 
     fun setLoggedInUsers(usersForPassword: Map<String, List<User>>) {
