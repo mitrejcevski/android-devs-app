@@ -6,10 +6,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import nl.jovmit.androiddevs.domain.auth.UserSession
+import nl.jovmit.androiddevs.domain.auth.data.User
 import nl.jovmit.androiddevs.domain.timeline.PostDetailsResult
 import nl.jovmit.androiddevs.domain.timeline.RemovePostResult
 import nl.jovmit.androiddevs.domain.timeline.TimelineRepository
@@ -26,6 +29,12 @@ class PostDetailsViewModel @Inject constructor(
     private val _screenState = MutableStateFlow(PostDetailsScreenState())
 
     val screenState = _screenState.asStateFlow()
+
+    init {
+        userSession.sessionUser
+            .onEach(::onSessionUserChanged)
+            .launchIn(viewModelScope)
+    }
 
     fun loadPostDetails(postId: String) {
         viewModelScope.launch {
@@ -59,7 +68,7 @@ class PostDetailsViewModel @Inject constructor(
         _screenState.update {
             when (result) {
                 is PostDetailsResult.Success -> PostDetailsScreenState(
-                    postItem = result.post.toPostDetailsItem()
+                    postItem = result.post.toPostDetailsItem(userSession.sessionUser.value)
                 )
                 PostDetailsResult.PostNotFound -> PostDetailsScreenState(isNotFound = true)
                 PostDetailsResult.Offline -> PostDetailsScreenState(isOffline = true)
@@ -68,10 +77,17 @@ class PostDetailsViewModel @Inject constructor(
         }
     }
 
-    private fun Post.toPostDetailsItem(): PostDetailsItem {
+    private fun onSessionUserChanged(sessionUser: User?) {
+        _screenState.update { screenState ->
+            val post = screenState.postItem?.post ?: return@update screenState
+            screenState.copy(postItem = post.toPostDetailsItem(sessionUser))
+        }
+    }
+
+    private fun Post.toPostDetailsItem(sessionUser: User?): PostDetailsItem {
         return PostDetailsItem(
             post = this,
-            canRemove = userSession.sessionUser.value?.userId == author.userId
+            canRemove = sessionUser?.userId == author.userId
         )
     }
 }
