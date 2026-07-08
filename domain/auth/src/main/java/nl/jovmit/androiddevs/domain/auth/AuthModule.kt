@@ -1,24 +1,22 @@
 package nl.jovmit.androiddevs.domain.auth
 
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class AuthModule {
+object AuthModule {
 
-    @Binds
-    @Singleton
-    internal abstract fun bindAuthRepository(
-        repository: InMemoryAuthRepository
-    ): AuthRepository
+  @Provides
+  @Singleton
+  internal fun bindAuthRepository(): AuthRepository =
+    InMemoryAuthRepository()
 
-    @Binds
-    @Singleton
-    internal abstract fun bindUserSession(
-        userSession: InMemoryUserSession
-    ): UserSession
+  @Provides
+  @Singleton
+  internal fun bindUserSession(): UserSession =
+    InMemoryUserSession()
 }
